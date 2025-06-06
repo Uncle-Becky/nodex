@@ -1,0 +1,192 @@
+{
+  "timestamp": "2025-06-06T04:36:40.191Z",
+  "summary": {
+    "filesAnalyzed": 24,
+    "undefinedReferences": 2,
+    "definitionsGenerated": 2
+  },
+  "undefinedRefs": {
+    "Implement": [
+      {
+        "name": "Implement",
+        "type": "type",
+        "line": 47,
+        "context": "\n  constructor() {\n    // TODO: Implement constructor\n  }\n\n ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\index.ts",
+        "relativePath": "src\\types\\index.ts"
+      },
+      {
+        "name": "Implement",
+        "type": "type",
+        "line": 13,
+        "context": "\n  constructor() {\n    // TODO: Implement constructor\n  }\n\n ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\utils.ts",
+        "relativePath": "src\\types\\utils.ts"
+      },
+      {
+        "name": "Implement",
+        "type": "type",
+        "line": 43,
+        "context": "\n  constructor() {\n    // TODO: Implement constructor\n  }\n\n ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\utils.ts",
+        "relativePath": "src\\types\\utils.ts"
+      },
+      {
+        "name": "Implement",
+        "type": "type",
+        "line": 51,
+        "context": "\n  constructor() {\n    // TODO: Implement constructor\n  }\n\n ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\utils.ts",
+        "relativePath": "src\\types\\utils.ts"
+      },
+      {
+        "name": "Implement",
+        "type": "type",
+        "line": 11,
+        "context": "\n  constructor() {\n    // TODO: Implement constructor\n  }\n\n ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\workers.ts",
+        "relativePath": "src\\types\\workers.ts"
+      }
+    ],
+    "Add": [
+      {
+        "name": "Add",
+        "type": "type",
+        "line": 50,
+        "context": "ent constructor\n  }\n\n  // TODO: Add methods and properties\n}",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\index.ts",
+        "relativePath": "src\\types\\index.ts"
+      },
+      {
+        "name": "Add",
+        "type": "type",
+        "line": 16,
+        "context": "ent constructor\n  }\n\n  // TODO: Add methods and properties\n}",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\utils.ts",
+        "relativePath": "src\\types\\utils.ts"
+      },
+      {
+        "name": "Add",
+        "type": "type",
+        "line": 46,
+        "context": "ent constructor\n  }\n\n  // TODO: Add methods and properties\n}",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\utils.ts",
+        "relativePath": "src\\types\\utils.ts"
+      },
+      {
+        "name": "Add",
+        "type": "type",
+        "line": 54,
+        "context": "ent constructor\n  }\n\n  // TODO: Add methods and properties\n}",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\utils.ts",
+        "relativePath": "src\\types\\utils.ts"
+      },
+      {
+        "name": "Add",
+        "type": "type",
+        "line": 14,
+        "context": "ent constructor\n  }\n\n  // TODO: Add methods and properties\n}",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\workers.ts",
+        "relativePath": "src\\types\\workers.ts"
+      }
+    ]
+  },
+  "definitions": {
+    "Implement": {
+      "name": "Implement",
+      "type": "type",
+      "definition": "export type Implement = unknown;",
+      "location": "src/types/index.ts",
+      "refs": [
+        {
+          "name": "Implement",
+          "type": "type",
+          "line": 47,
+          "context": "\n  constructor() {\n    // TODO: Implement constructor\n  }\n\n ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\index.ts",
+          "relativePath": "src\\types\\index.ts"
+        },
+        {
+          "name": "Implement",
+          "type": "type",
+          "line": 13,
+          "context": "\n  constructor() {\n    // TODO: Implement constructor\n  }\n\n ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\utils.ts",
+          "relativePath": "src\\types\\utils.ts"
+        },
+        {
+          "name": "Implement",
+          "type": "type",
+          "line": 43,
+          "context": "\n  constructor() {\n    // TODO: Implement constructor\n  }\n\n ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\utils.ts",
+          "relativePath": "src\\types\\utils.ts"
+        },
+        {
+          "name": "Implement",
+          "type": "type",
+          "line": 51,
+          "context": "\n  constructor() {\n    // TODO: Implement constructor\n  }\n\n ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\utils.ts",
+          "relativePath": "src\\types\\utils.ts"
+        },
+        {
+          "name": "Implement",
+          "type": "type",
+          "line": 11,
+          "context": "\n  constructor() {\n    // TODO: Implement constructor\n  }\n\n ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\workers.ts",
+          "relativePath": "src\\types\\workers.ts"
+        }
+      ]
+    },
+    "Add": {
+      "name": "Add",
+      "type": "type",
+      "definition": "export type Add = unknown;",
+      "location": "src/types/index.ts",
+      "refs": [
+        {
+          "name": "Add",
+          "type": "type",
+          "line": 50,
+          "context": "ent constructor\n  }\n\n  // TODO: Add methods and properties\n}",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\index.ts",
+          "relativePath": "src\\types\\index.ts"
+        },
+        {
+          "name": "Add",
+          "type": "type",
+          "line": 16,
+          "context": "ent constructor\n  }\n\n  // TODO: Add methods and properties\n}",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\utils.ts",
+          "relativePath": "src\\types\\utils.ts"
+        },
+        {
+          "name": "Add",
+          "type": "type",
+          "line": 46,
+          "context": "ent constructor\n  }\n\n  // TODO: Add methods and properties\n}",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\utils.ts",
+          "relativePath": "src\\types\\utils.ts"
+        },
+        {
+          "name": "Add",
+          "type": "type",
+          "line": 54,
+          "context": "ent constructor\n  }\n\n  // TODO: Add methods and properties\n}",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\utils.ts",
+          "relativePath": "src\\types\\utils.ts"
+        },
+        {
+          "name": "Add",
+          "type": "type",
+          "line": 14,
+          "context": "ent constructor\n  }\n\n  // TODO: Add methods and properties\n}",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\workers.ts",
+          "relativePath": "src\\types\\workers.ts"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,749 @@
+/* Import modern fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&display=swap');
+
+@import 'tailwindcss';
+
+/* Custom Components */
+@layer components {
+  .glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .neural-button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+  }
+
+  .card-glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .holographic-text {
+    background: linear-gradient(45deg, #667eea, #764ba2, #f093fb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .neural-mesh-bg {
+    background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+  }
+}
+
+/* CSS Custom Properties for Dynamic Theming */
+:root {
+  /* Neural Network Color Palette */
+  --neural-primary: #667eea;
+  --neural-secondary: #764ba2;
+  --neural-accent: #f093fb;
+
+  /* Agent Colors */
+  --agent-reasoning: #8b5cf6;
+  --agent-swarm: #f59e0b;
+  --agent-canvas: #10b981;
+  --agent-worker: #ef4444;
+
+  /* Glassmorphism */
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+
+  /* Neural Glow Effects */
+  --glow-primary: 0 0 20px rgba(102, 126, 234, 0.5);
+  --glow-secondary: 0 0 30px rgba(118, 75, 162, 0.4);
+
+  /* Animation Durations */
+  --duration-fast: 0.15s;
+  --duration-normal: 0.3s;
+  --duration-slow: 0.6s;
+
+  /* Easing Functions */
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-neural: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Dark Mode Variables */
+[data-theme='dark'] {
+  --glass-bg: rgba(0, 0, 0, 0.2);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* Base Styles with Modern Reset */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+}
+
+body {
+  font-family:
+    'Inter',
+    system-ui,
+    -apple-system,
+    sans-serif;
+  font-optical-sizing: auto;
+  font-variation-settings: 'slnt' 0;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Advanced Keyframe Animations */
+@keyframes gradient-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes neural-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.02);
+    filter: brightness(1.1);
+  }
+}
+
+@keyframes data-stream {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes holographic-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes matrix-digital-rain {
+  0% {
+    transform: translateY(-100vh) rotateX(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotateX(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes cyber-glitch {
+  0%,
+  100% {
+    transform: translate(0);
+    filter: hue-rotate(0deg);
+  }
+  10% {
+    transform: translate(-2px, 2px);
+    filter: hue-rotate(90deg);
+  }
+  20% {
+    transform: translate(-2px, -2px);
+    filter: hue-rotate(180deg);
+  }
+  30% {
+    transform: translate(2px, 2px);
+    filter: hue-rotate(270deg);
+  }
+  40% {
+    transform: translate(2px, -2px);
+    filter: hue-rotate(360deg);
+  }
+}
+
+@keyframes quantum-float {
+  0%,
+  100% {
+    transform: translateY(0px) rotateY(0deg);
+    box-shadow: var(--glow-primary);
+  }
+  25% {
+    transform: translateY(-5px) rotateY(90deg);
+    box-shadow: var(--glow-secondary);
+  }
+  50% {
+    transform: translateY(-10px) rotateY(180deg);
+    box-shadow: var(--glow-primary);
+  }
+  75% {
+    transform: translateY(-5px) rotateY(270deg);
+    box-shadow: var(--glow-secondary);
+  }
+}
+
+/* Advanced Utility Classes */
+.neural-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--neural-primary) 0%,
+    var(--neural-secondary) 100%
+  );
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+.holographic-text {
+  background: linear-gradient(
+    45deg,
+    #ff006e,
+    #8338ec,
+    #3a86ff,
+    #06ffa5,
+    #ffbe0b
+  );
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: holographic-shift 3s ease infinite;
+  font-weight: 700;
+}
+
+.cyber-border {
+  position: relative;
+  border: 2px solid transparent;
+  background: linear-gradient(45deg, #667eea, #764ba2) border-box;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+}
+
+.quantum-shadow {
+  box-shadow:
+    0 0 20px rgba(102, 126, 234, 0.4),
+    0 0 40px rgba(118, 75, 162, 0.3),
+    0 0 60px rgba(240, 147, 251, 0.2),
+    inset 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.neural-mesh-bg {
+  background:
+    radial-gradient(
+      circle at 25% 25%,
+      rgba(102, 126, 234, 0.2) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 75% 75%,
+      rgba(118, 75, 162, 0.2) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(240, 147, 251, 0.1) 0%,
+      transparent 50%
+    ),
+    linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+}
+
+.data-visualization-grid {
+  background-image:
+    linear-gradient(rgba(102, 126, 234, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(102, 126, 234, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+  animation: data-stream 10s linear infinite;
+}
+
+/* Advanced Component Styles */
+.agent-card {
+  @apply relative overflow-hidden rounded-xl;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  transition: all var(--duration-normal) var(--ease-neural);
+}
+
+.agent-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.agent-card:hover::before {
+  left: 100%;
+}
+
+.agent-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow:
+    var(--glass-shadow),
+    0 20px 40px rgba(102, 126, 234, 0.2);
+}
+
+.neural-button {
+  @apply relative overflow-hidden rounded-xl px-6 py-3 font-semibold text-white;
+  background: linear-gradient(
+    135deg,
+    var(--neural-primary),
+    var(--neural-secondary)
+  );
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  transition: all var(--duration-normal) var(--ease-bounce);
+  position: relative;
+}
+
+.neural-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.6s ease;
+}
+
+.neural-button:hover::before {
+  left: 100%;
+}
+
+.neural-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+}
+
+.neural-button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+/* Agent-specific styling */
+.agent-reasoning {
+  --agent-color: var(--agent-reasoning);
+  --agent-glow: 0 0 20px rgba(139, 92, 246, 0.4);
+}
+
+.agent-swarm {
+  --agent-color: var(--agent-swarm);
+  --agent-glow: 0 0 20px rgba(245, 158, 11, 0.4);
+}
+
+.agent-canvas {
+  --agent-color: var(--agent-canvas);
+  --agent-glow: 0 0 20px rgba(16, 185, 129, 0.4);
+}
+
+.agent-worker {
+  --agent-color: var(--agent-worker);
+  --agent-glow: 0 0 20px rgba(239, 68, 68, 0.4);
+}
+
+/* Advanced Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    135deg,
+    var(--neural-primary),
+    var(--neural-secondary)
+  );
+  border-radius: 4px;
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    135deg,
+    var(--neural-secondary),
+    var(--neural-accent)
+  );
+}
+
+/* Selection Styling */
+::selection {
+  background: rgba(102, 126, 234, 0.3);
+  color: white;
+}
+
+::-moz-selection {
+  background: rgba(102, 126, 234, 0.3);
+  color: white;
+}
+
+/* Focus Styles */
+*:focus {
+  outline: 2px solid var(--neural-primary);
+  outline-offset: 2px;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  .agent-card {
+    border: 2px solid white;
+  }
+
+  .neural-button {
+    border: 2px solid white;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .neural-gradient,
+  .holographic-text,
+  .agent-card {
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
+  }
+}
+
+/* Basic reset and utilities */
+* {
+  box-sizing: border-box;
+}
+
+.w-screen {
+  width: 100vw;
+}
+.h-screen {
+  height: 100vh;
+}
+.flex {
+  display: flex;
+}
+.flex-1 {
+  flex: 1;
+}
+.relative {
+  position: relative;
+}
+.absolute {
+  position: absolute;
+}
+.space-y-1 > * + * {
+  margin-top: 0.25rem;
+}
+.space-y-2 > * + * {
+  margin-top: 0.5rem;
+}
+.w-full {
+  width: 100%;
+}
+.w-80 {
+  width: 20rem;
+}
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+.p-4 {
+  padding: 1rem;
+}
+.text-xs {
+  font-size: 0.75rem;
+}
+.text-sm {
+  font-size: 0.875rem;
+}
+.font-bold {
+  font-weight: 700;
+}
+.rounded {
+  border-radius: 0.25rem;
+}
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+.shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+.border-l {
+  border-left-width: 1px;
+}
+.border-gray-200 {
+  border-color: #e5e7eb;
+}
+.bg-white {
+  background-color: #ffffff;
+}
+.bg-gray-50 {
+  background-color: #f9fafb;
+}
+.bg-blue-500 {
+  background-color: #3b82f6;
+}
+.bg-green-500 {
+  background-color: #10b981;
+}
+.bg-yellow-500 {
+  background-color: #f59e0b;
+}
+.bg-emerald-500 {
+  background-color: #10b981;
+}
+.bg-indigo-500 {
+  background-color: #6366f1;
+}
+.bg-purple-500 {
+  background-color: #8b5cf6;
+}
+.bg-gray-500 {
+  background-color: #6b7280;
+}
+.bg-red-500 {
+  background-color: #ef4444;
+}
+.text-white {
+  color: #ffffff;
+}
+.hover\\:bg-blue-600:hover {
+  background-color: #2563eb;
+}
+.hover\\:bg-green-600:hover {
+  background-color: #059669;
+}
+.hover\\:bg-yellow-600:hover {
+  background-color: #d97706;
+}
+.hover\\:bg-emerald-600:hover {
+  background-color: #059669;
+}
+.hover\\:bg-indigo-600:hover {
+  background-color: #4f46e5;
+}
+.hover\\:bg-purple-600:hover {
+  background-color: #7c3aed;
+}
+.hover\\:bg-gray-600:hover {
+  background-color: #4b5563;
+}
+.hover\\:bg-red-600:hover {
+  background-color: #dc2626;
+}
+.disabled\\:opacity-50:disabled {
+  opacity: 0.5;
+}
+.top-4 {
+  top: 1rem;
+}
+.left-4 {
+  left: 1rem;
+}
+.my-2 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.hidden {
+  display: none;
+}
+
+/* Custom styles for the agent canvas */
+body {
+  margin: 0;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* React Flow custom styles */
+.react-flow__node {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.react-flow__edge {
+  stroke-width: 2;
+}
+
+.react-flow__edge.selected {
+  stroke-width: 3;
+}
+
+/* Agent node specific styles */
+.agent-node {
+  background: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 12px;
+  min-width: 200px;
+}
+
+.agent-node.active {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.agent-node.reasoning {
+  border-color: #6366f1;
+}
+
+.agent-node.swarm {
+  border-color: #10b981;
+}
+
+.agent-node.worker {
+  border-color: #f59e0b;
+}
+
+.agent-node.canvas {
+  border-color: #8b5cf6;
+}
+
+/* Control panel styles */
+.control-panel {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+/* Analytics dashboard styles */
+.analytics-dashboard {
+  background: #f9fafb;
+}
+
+.metric-card {
+  background: white;
+  border-radius: 6px;
+  padding: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Animation classes */
+.pulse-animation {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Status indicators */
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.status-active {
+  background-color: #10b981;
+}
+
+.status-idle {
+  background-color: #6b7280;
+}
+
+.status-error {
+  background-color: #ef4444;
+}
+
+.status-busy {
+  background-color: #f59e0b;
+}
