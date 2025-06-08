@@ -94,3 +94,9 @@ export interface Position {
   x: number;
   y: number;
 }
+
+export interface Math {
+  id: string;
+}
+
+export type Set = unknown;

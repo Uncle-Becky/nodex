@@ -1,190 +1,4194 @@
 {
-  "timestamp": "2025-06-06T04:36:40.191Z",
+  "timestamp": "2025-06-08T11:12:32.097Z",
   "summary": {
-    "filesAnalyzed": 24,
-    "undefinedReferences": 2,
-    "definitionsGenerated": 2
+    "filesAnalyzed": 37,
+    "undefinedReferences": 20,
+    "definitionsGenerated": 20
   },
   "undefinedRefs": {
-    "Implement": [
+    "Record": [
       {
-        "name": "Implement",
+        "name": "Record",
         "type": "type",
-        "line": 47,
-        "context": "\n  constructor() {\n    // TODO: Implement constructor\n  }\n\n ",
-        "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\index.ts",
-        "relativePath": "src\\types\\index.ts"
+        "line": 6,
+        "context": "ext {\r\n  id: AgentId;\r\n  state: Record<string, unknown>;\r\n  ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\AgentBase.ts",
+        "relativePath": "src\\agents\\AgentBase.ts"
       },
       {
-        "name": "Implement",
+        "name": "Record",
+        "type": "type",
+        "line": 7,
+        "context": "rd<string, unknown>;\r\n  memory: Record<string, unknown>;\r\n}\r",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\AgentBase.ts",
+        "relativePath": "src\\agents\\AgentBase.ts"
+      },
+      {
+        "name": "Record",
+        "type": "type",
+        "line": 12,
+        "context": "d: AgentId;\r\n  protected state: Record<string, unknown> = {}",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\AgentBase.ts",
+        "relativePath": "src\\agents\\AgentBase.ts"
+      },
+      {
+        "name": "Record",
         "type": "type",
         "line": 13,
-        "context": "\n  constructor() {\n    // TODO: Implement constructor\n  }\n\n ",
-        "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\utils.ts",
-        "relativePath": "src\\types\\utils.ts"
+        "context": "own> = {};\r\n  protected memory: Record<string, unknown> = {}",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\AgentBase.ts",
+        "relativePath": "src\\agents\\AgentBase.ts"
       },
       {
-        "name": "Implement",
+        "name": "Record",
         "type": "type",
-        "line": 43,
-        "context": "\n  constructor() {\n    // TODO: Implement constructor\n  }\n\n ",
-        "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\utils.ts",
-        "relativePath": "src\\types\\utils.ts"
+        "line": 47,
+        "context": "\n  public updateState(newState: Record<string, unknown>): vo",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\AgentBase.ts",
+        "relativePath": "src\\agents\\AgentBase.ts"
       },
       {
-        "name": "Implement",
+        "name": "Record",
         "type": "type",
-        "line": 51,
-        "context": "\n  constructor() {\n    // TODO: Implement constructor\n  }\n\n ",
-        "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\utils.ts",
-        "relativePath": "src\\types\\utils.ts"
+        "line": 389,
+        "context": "vate analyzeConfidenceTrends(): Record<string, number> {\r\n  ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\ReasoningAgent.ts",
+        "relativePath": "src\\agents\\ReasoningAgent.ts"
       },
       {
-        "name": "Implement",
+        "name": "Record",
+        "type": "type",
+        "line": 459,
+        "context": "\n\r\n  private getCurrentState(): Record<string, unknown> {\r\n ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\ReasoningAgent.ts",
+        "relativePath": "src\\agents\\ReasoningAgent.ts"
+      },
+      {
+        "name": "Record",
         "type": "type",
         "line": 11,
-        "context": "\n  constructor() {\n    // TODO: Implement constructor\n  }\n\n ",
-        "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\workers.ts",
-        "relativePath": "src\\types\\workers.ts"
-      }
-    ],
-    "Add": [
+        "context": " color: string;\r\n  defaultData: Record<string, unknown>;\r\n}\r",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\components\\NodePalette.tsx",
+        "relativePath": "src\\components\\NodePalette.tsx"
+      },
       {
-        "name": "Add",
+        "name": "Record",
+        "type": "type",
+        "line": 17,
+        "context": "number; y: number };\r\n  state?: Record<string, unknown>;\r\n}\r",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\managers\\AgentManager.ts",
+        "relativePath": "src\\managers\\AgentManager.ts"
+      },
+      {
+        "name": "Record",
         "type": "type",
         "line": 50,
-        "context": "ent constructor\n  }\n\n  // TODO: Add methods and properties\n}",
-        "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\index.ts",
-        "relativePath": "src\\types\\index.ts"
+        "context": "oid {\r\n    const defaultLimits: Record<LLMProvider, RateLimi",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ApiKeyManager.ts",
+        "relativePath": "src\\services\\ApiKeyManager.ts"
       },
       {
-        "name": "Add",
+        "name": "Record",
         "type": "type",
-        "line": 16,
-        "context": "ent constructor\n  }\n\n  // TODO: Add methods and properties\n}",
-        "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\utils.ts",
-        "relativePath": "src\\types\\utils.ts"
+        "line": 10,
+        "context": " userId?: string;\r\n  variables: Record<string, unknown>;\r\n  ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+        "relativePath": "src\\services\\ExecutionEngine.ts"
       },
       {
-        "name": "Add",
+        "name": "Record",
         "type": "type",
+        "line": 11,
+        "context": "rd<string, unknown>;\r\n  memory: Record<string, unknown>;\r\n  ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+        "relativePath": "src\\services\\ExecutionEngine.ts"
+      },
+      {
+        "name": "Record",
+        "type": "type",
+        "line": 12,
+        "context": "<string, unknown>;\r\n  metadata: Record<string, unknown>;\r\n}\r",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+        "relativePath": "src\\services\\ExecutionEngine.ts"
+      },
+      {
+        "name": "Record",
+        "type": "type",
+        "line": 277,
+        "context": "t(\r\n    code: string,\r\n    env: Record<string, unknown>,\r\n  ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+        "relativePath": "src\\services\\ExecutionEngine.ts"
+      },
+      {
+        "name": "Record",
+        "type": "type",
+        "line": 307,
+        "context": "\r\n    _code: string,\r\n    _env: Record<string, unknown>,\r\n  ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+        "relativePath": "src\\services\\ExecutionEngine.ts"
+      },
+      {
+        "name": "Record",
+        "type": "type",
+        "line": 352,
+        "context": "on: { type: string; parameters: Record<string, unknown> }\r\n ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+        "relativePath": "src\\services\\ExecutionEngine.ts"
+      },
+      {
+        "name": "Record",
+        "type": "type",
+        "line": 381,
+        "context": " string;\r\n        const groups: Record<string, unknown[]> = ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+        "relativePath": "src\\services\\ExecutionEngine.ts"
+      },
+      {
+        "name": "Record",
+        "type": "type",
+        "line": 397,
+        "context": " item: unknown,\r\n    condition: Record<string, unknown>\r\n  )",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+        "relativePath": "src\\services\\ExecutionEngine.ts"
+      },
+      {
+        "name": "Record",
+        "type": "type",
+        "line": 421,
+        "context": ": unknown,\r\n    transformation: Record<string, unknown>\r\n  )",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+        "relativePath": "src\\services\\ExecutionEngine.ts"
+      },
+      {
+        "name": "Record",
+        "type": "type",
+        "line": 465,
+        "context": "xtraction\r\n      const results: Record<string, string> = {};",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+        "relativePath": "src\\services\\ExecutionEngine.ts"
+      },
+      {
+        "name": "Record",
+        "type": "type",
+        "line": 502,
+        "context": "config;\r\n\r\n      const headers: Record<string, string> = {\r\n",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+        "relativePath": "src\\services\\ExecutionEngine.ts"
+      },
+      {
+        "name": "Record",
+        "type": "type",
+        "line": 68,
+        "context": "\n\r\n  public getServiceStatus(): Record<string, boolean> {\r\n ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ServiceInitializer.ts",
+        "relativePath": "src\\services\\ServiceInitializer.ts"
+      },
+      {
+        "name": "Record",
+        "type": "type",
+        "line": 74,
+        "context": "ealthy: boolean;\r\n    services: Record<string, boolean>;\r\n  ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ServiceInitializer.ts",
+        "relativePath": "src\\services\\ServiceInitializer.ts"
+      },
+      {
+        "name": "Record",
+        "type": "type",
+        "line": 78,
+        "context": "= [];\r\n    const serviceStatus: Record<string, boolean> = {}",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ServiceInitializer.ts",
+        "relativePath": "src\\services\\ServiceInitializer.ts"
+      },
+      {
+        "name": "Record",
+        "type": "type",
+        "line": 36,
+        "context": "\r\n  agentId: AgentId;\r\n  state: Record<string, unknown>;\r\n  ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\bus.ts",
+        "relativePath": "src\\types\\bus.ts"
+      },
+      {
+        "name": "Record",
+        "type": "type",
+        "line": 37,
+        "context": "<string, unknown>;\r\n  metrics?: Record<string, unknown>;\r\n}\r",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\bus.ts",
+        "relativePath": "src\\types\\bus.ts"
+      },
+      {
+        "name": "Record",
+        "type": "type",
+        "line": 76,
+        "context": "vents: number;\r\n  eventsByType: Record<BusEventType, number>",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\bus.ts",
+        "relativePath": "src\\types\\bus.ts"
+      },
+      {
+        "name": "Record",
+        "type": "type",
+        "line": 77,
+        "context": "pe, number>;\r\n  eventsBySource: Record<string, number>;\r\n  a",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\bus.ts",
+        "relativePath": "src\\types\\bus.ts"
+      },
+      {
+        "name": "Record",
+        "type": "type",
+        "line": 80,
+        "context": "e: number;\r\n  timelineAnalysis: Record<string, number>;\r\n}\r\n",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\bus.ts",
+        "relativePath": "src\\types\\bus.ts"
+      },
+      {
+        "name": "Record",
+        "type": "type",
+        "line": 30,
+        "context": "ype: 'object';\r\n    properties: Record<\r\n      string,\r\n    ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\llm.ts",
+        "relativePath": "src\\types\\llm.ts"
+      },
+      {
+        "name": "Record",
+        "type": "type",
+        "line": 128,
+        "context": "abilities: string[];\r\n  memory: Record<string, unknown>;\r\n  ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\llm.ts",
+        "relativePath": "src\\types\\llm.ts"
+      },
+      {
+        "name": "Record",
+        "type": "type",
+        "line": 133,
+        "context": "meout: number;\r\n    rateLimits: Record<string, number>;\r\n  }",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\llm.ts",
+        "relativePath": "src\\types\\llm.ts"
+      },
+      {
+        "name": "Record",
+        "type": "type",
+        "line": 58,
+        "context": "ion: string;\r\n      parameters: Record<string, unknown>;\r\n  ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\nodes.ts",
+        "relativePath": "src\\types\\nodes.ts"
+      },
+      {
+        "name": "Record",
+        "type": "type",
+        "line": 84,
+        "context": "ess: boolean;\r\n    environment: Record<string, unknown>;\r\n  ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\nodes.ts",
+        "relativePath": "src\\types\\nodes.ts"
+      },
+      {
+        "name": "Record",
+        "type": "type",
+        "line": 94,
+        "context": "'aggregate';\r\n      parameters: Record<string, unknown>;\r\n  ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\nodes.ts",
+        "relativePath": "src\\types\\nodes.ts"
+      },
+      {
+        "name": "Record",
+        "type": "type",
+        "line": 96,
+        "context": "n>;\r\n    }>;\r\n    inputSchema?: Record<string, unknown>;\r\n  ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\nodes.ts",
+        "relativePath": "src\\types\\nodes.ts"
+      },
+      {
+        "name": "Record",
+        "type": "type",
+        "line": 97,
+        "context": ", unknown>;\r\n    outputSchema?: Record<string, unknown>;\r\n  ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\nodes.ts",
+        "relativePath": "src\\types\\nodes.ts"
+      },
+      {
+        "name": "Record",
+        "type": "type",
+        "line": 106,
+        "context": "   url: string;\r\n    selectors: Record<string, string>;\r\n   ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\nodes.ts",
+        "relativePath": "src\\types\\nodes.ts"
+      },
+      {
+        "name": "Record",
+        "type": "type",
+        "line": 109,
+        "context": "timeout: number;\r\n    headers?: Record<string, string>;\r\n   ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\nodes.ts",
+        "relativePath": "src\\types\\nodes.ts"
+      },
+      {
+        "name": "Record",
+        "type": "type",
+        "line": 122,
+        "context": " 'validate';\r\n      parameters: Record<string, unknown>;\r\n  ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\nodes.ts",
+        "relativePath": "src\\types\\nodes.ts"
+      },
+      {
+        "name": "Record",
+        "type": "type",
+        "line": 185,
+        "context": "    url: string;\r\n    headers?: Record<string, string>;\r\n   ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\nodes.ts",
+        "relativePath": "src\\types\\nodes.ts"
+      },
+      {
+        "name": "Record",
+        "type": "type",
+        "line": 188,
+        "context": " | 'oauth';\r\n      credentials: Record<string, string>;\r\n   ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\nodes.ts",
+        "relativePath": "src\\types\\nodes.ts"
+      },
+      {
+        "name": "Record",
+        "type": "type",
+        "line": 242,
+        "context": "tring;\r\n  }>;\r\n  configuration: Record<\r\n    string,\r\n    {\r",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\nodes.ts",
+        "relativePath": "src\\types\\nodes.ts"
+      },
+      {
+        "name": "Record",
+        "type": "type",
+        "line": 148,
+        "context": "log;\r\n\r\n    const eventsByType: Record<BusEventType, number>",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\utils\\eventBus.ts",
+        "relativePath": "src\\utils\\eventBus.ts"
+      },
+      {
+        "name": "Record",
+        "type": "type",
+        "line": 152,
+        "context": "  >;\r\n    const eventsBySource: Record<string, number> = {};",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\utils\\eventBus.ts",
+        "relativePath": "src\\utils\\eventBus.ts"
+      },
+      {
+        "name": "Record",
+        "type": "type",
+        "line": 330,
+        "context": "Entry[]) {\r\n    const timeline: Record<string, number> = {};",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\utils\\eventBus.ts",
+        "relativePath": "src\\utils\\eventBus.ts"
+      },
+      {
+        "name": "Record",
+        "type": "type",
+        "line": 376,
+        "context": "\r\n    ttl?: number;\r\n    meta?: Record<string, unknown>;\r\n  ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\utils\\eventBus.ts",
+        "relativePath": "src\\utils\\eventBus.ts"
+      },
+      {
+        "name": "Record",
+        "type": "type",
+        "line": 409,
+        "context": "\r\n    ttl?: number;\r\n    meta?: Record<string, unknown>;\r\n  ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\utils\\eventBus.ts",
+        "relativePath": "src\\utils\\eventBus.ts"
+      },
+      {
+        "name": "Record",
+        "type": "type",
+        "line": 133,
+        "context": "agentId: AgentId,\r\n    message: Record<string, unknown>\r\n  )",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\workers\\WorkerPool.ts",
+        "relativePath": "src\\workers\\WorkerPool.ts"
+      }
+    ],
+    "Map": [
+      {
+        "name": "Map",
+        "type": "type",
+        "line": 24,
+        "context": "= [];\r\n  private knowledgeBase: Map<string, unknown> = new M",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\ReasoningAgent.ts",
+        "relativePath": "src\\agents\\ReasoningAgent.ts"
+      },
+      {
+        "name": "Map",
+        "type": "type",
+        "line": 24,
+        "context": "eBase: Map<string, unknown> = new Map();\r\n\r\n  constructor(id",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\ReasoningAgent.ts",
+        "relativePath": "src\\agents\\ReasoningAgent.ts"
+      },
+      {
+        "name": "Map",
+        "type": "type",
+        "line": 17,
+        "context": "d;\r\n  value: unknown;\r\n  votes: Map<AgentId, boolean>;\r\n  ti",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Map",
+        "type": "type",
+        "line": 29,
+        "context": "\r\n  private consensusProposals: Map<string, ConsensusProposa",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Map",
+        "type": "type",
+        "line": 29,
+        "context": "<string, ConsensusProposal> = new Map();\r\n  private behavior",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Map",
+        "type": "class",
+        "line": 426,
+        "context": ",\r\n      value,\r\n      votes: new Map(),\r\n      timestamp: D",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Map",
+        "type": "type",
+        "line": 37,
+        "context": "entManager {\r\n  private agents: Map<AgentId, AgentInfo> = ne",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\managers\\AgentManager.ts",
+        "relativePath": "src\\managers\\AgentManager.ts"
+      },
+      {
+        "name": "Map",
+        "type": "type",
+        "line": 37,
+        "context": "ts: Map<AgentId, AgentInfo> = new Map();\r\n  private canvasAg",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\managers\\AgentManager.ts",
+        "relativePath": "src\\managers\\AgentManager.ts"
+      },
+      {
+        "name": "Map",
+        "type": "type",
+        "line": 33,
+        "context": "piKeyManager {\r\n  private keys: Map<LLMProvider, ApiKeyConfi",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ApiKeyManager.ts",
+        "relativePath": "src\\services\\ApiKeyManager.ts"
+      },
+      {
+        "name": "Map",
+        "type": "type",
+        "line": 34,
+        "context": "w Map();\r\n  private rateLimits: Map<LLMProvider, RateLimitCo",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ApiKeyManager.ts",
+        "relativePath": "src\\services\\ApiKeyManager.ts"
+      },
+      {
+        "name": "Map",
+        "type": "type",
+        "line": 35,
+        "context": " = new Map();\r\n  private usage: Map<LLMProvider, UsageTracke",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ApiKeyManager.ts",
+        "relativePath": "src\\services\\ApiKeyManager.ts"
+      },
+      {
+        "name": "Map",
+        "type": "type",
+        "line": 33,
+        "context": "<LLMProvider, ApiKeyConfig> = new Map();\r\n  private rateLimi",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ApiKeyManager.ts",
+        "relativePath": "src\\services\\ApiKeyManager.ts"
+      },
+      {
+        "name": "Map",
+        "type": "type",
+        "line": 34,
+        "context": "MProvider, RateLimitConfig> = new Map();\r\n  private usage: M",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ApiKeyManager.ts",
+        "relativePath": "src\\services\\ApiKeyManager.ts"
+      },
+      {
+        "name": "Map",
+        "type": "type",
+        "line": 35,
+        "context": "<LLMProvider, UsageTracker> = new Map();\r\n  private encrypti",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ApiKeyManager.ts",
+        "relativePath": "src\\services\\ApiKeyManager.ts"
+      },
+      {
+        "name": "Map",
+        "type": "type",
+        "line": 564,
+        "context": "nEngine {\r\n  private executors: Map<NodeType, NodeExecutor> ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+        "relativePath": "src\\services\\ExecutionEngine.ts"
+      },
+      {
+        "name": "Map",
+        "type": "type",
+        "line": 565,
+        "context": "w Map();\r\n  private executions: Map<string, NodeExecution> =",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+        "relativePath": "src\\services\\ExecutionEngine.ts"
+      },
+      {
+        "name": "Map",
+        "type": "type",
+        "line": 564,
+        "context": "Map<NodeType, NodeExecutor> = new Map();\r\n  private executio",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+        "relativePath": "src\\services\\ExecutionEngine.ts"
+      },
+      {
+        "name": "Map",
+        "type": "type",
+        "line": 565,
+        "context": " Map<string, NodeExecution> = new Map();\r\n\r\n  constructor() ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+        "relativePath": "src\\services\\ExecutionEngine.ts"
+      },
+      {
+        "name": "Map",
+        "type": "type",
+        "line": 337,
+        "context": "MService {\r\n  private adapters: Map<LLMProvider, ProviderAda",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\LLMService.ts",
+        "relativePath": "src\\services\\LLMService.ts"
+      },
+      {
+        "name": "Map",
+        "type": "type",
+        "line": 339,
+        "context": " = [];\r\n  private runningTasks: Map<string, LLMTask> = new M",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\LLMService.ts",
+        "relativePath": "src\\services\\LLMService.ts"
+      },
+      {
+        "name": "Map",
+        "type": "type",
+        "line": 340,
+        "context": " new Map();\r\n  private metrics: Map<LLMProvider, LLMMetrics>",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\LLMService.ts",
+        "relativePath": "src\\services\\LLMService.ts"
+      },
+      {
+        "name": "Map",
+        "type": "type",
+        "line": 337,
+        "context": "MProvider, ProviderAdapter> = new Map();\r\n  private taskQueu",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\LLMService.ts",
+        "relativePath": "src\\services\\LLMService.ts"
+      },
+      {
+        "name": "Map",
+        "type": "type",
+        "line": 339,
+        "context": "Tasks: Map<string, LLMTask> = new Map();\r\n  private metrics:",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\LLMService.ts",
+        "relativePath": "src\\services\\LLMService.ts"
+      },
+      {
+        "name": "Map",
+        "type": "type",
+        "line": 340,
+        "context": "ap<LLMProvider, LLMMetrics> = new Map();\r\n  private maxConcu",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\LLMService.ts",
+        "relativePath": "src\\services\\LLMService.ts"
+      },
+      {
+        "name": "Map",
+        "type": "type",
+        "line": 4,
+        "context": "d = false;\r\n  private services: Map<string, boolean> = new M",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ServiceInitializer.ts",
+        "relativePath": "src\\services\\ServiceInitializer.ts"
+      },
+      {
+        "name": "Map",
+        "type": "type",
+        "line": 4,
+        "context": "vices: Map<string, boolean> = new Map();\r\n\r\n  private constr",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ServiceInitializer.ts",
+        "relativePath": "src\\services\\ServiceInitializer.ts"
+      },
+      {
+        "name": "Map",
+        "type": "type",
+        "line": 18,
+        "context": "] = [];\r\n  private subscribers: Map<BusEventType, Set<EventH",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\utils\\eventBus.ts",
+        "relativePath": "src\\utils\\eventBus.ts"
+      },
+      {
+        "name": "Map",
+        "type": "type",
+        "line": 18,
+        "context": "entType, Set<EventHandler>> = new Map();\r\n  private validato",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\utils\\eventBus.ts",
+        "relativePath": "src\\utils\\eventBus.ts"
+      },
+      {
+        "name": "Map",
+        "type": "type",
+        "line": 29,
+        "context": "orkerPool {\r\n  private workers: Map<AgentId, Worker> = new M",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\workers\\WorkerPool.ts",
+        "relativePath": "src\\workers\\WorkerPool.ts"
+      },
+      {
+        "name": "Map",
+        "type": "type",
+        "line": 30,
+        "context": "ap();\r\n  private workerMetrics: Map<AgentId, WorkerMetrics> ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\workers\\WorkerPool.ts",
+        "relativePath": "src\\workers\\WorkerPool.ts"
+      },
+      {
+        "name": "Map",
+        "type": "type",
+        "line": 31,
+        "context": "Map();\r\n  private messageQueue: Map<AgentId, WorkerMessage[]",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\workers\\WorkerPool.ts",
+        "relativePath": "src\\workers\\WorkerPool.ts"
+      },
+      {
+        "name": "Map",
+        "type": "type",
+        "line": 29,
+        "context": "rkers: Map<AgentId, Worker> = new Map();\r\n  private workerMe",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\workers\\WorkerPool.ts",
+        "relativePath": "src\\workers\\WorkerPool.ts"
+      },
+      {
+        "name": "Map",
+        "type": "type",
+        "line": 30,
+        "context": "Map<AgentId, WorkerMetrics> = new Map();\r\n  private messageQ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\workers\\WorkerPool.ts",
+        "relativePath": "src\\workers\\WorkerPool.ts"
+      },
+      {
+        "name": "Map",
+        "type": "type",
+        "line": 31,
+        "context": "p<AgentId, WorkerMessage[]> = new Map();\r\n  private config: ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\workers\\WorkerPool.ts",
+        "relativePath": "src\\workers\\WorkerPool.ts"
+      }
+    ],
+    "Math": [
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 158,
+        "context": " deduce...`,\r\n      confidence: Math.min(0.9, 0.5 + patterns",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\ReasoningAgent.ts",
+        "relativePath": "src\\agents\\ReasoningAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 171,
+        "context": "I infer...`,\r\n      confidence: Math.min(0.8, 0.3 + similarC",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\ReasoningAgent.ts",
+        "relativePath": "src\\agents\\ReasoningAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 184,
+        "context": "ties is...`,\r\n      confidence: Math.min(0.7, 0.4 + possible",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\ReasoningAgent.ts",
+        "relativePath": "src\\agents\\ReasoningAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 158,
+        "context": "educe...`,\r\n      confidence: Math.min(0.9, 0.5 + patterns.l",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\ReasoningAgent.ts",
+        "relativePath": "src\\agents\\ReasoningAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 171,
+        "context": "infer...`,\r\n      confidence: Math.min(0.8, 0.3 + similarCas",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\ReasoningAgent.ts",
+        "relativePath": "src\\agents\\ReasoningAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 184,
+        "context": "es is...`,\r\n      confidence: Math.min(0.7, 0.4 + possibleEx",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\ReasoningAgent.ts",
+        "relativePath": "src\\agents\\ReasoningAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 221,
+        "context": " * 0.05;\r\n    }\r\n\r\n    return Math.min(1, importance);\r\n  }\r",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\ReasoningAgent.ts",
+        "relativePath": "src\\agents\\ReasoningAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 292,
+        "context": "p;\r\n    const recencyFactor = Math.max(0, 1 - age / (1000 * ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\ReasoningAgent.ts",
+        "relativePath": "src\\agents\\ReasoningAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 295,
+        "context": "cyFactor * 0.5;\r\n\r\n    return Math.min(1, relevance);\r\n  }\r\n",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\ReasoningAgent.ts",
+        "relativePath": "src\\agents\\ReasoningAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 353,
+        "context": "mory[]): number {\r\n    return Math.min(1, memories.length * ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\ReasoningAgent.ts",
+        "relativePath": "src\\agents\\ReasoningAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 406,
+        "context": "e(\r\n      reasonings.slice(0, Math.floor(reasonings.length /",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\ReasoningAgent.ts",
+        "relativePath": "src\\agents\\ReasoningAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 409,
+        "context": "ence(\r\n      reasonings.slice(Math.floor(reasonings.length /",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\ReasoningAgent.ts",
+        "relativePath": "src\\agents\\ReasoningAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 41,
+        "context": "nitialPosition || {\r\n        x: Math.random() * 100,\r\n      ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 42,
+        "context": "ath.random() * 100,\r\n        y: Math.random() * 100,\r\n      ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 41,
+        "context": "tialPosition || {\r\n        x: Math.random() * 100,\r\n        ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 42,
+        "context": "h.random() * 100,\r\n        y: Math.random() * 100,\r\n      },",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 44,
+        "context": "    },\r\n      velocity: { x: (Math.random() - 0.5) * 2, y: (",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 44,
+        "context": "Math.random() - 0.5) * 2, y: (Math.random() - 0.5) * 2 },\r\n ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 228,
+        "context": " this.particle.velocity.x += (Math.random() - 0.5) * 0.5;\r\n ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 229,
+        "context": " this.particle.velocity.y += (Math.random() - 0.5) * 0.5;\r\n\r",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 232,
+        "context": "   this.particle.velocity.x = Math.max(\r\n      -2,\r\n      Ma",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 234,
+        "context": "= Math.max(\r\n      -2,\r\n      Math.min(2, this.particle.velo",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 236,
+        "context": "   this.particle.velocity.y = Math.max(\r\n      -2,\r\n      Ma",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 238,
+        "context": "= Math.max(\r\n      -2,\r\n      Math.min(2, this.particle.velo",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 246,
+        "context": "   this.particle.position.x = Math.max(\r\n      0,\r\n      Mat",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 248,
+        "context": " = Math.max(\r\n      0,\r\n      Math.min(100, this.particle.po",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 250,
+        "context": "   this.particle.position.y = Math.max(\r\n      0,\r\n      Mat",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 252,
+        "context": " = Math.max(\r\n      0,\r\n      Math.min(100, this.particle.po",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 262,
+        "context": "l parameter\r\n\r\n    const r1 = Math.random();\r\n    const r2 =",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 263,
+        "context": "ath.random();\r\n    const r2 = Math.random();\r\n\r\n    // Updat",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 281,
+        "context": "   this.particle.position.x = Math.max(\r\n      0,\r\n      Mat",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 283,
+        "context": " = Math.max(\r\n      0,\r\n      Math.min(100, this.particle.po",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 285,
+        "context": "   this.particle.position.y = Math.max(\r\n      0,\r\n      Mat",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 287,
+        "context": " = Math.max(\r\n      0,\r\n      Math.min(100, this.particle.po",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 298,
+        "context": "e.position.x) * 0.1 +\r\n      (Math.random() - 0.5) * 0.2;\r\n ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 301,
+        "context": "e.position.y) * 0.1 +\r\n      (Math.random() - 0.5) * 0.2;\r\n ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 306,
+        "context": " this.particle.velocity.x += (Math.random() - 0.5) * 2;\r\n   ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 307,
+        "context": " this.particle.velocity.y += (Math.random() - 0.5) * 2;\r\n\r\n ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 313,
+        "context": "   this.particle.position.x = Math.max(\r\n      0,\r\n      Mat",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 315,
+        "context": " = Math.max(\r\n      0,\r\n      Math.min(100, this.particle.po",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 317,
+        "context": "   this.particle.position.y = Math.max(\r\n      0,\r\n      Mat",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 319,
+        "context": " = Math.max(\r\n      0,\r\n      Math.min(100, this.particle.po",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 327,
+        "context": "Y = 50;\r\n    const distance = Math.sqrt(\r\n      Math.pow(pos",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 328,
+        "context": " distance = Math.sqrt(\r\n      Math.pow(position.x - centerX,",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 328,
+        "context": "ow(position.x - centerX, 2) + Math.pow(position.y - centerY,",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 333,
+        "context": "00 -\r\n      distance +\r\n      Math.sin(position.x / 10) * 5 ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 334,
+        "context": "position.x / 10) * 5 +\r\n      Math.cos(position.y / 10) * 5\r",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 379,
+        "context": "ase 'consensus':\r\n        if (Math.random() < 0.05) {\r\n     ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 385,
+        "context": "se 'dispersing':\r\n        if (Math.random() < 0.1) {\r\n      ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 415,
+        "context": " other swarm members\r\n    if (Math.random() < 0.7) {\r\n      ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 474,
+        "context": "   if (proposal.votes.size >= Math.ceil(this.swarmMembers.si",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 489,
+        "context": "ore sophisticated\r\n    return Math.random() > 0.3; // 70% ch",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 156,
+        "context": "      position: {\r\n          x: Math.random() * 400 + 200,\r\n",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+        "relativePath": "src\\App.tsx"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 157,
+        "context": "om() * 400 + 200,\r\n          y: Math.random() * 400 + 200,\r\n",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+        "relativePath": "src\\App.tsx"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 400,
+        "context": "tration\r\n          performance: Math.round(Math.random() * 1",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+        "relativePath": "src\\App.tsx"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 401,
+        "context": " 100),\r\n          messageCount: Math.round(Math.random() * 5",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+        "relativePath": "src\\App.tsx"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 472,
+        "context": "dom() * 10,\r\n        cpu_usage: Math.round(Math.random() * 1",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+        "relativePath": "src\\App.tsx"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 473,
+        "context": " * 100),\r\n        memory_usage: Math.round(Math.random() * 1",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+        "relativePath": "src\\App.tsx"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 474,
+        "context": "100),\r\n        network_latency: Math.round(Math.random() * 2",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+        "relativePath": "src\\App.tsx"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 475,
+        "context": "() * 200),\r\n        throughput: Math.round(Math.random() * 1",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+        "relativePath": "src\\App.tsx"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 156,
+        "context": "    position: {\r\n          x: Math.random() * 400 + 200,\r\n  ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+        "relativePath": "src\\App.tsx"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 157,
+        "context": "() * 400 + 200,\r\n          y: Math.random() * 400 + 200,\r\n  ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+        "relativePath": "src\\App.tsx"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 251,
+        "context": "% 3) * 150,\r\n        y: 300 + Math.floor(index / 3) * 120,\r\n",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+        "relativePath": "src\\App.tsx"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 400,
+        "context": "ation\r\n          performance: Math.round(Math.random() * 100",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+        "relativePath": "src\\App.tsx"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 400,
+        "context": "      performance: Math.round(Math.random() * 100),\r\n       ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+        "relativePath": "src\\App.tsx"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 401,
+        "context": "00),\r\n          messageCount: Math.round(Math.random() * 50)",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+        "relativePath": "src\\App.tsx"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 401,
+        "context": "     messageCount: Math.round(Math.random() * 50),\r\n        ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+        "relativePath": "src\\App.tsx"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 403,
+        "context": ", 'processing'][\r\n            Math.floor(Math.random() * 3)\r",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+        "relativePath": "src\\App.tsx"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 403,
+        "context": "ng'][\r\n            Math.floor(Math.random() * 3)\r\n          ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+        "relativePath": "src\\App.tsx"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 427,
+        "context": "pes\r\n        const edgeType = Math.random() > 0.5 ? 'dataEdg",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+        "relativePath": "src\\App.tsx"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 471,
+        "context": "\r\n        temperature: 23.5 + Math.random() * 10,\r\n        c",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+        "relativePath": "src\\App.tsx"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 472,
+        "context": "m() * 10,\r\n        cpu_usage: Math.round(Math.random() * 100",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+        "relativePath": "src\\App.tsx"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 472,
+        "context": "        cpu_usage: Math.round(Math.random() * 100),\r\n       ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+        "relativePath": "src\\App.tsx"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 473,
+        "context": " 100),\r\n        memory_usage: Math.round(Math.random() * 100",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+        "relativePath": "src\\App.tsx"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 473,
+        "context": "     memory_usage: Math.round(Math.random() * 100),\r\n       ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+        "relativePath": "src\\App.tsx"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 474,
+        "context": "0),\r\n        network_latency: Math.round(Math.random() * 200",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+        "relativePath": "src\\App.tsx"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 474,
+        "context": "  network_latency: Math.round(Math.random() * 200),\r\n       ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+        "relativePath": "src\\App.tsx"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 475,
+        "context": " * 200),\r\n        throughput: Math.round(Math.random() * 100",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+        "relativePath": "src\\App.tsx"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 475,
+        "context": "       throughput: Math.round(Math.random() * 1000),\r\n      ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+        "relativePath": "src\\App.tsx"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 129,
+        "context": "\r\n                  width: `${Math.min(100, networkMetrics.t",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\components\\AnalyticsDashboard.tsx",
+        "relativePath": "src\\components\\AnalyticsDashboard.tsx"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 169,
+        "context": "                    width: `${Math.min(100, swarmMetrics.con",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\components\\AnalyticsDashboard.tsx",
+        "relativePath": "src\\components\\AnalyticsDashboard.tsx"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 184,
+        "context": "                    width: `${Math.min(100, swarmMetrics.div",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\components\\AnalyticsDashboard.tsx",
+        "relativePath": "src\\components\\AnalyticsDashboard.tsx"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 212,
+        "context": "mestamp;\r\n    const minutes = Math.floor(diff / 60000);\r\n   ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\components\\ApiKeySettings.tsx",
+        "relativePath": "src\\components\\ApiKeySettings.tsx"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 213,
+        "context": " / 60000);\r\n    const hours = Math.floor(diff / 3600000);\r\n ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\components\\ApiKeySettings.tsx",
+        "relativePath": "src\\components\\ApiKeySettings.tsx"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 214,
+        "context": "/ 3600000);\r\n    const days = Math.floor(diff / 86400000);\r\n",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\components\\ApiKeySettings.tsx",
+        "relativePath": "src\\components\\ApiKeySettings.tsx"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 256,
+        "context": "   const position = {\r\n      x: Math.random() * 400 + 100,\r\n",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\components\\NodePalette.tsx",
+        "relativePath": "src\\components\\NodePalette.tsx"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 257,
+        "context": "random() * 400 + 100,\r\n      y: Math.random() * 300 + 100,\r\n",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\components\\NodePalette.tsx",
+        "relativePath": "src\\components\\NodePalette.tsx"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 256,
+        "context": " const position = {\r\n      x: Math.random() * 400 + 100,\r\n  ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\components\\NodePalette.tsx",
+        "relativePath": "src\\components\\NodePalette.tsx"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 257,
+        "context": "ndom() * 400 + 100,\r\n      y: Math.random() * 300 + 100,\r\n  ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\components\\NodePalette.tsx",
+        "relativePath": "src\\components\\NodePalette.tsx"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 63,
+        "context": "d ?? `${type}-${Date.now()}-${Math.random().toString(36).sub",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\managers\\AgentManager.ts",
+        "relativePath": "src\\managers\\AgentManager.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 131,
+        "context": "ensity: activeAgents.length / Math.max(1, this.agents.size),",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\managers\\AgentManager.ts",
+        "relativePath": "src\\managers\\AgentManager.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 35,
+        "context": "\r\n          setPulseIntensity(Math.random() * 0.5 + 0.5);\r\n\r",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\nodes\\AdvancedAgentNode.tsx",
+        "relativePath": "src\\nodes\\AdvancedAgentNode.tsx"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 108,
+        "context": "AgentType);\r\n  const uptime = Math.floor((Date.now() - metri",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\nodes\\AdvancedAgentNode.tsx",
+        "relativePath": "src\\nodes\\AdvancedAgentNode.tsx"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 125,
+        "context": "{\r\n        animationDelay: `${Math.random() * 2}s`,\r\n       ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\nodes\\AdvancedAgentNode.tsx",
+        "relativePath": "src\\nodes\\AdvancedAgentNode.tsx"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 246,
+        "context": "{{\r\n                width: `${Math.min(100, (metrics.message",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\nodes\\AdvancedAgentNode.tsx",
+        "relativePath": "src\\nodes\\AdvancedAgentNode.tsx"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 41,
+        "context": " startTime,\r\n      memoryUsage: Math.floor(Math.random() * 1",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+        "relativePath": "src\\services\\ExecutionEngine.ts"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 41,
+        "context": "tartTime,\r\n      memoryUsage: Math.floor(Math.random() * 100",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+        "relativePath": "src\\services\\ExecutionEngine.ts"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 41,
+        "context": "      memoryUsage: Math.floor(Math.random() * 100) + 50,\r\n  ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+        "relativePath": "src\\services\\ExecutionEngine.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 591,
+        "context": "    id: `exec-${Date.now()}-${Math.random().toString(36).sub",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+        "relativePath": "src\\services\\ExecutionEngine.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 523,
+        "context": "    id: `task-${Date.now()}-${Math.random().toString(36).sub",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\LLMService.ts",
+        "relativePath": "src\\services\\LLMService.ts"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 306,
+        "context": "ndom()),\r\n            priority: Math.random() > 0.5 ? 'high'",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\utils\\demoScenarios.ts",
+        "relativePath": "src\\utils\\demoScenarios.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 228,
+        "context": "artPoints[\r\n                  Math.floor(\r\n                 ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\utils\\demoScenarios.ts",
+        "relativePath": "src\\utils\\demoScenarios.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 229,
+        "context": "h.floor(\r\n                    Math.random() * problem.parame",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\utils\\demoScenarios.ts",
+        "relativePath": "src\\utils\\demoScenarios.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 291,
+        "context": "    const sourceId = agentIds[Math.floor(Math.random() * age",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\utils\\demoScenarios.ts",
+        "relativePath": "src\\utils\\demoScenarios.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 291,
+        "context": "ourceId = agentIds[Math.floor(Math.random() * agentIds.lengt",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\utils\\demoScenarios.ts",
+        "relativePath": "src\\utils\\demoScenarios.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 292,
+        "context": "    const targetId = agentIds[Math.floor(Math.random() * age",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\utils\\demoScenarios.ts",
+        "relativePath": "src\\utils\\demoScenarios.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 292,
+        "context": "argetId = agentIds[Math.floor(Math.random() * agentIds.lengt",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\utils\\demoScenarios.ts",
+        "relativePath": "src\\utils\\demoScenarios.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 296,
+        "context": "tress-message-${Date.now()}-${Math.random()}`,\r\n          ty",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\utils\\demoScenarios.ts",
+        "relativePath": "src\\utils\\demoScenarios.ts"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 305,
+        "context": "(0)\r\n              .map(() => Math.random()),\r\n            p",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\utils\\demoScenarios.ts",
+        "relativePath": "src\\utils\\demoScenarios.ts"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 306,
+        "context": "om()),\r\n            priority: Math.random() > 0.5 ? 'high' :",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\utils\\demoScenarios.ts",
+        "relativePath": "src\\utils\\demoScenarios.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 334,
+        "context": " => {\r\n      const timeSlot = Math.floor(event.timestamp / i",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\utils\\eventBus.ts",
+        "relativePath": "src\\utils\\eventBus.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 380,
+        "context": "   id: `event-${Date.now()}-${Math.random().toString(36).sub",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\utils\\eventBus.ts",
+        "relativePath": "src\\utils\\eventBus.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 23,
+        "context": "eueId: `queue-${Date.now()}-${Math.random()}`,\r\n    ...updat",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\workers\\agentWorker.ts",
+        "relativePath": "src\\workers\\agentWorker.ts"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 21,
+        "context": "ialPosition = {\r\n            x: Math.random() * 100,\r\n      ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\workers\\swarmWorker.ts",
+        "relativePath": "src\\workers\\swarmWorker.ts"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 22,
+        "context": "random() * 100,\r\n            y: Math.random() * 100,\r\n      ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\workers\\swarmWorker.ts",
+        "relativePath": "src\\workers\\swarmWorker.ts"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 21,
+        "context": "lPosition = {\r\n            x: Math.random() * 100,\r\n        ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\workers\\swarmWorker.ts",
+        "relativePath": "src\\workers\\swarmWorker.ts"
+      },
+      {
+        "name": "Math",
+        "type": "type",
+        "line": 22,
+        "context": "ndom() * 100,\r\n            y: Math.random() * 100,\r\n        ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\workers\\swarmWorker.ts",
+        "relativePath": "src\\workers\\swarmWorker.ts"
+      },
+      {
+        "name": "Math",
+        "type": "interface",
+        "line": 150,
+        "context": "sg-${agentId}-${Date.now()}-${Math.random()}`,\r\n    };\r\n\r\n  ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\workers\\WorkerPool.ts",
+        "relativePath": "src\\workers\\WorkerPool.ts"
+      }
+    ],
+    "Object": [
+      {
+        "name": "Object",
+        "type": "interface",
+        "line": 218,
+        "context": "ject') {\r\n      importance += Object.keys(event.payload).len",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\ReasoningAgent.ts",
+        "relativePath": "src\\agents\\ReasoningAgent.ts"
+      },
+      {
+        "name": "Object",
+        "type": "interface",
+        "line": 241,
+        "context": "e='space-y-6'>\r\n            {(Object.keys(providers) as LLMP",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\components\\ApiKeySettings.tsx",
+        "relativePath": "src\\components\\ApiKeySettings.tsx"
+      },
+      {
+        "name": "Object",
+        "type": "interface",
+        "line": 89,
+        "context": "000,\r\n      },\r\n    };\r\n\r\n    Object.values(defaultLimits).f",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ApiKeyManager.ts",
+        "relativePath": "src\\services\\ApiKeyManager.ts"
+      },
+      {
+        "name": "Object",
+        "type": "interface",
+        "line": 99,
+        "context": " JSON.parse(stored);\r\n        Object.entries(parsed).forEach",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ApiKeyManager.ts",
+        "relativePath": "src\\services\\ApiKeyManager.ts"
+      },
+      {
+        "name": "Object",
+        "type": "interface",
+        "line": 110,
+        "context": "y {\r\n      const keysObject = Object.fromEntries(this.keys);",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ApiKeyManager.ts",
+        "relativePath": "src\\services\\ApiKeyManager.ts"
+      },
+      {
+        "name": "Object",
+        "type": "interface",
+        "line": 167,
+        "context": "variables from context\r\n      Object.entries(context.variabl",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+        "relativePath": "src\\services\\ExecutionEngine.ts"
+      },
+      {
+        "name": "Object",
+        "type": "interface",
+        "line": 288,
+        "context": "= new Function(\r\n          ...Object.keys(env),\r\n          `",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+        "relativePath": "src\\services\\ExecutionEngine.ts"
+      },
+      {
+        "name": "Object",
+        "type": "interface",
+        "line": 295,
+        "context": "       const result = func(...Object.values(env));\r\n        ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+        "relativePath": "src\\services\\ExecutionEngine.ts"
+      },
+      {
+        "name": "Object",
+        "type": "interface",
+        "line": 387,
+        "context": "\r\n        });\r\n        return Object.entries(groups).map(([k",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+        "relativePath": "src\\services\\ExecutionEngine.ts"
+      },
+      {
+        "name": "Object",
+        "type": "interface",
+        "line": 466,
+        "context": "<string, string> = {};\r\n      Object.entries(scraperConfig.s",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+        "relativePath": "src\\services\\ExecutionEngine.ts"
+      },
+      {
+        "name": "Object",
+        "type": "interface",
+        "line": 69,
+        "context": "tring, boolean> {\r\n    return Object.fromEntries(this.servic",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ServiceInitializer.ts",
+        "relativePath": "src\\services\\ServiceInitializer.ts"
+      }
+    ],
+    "Set": [
+      {
+        "name": "Set",
+        "type": "type",
+        "line": 22,
+        "context": "Base {\r\n  private swarmMembers: Set<AgentId> = new Set();\r\n ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Set",
+        "type": "type",
+        "line": 22,
+        "context": " swarmMembers: Set<AgentId> = new Set();\r\n  private particle",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+        "relativePath": "src\\agents\\SwarmAgent.ts"
+      },
+      {
+        "name": "Set",
+        "type": "class",
+        "line": 241,
+        "context": "    'All',\r\n    ...Array.from(new Set(nodeTemplates.map(t =>",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\components\\NodePalette.tsx",
+        "relativePath": "src\\components\\NodePalette.tsx"
+      },
+      {
+        "name": "Set",
+        "type": "class",
+        "line": 100,
+        "context": "      this.subscribers.set(t, new Set());\r\n      }\r\n      th",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\utils\\eventBus.ts",
+        "relativePath": "src\\utils\\eventBus.ts"
+      }
+    ],
+    "Services": [
+      {
+        "name": "Services",
+        "type": "type",
+        "line": 57,
+        "context": "e();\r\n        console.log('App: Services initialized success",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+        "relativePath": "src\\App.tsx"
+      }
+    ],
+    "Failed": [
+      {
+        "name": "Failed",
+        "type": "type",
+        "line": 59,
+        "context": " {\r\n        console.error('App: Failed to initialize service",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+        "relativePath": "src\\App.tsx"
+      },
+      {
+        "name": "Failed",
+        "type": "type",
+        "line": 57,
+        "context": "(\r\n        'ServiceInitializer: Failed to initialize service",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ServiceInitializer.ts",
+        "relativePath": "src\\services\\ServiceInitializer.ts"
+      }
+    ],
+    "String": [
+      {
+        "name": "String",
+        "type": "type",
+        "line": 38,
+        "context": "ata.formatValue(value)\r\n      : String(value ?? '');\r\n    co",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\edges\\DataEdge.tsx",
+        "relativePath": "src\\edges\\DataEdge.tsx"
+      },
+      {
+        "name": "String",
+        "type": "interface",
+        "line": 123,
+        "context": " .map((char, i) =>\r\n          String.fromCharCode(\r\n        ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ApiKeyManager.ts",
+        "relativePath": "src\\services\\ApiKeyManager.ts"
+      },
+      {
+        "name": "String",
+        "type": "interface",
+        "line": 138,
+        "context": " .map((char, i) =>\r\n          String.fromCharCode(\r\n        ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ApiKeyManager.ts",
+        "relativePath": "src\\services\\ApiKeyManager.ts"
+      }
+    ],
+    "Uint8Array": [
+      {
+        "name": "Uint8Array",
+        "type": "class",
         "line": 46,
-        "context": "ent constructor\n  }\n\n  // TODO: Add methods and properties\n}",
-        "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\utils.ts",
-        "relativePath": "src\\types\\utils.ts"
+        "context": "n btoa(crypto.getRandomValues(new Uint8Array(32)).toString()",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ApiKeyManager.ts",
+        "relativePath": "src\\services\\ApiKeyManager.ts"
+      }
+    ],
+    "AbortSignal": [
+      {
+        "name": "AbortSignal",
+        "type": "type",
+        "line": 455,
+        "context": "onfig.headers,\r\n        signal: AbortSignal.timeout(scraperC",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+        "relativePath": "src\\services\\ExecutionEngine.ts"
       },
       {
-        "name": "Add",
+        "name": "AbortSignal",
         "type": "type",
-        "line": 54,
-        "context": "ent constructor\n  }\n\n  // TODO: Add methods and properties\n}",
-        "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\utils.ts",
-        "relativePath": "src\\types\\utils.ts"
+        "line": 525,
+        "context": "      headers,\r\n        signal: AbortSignal.timeout(apiConfi",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+        "relativePath": "src\\services\\ExecutionEngine.ts"
       },
       {
-        "name": "Add",
+        "name": "AbortSignal",
         "type": "type",
-        "line": 14,
-        "context": "ent constructor\n  }\n\n  // TODO: Add methods and properties\n}",
-        "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\workers.ts",
-        "relativePath": "src\\types\\workers.ts"
+        "line": 455,
+        "context": "fig.headers,\r\n        signal: AbortSignal.timeout(scraperCon",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+        "relativePath": "src\\services\\ExecutionEngine.ts"
+      },
+      {
+        "name": "AbortSignal",
+        "type": "type",
+        "line": 525,
+        "context": "    headers,\r\n        signal: AbortSignal.timeout(apiConfig.",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+        "relativePath": "src\\services\\ExecutionEngine.ts"
+      }
+    ],
+    "RequestInit": [
+      {
+        "name": "RequestInit",
+        "type": "type",
+        "line": 522,
+        "context": "\r\n\r\n      const requestOptions: RequestInit = {\r\n        met",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+        "relativePath": "src\\services\\ExecutionEngine.ts"
+      }
+    ],
+    "Partial": [
+      {
+        "name": "Partial",
+        "type": "type",
+        "line": 583,
+        "context": "  input: unknown,\r\n    context: Partial<ExecutionContext> = ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+        "relativePath": "src\\services\\ExecutionEngine.ts"
+      },
+      {
+        "name": "Partial",
+        "type": "type",
+        "line": 515,
+        "context": "uest: LLMRequest,\r\n    context: Partial<LLMExecutionContext>",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\LLMService.ts",
+        "relativePath": "src\\services\\LLMService.ts"
+      },
+      {
+        "name": "Partial",
+        "type": "type",
+        "line": 569,
+        "context": "uest: LLMRequest,\r\n    context: Partial<LLMExecutionContext>",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\LLMService.ts",
+        "relativePath": "src\\services\\LLMService.ts"
+      },
+      {
+        "name": "Partial",
+        "type": "type",
+        "line": 260,
+        "context": "pe: NodeType;\r\n  defaultConfig: Partial<NodeConfig>;\r\n  capa",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\nodes.ts",
+        "relativePath": "src\\types\\nodes.ts"
+      },
+      {
+        "name": "Partial",
+        "type": "type",
+        "line": 265,
+        "context": "scription: string;\r\n    config: Partial<NodeConfig>;\r\n    sa",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\nodes.ts",
+        "relativePath": "src\\types\\nodes.ts"
+      },
+      {
+        "name": "Partial",
+        "type": "type",
+        "line": 20,
+        "context": "\n\r\nfunction sendMessage(update: Partial<AgentWorkerMessage>)",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\workers\\agentWorker.ts",
+        "relativePath": "src\\workers\\agentWorker.ts"
+      }
+    ],
+    "RegExp": [
+      {
+        "name": "RegExp",
+        "type": "class",
+        "line": 169,
+        "context": " = prompt.replace(\r\n          new RegExp(`\\\\{\\\\{${key}\\\\}\\\\}",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+        "relativePath": "src\\services\\ExecutionEngine.ts"
+      }
+    ],
+    "Function": [
+      {
+        "name": "Function",
+        "type": "class",
+        "line": 287,
+        "context": "context\r\n        const func = new Function(\r\n          ...Ob",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+        "relativePath": "src\\services\\ExecutionEngine.ts"
+      }
+    ],
+    "AsyncGenerator": [
+      {
+        "name": "AsyncGenerator",
+        "type": "type",
+        "line": 19,
+        "context": "\r\n    request: LLMRequest\r\n  ): AsyncGenerator<LLMStreamChun",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\LLMService.ts",
+        "relativePath": "src\\services\\LLMService.ts"
+      },
+      {
+        "name": "AsyncGenerator",
+        "type": "type",
+        "line": 62,
+        "context": "\r\n    request: LLMRequest\r\n  ): AsyncGenerator<LLMStreamChun",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\LLMService.ts",
+        "relativePath": "src\\services\\LLMService.ts"
+      },
+      {
+        "name": "AsyncGenerator",
+        "type": "type",
+        "line": 187,
+        "context": "\n    _request: LLMRequest\r\n  ): AsyncGenerator<LLMStreamChun",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\LLMService.ts",
+        "relativePath": "src\\services\\LLMService.ts"
+      },
+      {
+        "name": "AsyncGenerator",
+        "type": "type",
+        "line": 268,
+        "context": "\r\n    request: LLMRequest\r\n  ): AsyncGenerator<LLMStreamChun",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\LLMService.ts",
+        "relativePath": "src\\services\\LLMService.ts"
+      },
+      {
+        "name": "AsyncGenerator",
+        "type": "type",
+        "line": 318,
+        "context": "\r\n    request: LLMRequest\r\n  ): AsyncGenerator<LLMStreamChun",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\LLMService.ts",
+        "relativePath": "src\\services\\LLMService.ts"
+      },
+      {
+        "name": "AsyncGenerator",
+        "type": "type",
+        "line": 570,
+        "context": "LLMExecutionContext> = {}\r\n  ): AsyncGenerator<LLMStreamChun",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\LLMService.ts",
+        "relativePath": "src\\services\\LLMService.ts"
+      }
+    ],
+    "Available": [
+      {
+        "name": "Available",
+        "type": "type",
+        "line": 519,
+        "context": "onsole.log(\r\n      'LLMService: Available providers:',\r\n    ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\LLMService.ts",
+        "relativePath": "src\\services\\LLMService.ts"
+      }
+    ],
+    "TextDecoder": [
+      {
+        "name": "TextDecoder",
+        "type": "class",
+        "line": 84,
+        "context": "ody');\r\n\r\n    const decoder = new TextDecoder();\r\n    let bu",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\LLMService.ts",
+        "relativePath": "src\\services\\LLMService.ts"
+      }
+    ],
+    "Already": [
+      {
+        "name": "Already",
+        "type": "type",
+        "line": 17,
+        "context": "onsole.log('ServiceInitializer: Already initialized');\r\n    ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ServiceInitializer.ts",
+        "relativePath": "src\\services\\ServiceInitializer.ts"
+      }
+    ],
+    "Starting": [
+      {
+        "name": "Starting",
+        "type": "type",
+        "line": 21,
+        "context": "onsole.log('ServiceInitializer: Starting initialization...')",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ServiceInitializer.ts",
+        "relativePath": "src\\services\\ServiceInitializer.ts"
+      }
+    ],
+    "Checking": [
+      {
+        "name": "Checking",
+        "type": "type",
+        "line": 30,
+        "context": "onsole.log('ServiceInitializer: Checking ApiKeyManager...');",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ServiceInitializer.ts",
+        "relativePath": "src\\services\\ServiceInitializer.ts"
+      },
+      {
+        "name": "Checking",
+        "type": "type",
+        "line": 36,
+        "context": "onsole.log('ServiceInitializer: Checking ExecutionEngine...'",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ServiceInitializer.ts",
+        "relativePath": "src\\services\\ServiceInitializer.ts"
+      },
+      {
+        "name": "Checking",
+        "type": "type",
+        "line": 45,
+        "context": "onsole.log('ServiceInitializer: Checking LLMService...');\r\n ",
+        "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ServiceInitializer.ts",
+        "relativePath": "src\\services\\ServiceInitializer.ts"
       }
     ]
   },
   "definitions": {
-    "Implement": {
-      "name": "Implement",
+    "Record": {
+      "name": "Record",
       "type": "type",
-      "definition": "export type Implement = unknown;",
+      "definition": "export type Record = unknown;",
       "location": "src/types/index.ts",
       "refs": [
         {
-          "name": "Implement",
+          "name": "Record",
           "type": "type",
-          "line": 47,
-          "context": "\n  constructor() {\n    // TODO: Implement constructor\n  }\n\n ",
-          "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\index.ts",
-          "relativePath": "src\\types\\index.ts"
+          "line": 6,
+          "context": "ext {\r\n  id: AgentId;\r\n  state: Record<string, unknown>;\r\n  ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\AgentBase.ts",
+          "relativePath": "src\\agents\\AgentBase.ts"
         },
         {
-          "name": "Implement",
+          "name": "Record",
+          "type": "type",
+          "line": 7,
+          "context": "rd<string, unknown>;\r\n  memory: Record<string, unknown>;\r\n}\r",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\AgentBase.ts",
+          "relativePath": "src\\agents\\AgentBase.ts"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 12,
+          "context": "d: AgentId;\r\n  protected state: Record<string, unknown> = {}",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\AgentBase.ts",
+          "relativePath": "src\\agents\\AgentBase.ts"
+        },
+        {
+          "name": "Record",
           "type": "type",
           "line": 13,
-          "context": "\n  constructor() {\n    // TODO: Implement constructor\n  }\n\n ",
-          "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\utils.ts",
-          "relativePath": "src\\types\\utils.ts"
+          "context": "own> = {};\r\n  protected memory: Record<string, unknown> = {}",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\AgentBase.ts",
+          "relativePath": "src\\agents\\AgentBase.ts"
         },
         {
-          "name": "Implement",
+          "name": "Record",
           "type": "type",
-          "line": 43,
-          "context": "\n  constructor() {\n    // TODO: Implement constructor\n  }\n\n ",
-          "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\utils.ts",
-          "relativePath": "src\\types\\utils.ts"
+          "line": 47,
+          "context": "\n  public updateState(newState: Record<string, unknown>): vo",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\AgentBase.ts",
+          "relativePath": "src\\agents\\AgentBase.ts"
         },
         {
-          "name": "Implement",
+          "name": "Record",
           "type": "type",
-          "line": 51,
-          "context": "\n  constructor() {\n    // TODO: Implement constructor\n  }\n\n ",
-          "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\utils.ts",
-          "relativePath": "src\\types\\utils.ts"
+          "line": 389,
+          "context": "vate analyzeConfidenceTrends(): Record<string, number> {\r\n  ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\ReasoningAgent.ts",
+          "relativePath": "src\\agents\\ReasoningAgent.ts"
         },
         {
-          "name": "Implement",
+          "name": "Record",
+          "type": "type",
+          "line": 459,
+          "context": "\n\r\n  private getCurrentState(): Record<string, unknown> {\r\n ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\ReasoningAgent.ts",
+          "relativePath": "src\\agents\\ReasoningAgent.ts"
+        },
+        {
+          "name": "Record",
           "type": "type",
           "line": 11,
-          "context": "\n  constructor() {\n    // TODO: Implement constructor\n  }\n\n ",
-          "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\workers.ts",
-          "relativePath": "src\\types\\workers.ts"
+          "context": " color: string;\r\n  defaultData: Record<string, unknown>;\r\n}\r",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\components\\NodePalette.tsx",
+          "relativePath": "src\\components\\NodePalette.tsx"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 17,
+          "context": "number; y: number };\r\n  state?: Record<string, unknown>;\r\n}\r",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\managers\\AgentManager.ts",
+          "relativePath": "src\\managers\\AgentManager.ts"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 50,
+          "context": "oid {\r\n    const defaultLimits: Record<LLMProvider, RateLimi",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ApiKeyManager.ts",
+          "relativePath": "src\\services\\ApiKeyManager.ts"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 10,
+          "context": " userId?: string;\r\n  variables: Record<string, unknown>;\r\n  ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+          "relativePath": "src\\services\\ExecutionEngine.ts"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 11,
+          "context": "rd<string, unknown>;\r\n  memory: Record<string, unknown>;\r\n  ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+          "relativePath": "src\\services\\ExecutionEngine.ts"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 12,
+          "context": "<string, unknown>;\r\n  metadata: Record<string, unknown>;\r\n}\r",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+          "relativePath": "src\\services\\ExecutionEngine.ts"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 277,
+          "context": "t(\r\n    code: string,\r\n    env: Record<string, unknown>,\r\n  ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+          "relativePath": "src\\services\\ExecutionEngine.ts"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 307,
+          "context": "\r\n    _code: string,\r\n    _env: Record<string, unknown>,\r\n  ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+          "relativePath": "src\\services\\ExecutionEngine.ts"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 352,
+          "context": "on: { type: string; parameters: Record<string, unknown> }\r\n ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+          "relativePath": "src\\services\\ExecutionEngine.ts"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 381,
+          "context": " string;\r\n        const groups: Record<string, unknown[]> = ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+          "relativePath": "src\\services\\ExecutionEngine.ts"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 397,
+          "context": " item: unknown,\r\n    condition: Record<string, unknown>\r\n  )",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+          "relativePath": "src\\services\\ExecutionEngine.ts"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 421,
+          "context": ": unknown,\r\n    transformation: Record<string, unknown>\r\n  )",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+          "relativePath": "src\\services\\ExecutionEngine.ts"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 465,
+          "context": "xtraction\r\n      const results: Record<string, string> = {};",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+          "relativePath": "src\\services\\ExecutionEngine.ts"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 502,
+          "context": "config;\r\n\r\n      const headers: Record<string, string> = {\r\n",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+          "relativePath": "src\\services\\ExecutionEngine.ts"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 68,
+          "context": "\n\r\n  public getServiceStatus(): Record<string, boolean> {\r\n ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ServiceInitializer.ts",
+          "relativePath": "src\\services\\ServiceInitializer.ts"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 74,
+          "context": "ealthy: boolean;\r\n    services: Record<string, boolean>;\r\n  ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ServiceInitializer.ts",
+          "relativePath": "src\\services\\ServiceInitializer.ts"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 78,
+          "context": "= [];\r\n    const serviceStatus: Record<string, boolean> = {}",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ServiceInitializer.ts",
+          "relativePath": "src\\services\\ServiceInitializer.ts"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 36,
+          "context": "\r\n  agentId: AgentId;\r\n  state: Record<string, unknown>;\r\n  ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\bus.ts",
+          "relativePath": "src\\types\\bus.ts"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 37,
+          "context": "<string, unknown>;\r\n  metrics?: Record<string, unknown>;\r\n}\r",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\bus.ts",
+          "relativePath": "src\\types\\bus.ts"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 76,
+          "context": "vents: number;\r\n  eventsByType: Record<BusEventType, number>",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\bus.ts",
+          "relativePath": "src\\types\\bus.ts"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 77,
+          "context": "pe, number>;\r\n  eventsBySource: Record<string, number>;\r\n  a",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\bus.ts",
+          "relativePath": "src\\types\\bus.ts"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 80,
+          "context": "e: number;\r\n  timelineAnalysis: Record<string, number>;\r\n}\r\n",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\bus.ts",
+          "relativePath": "src\\types\\bus.ts"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 30,
+          "context": "ype: 'object';\r\n    properties: Record<\r\n      string,\r\n    ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\llm.ts",
+          "relativePath": "src\\types\\llm.ts"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 128,
+          "context": "abilities: string[];\r\n  memory: Record<string, unknown>;\r\n  ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\llm.ts",
+          "relativePath": "src\\types\\llm.ts"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 133,
+          "context": "meout: number;\r\n    rateLimits: Record<string, number>;\r\n  }",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\llm.ts",
+          "relativePath": "src\\types\\llm.ts"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 58,
+          "context": "ion: string;\r\n      parameters: Record<string, unknown>;\r\n  ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\nodes.ts",
+          "relativePath": "src\\types\\nodes.ts"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 84,
+          "context": "ess: boolean;\r\n    environment: Record<string, unknown>;\r\n  ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\nodes.ts",
+          "relativePath": "src\\types\\nodes.ts"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 94,
+          "context": "'aggregate';\r\n      parameters: Record<string, unknown>;\r\n  ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\nodes.ts",
+          "relativePath": "src\\types\\nodes.ts"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 96,
+          "context": "n>;\r\n    }>;\r\n    inputSchema?: Record<string, unknown>;\r\n  ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\nodes.ts",
+          "relativePath": "src\\types\\nodes.ts"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 97,
+          "context": ", unknown>;\r\n    outputSchema?: Record<string, unknown>;\r\n  ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\nodes.ts",
+          "relativePath": "src\\types\\nodes.ts"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 106,
+          "context": "   url: string;\r\n    selectors: Record<string, string>;\r\n   ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\nodes.ts",
+          "relativePath": "src\\types\\nodes.ts"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 109,
+          "context": "timeout: number;\r\n    headers?: Record<string, string>;\r\n   ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\nodes.ts",
+          "relativePath": "src\\types\\nodes.ts"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 122,
+          "context": " 'validate';\r\n      parameters: Record<string, unknown>;\r\n  ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\nodes.ts",
+          "relativePath": "src\\types\\nodes.ts"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 185,
+          "context": "    url: string;\r\n    headers?: Record<string, string>;\r\n   ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\nodes.ts",
+          "relativePath": "src\\types\\nodes.ts"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 188,
+          "context": " | 'oauth';\r\n      credentials: Record<string, string>;\r\n   ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\nodes.ts",
+          "relativePath": "src\\types\\nodes.ts"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 242,
+          "context": "tring;\r\n  }>;\r\n  configuration: Record<\r\n    string,\r\n    {\r",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\nodes.ts",
+          "relativePath": "src\\types\\nodes.ts"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 148,
+          "context": "log;\r\n\r\n    const eventsByType: Record<BusEventType, number>",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\utils\\eventBus.ts",
+          "relativePath": "src\\utils\\eventBus.ts"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 152,
+          "context": "  >;\r\n    const eventsBySource: Record<string, number> = {};",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\utils\\eventBus.ts",
+          "relativePath": "src\\utils\\eventBus.ts"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 330,
+          "context": "Entry[]) {\r\n    const timeline: Record<string, number> = {};",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\utils\\eventBus.ts",
+          "relativePath": "src\\utils\\eventBus.ts"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 376,
+          "context": "\r\n    ttl?: number;\r\n    meta?: Record<string, unknown>;\r\n  ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\utils\\eventBus.ts",
+          "relativePath": "src\\utils\\eventBus.ts"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 409,
+          "context": "\r\n    ttl?: number;\r\n    meta?: Record<string, unknown>;\r\n  ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\utils\\eventBus.ts",
+          "relativePath": "src\\utils\\eventBus.ts"
+        },
+        {
+          "name": "Record",
+          "type": "type",
+          "line": 133,
+          "context": "agentId: AgentId,\r\n    message: Record<string, unknown>\r\n  )",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\workers\\WorkerPool.ts",
+          "relativePath": "src\\workers\\WorkerPool.ts"
         }
       ]
     },
-    "Add": {
-      "name": "Add",
+    "Map": {
+      "name": "Map",
       "type": "type",
-      "definition": "export type Add = unknown;",
+      "definition": "export type Map = Record<string, unknown>;",
       "location": "src/types/index.ts",
       "refs": [
         {
-          "name": "Add",
+          "name": "Map",
           "type": "type",
-          "line": 50,
-          "context": "ent constructor\n  }\n\n  // TODO: Add methods and properties\n}",
-          "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\index.ts",
-          "relativePath": "src\\types\\index.ts"
+          "line": 24,
+          "context": "= [];\r\n  private knowledgeBase: Map<string, unknown> = new M",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\ReasoningAgent.ts",
+          "relativePath": "src\\agents\\ReasoningAgent.ts"
         },
         {
-          "name": "Add",
+          "name": "Map",
           "type": "type",
-          "line": 16,
-          "context": "ent constructor\n  }\n\n  // TODO: Add methods and properties\n}",
-          "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\utils.ts",
-          "relativePath": "src\\types\\utils.ts"
+          "line": 24,
+          "context": "eBase: Map<string, unknown> = new Map();\r\n\r\n  constructor(id",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\ReasoningAgent.ts",
+          "relativePath": "src\\agents\\ReasoningAgent.ts"
         },
         {
-          "name": "Add",
+          "name": "Map",
           "type": "type",
+          "line": 17,
+          "context": "d;\r\n  value: unknown;\r\n  votes: Map<AgentId, boolean>;\r\n  ti",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Map",
+          "type": "type",
+          "line": 29,
+          "context": "\r\n  private consensusProposals: Map<string, ConsensusProposa",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Map",
+          "type": "type",
+          "line": 29,
+          "context": "<string, ConsensusProposal> = new Map();\r\n  private behavior",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Map",
+          "type": "class",
+          "line": 426,
+          "context": ",\r\n      value,\r\n      votes: new Map(),\r\n      timestamp: D",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Map",
+          "type": "type",
+          "line": 37,
+          "context": "entManager {\r\n  private agents: Map<AgentId, AgentInfo> = ne",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\managers\\AgentManager.ts",
+          "relativePath": "src\\managers\\AgentManager.ts"
+        },
+        {
+          "name": "Map",
+          "type": "type",
+          "line": 37,
+          "context": "ts: Map<AgentId, AgentInfo> = new Map();\r\n  private canvasAg",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\managers\\AgentManager.ts",
+          "relativePath": "src\\managers\\AgentManager.ts"
+        },
+        {
+          "name": "Map",
+          "type": "type",
+          "line": 33,
+          "context": "piKeyManager {\r\n  private keys: Map<LLMProvider, ApiKeyConfi",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ApiKeyManager.ts",
+          "relativePath": "src\\services\\ApiKeyManager.ts"
+        },
+        {
+          "name": "Map",
+          "type": "type",
+          "line": 34,
+          "context": "w Map();\r\n  private rateLimits: Map<LLMProvider, RateLimitCo",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ApiKeyManager.ts",
+          "relativePath": "src\\services\\ApiKeyManager.ts"
+        },
+        {
+          "name": "Map",
+          "type": "type",
+          "line": 35,
+          "context": " = new Map();\r\n  private usage: Map<LLMProvider, UsageTracke",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ApiKeyManager.ts",
+          "relativePath": "src\\services\\ApiKeyManager.ts"
+        },
+        {
+          "name": "Map",
+          "type": "type",
+          "line": 33,
+          "context": "<LLMProvider, ApiKeyConfig> = new Map();\r\n  private rateLimi",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ApiKeyManager.ts",
+          "relativePath": "src\\services\\ApiKeyManager.ts"
+        },
+        {
+          "name": "Map",
+          "type": "type",
+          "line": 34,
+          "context": "MProvider, RateLimitConfig> = new Map();\r\n  private usage: M",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ApiKeyManager.ts",
+          "relativePath": "src\\services\\ApiKeyManager.ts"
+        },
+        {
+          "name": "Map",
+          "type": "type",
+          "line": 35,
+          "context": "<LLMProvider, UsageTracker> = new Map();\r\n  private encrypti",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ApiKeyManager.ts",
+          "relativePath": "src\\services\\ApiKeyManager.ts"
+        },
+        {
+          "name": "Map",
+          "type": "type",
+          "line": 564,
+          "context": "nEngine {\r\n  private executors: Map<NodeType, NodeExecutor> ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+          "relativePath": "src\\services\\ExecutionEngine.ts"
+        },
+        {
+          "name": "Map",
+          "type": "type",
+          "line": 565,
+          "context": "w Map();\r\n  private executions: Map<string, NodeExecution> =",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+          "relativePath": "src\\services\\ExecutionEngine.ts"
+        },
+        {
+          "name": "Map",
+          "type": "type",
+          "line": 564,
+          "context": "Map<NodeType, NodeExecutor> = new Map();\r\n  private executio",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+          "relativePath": "src\\services\\ExecutionEngine.ts"
+        },
+        {
+          "name": "Map",
+          "type": "type",
+          "line": 565,
+          "context": " Map<string, NodeExecution> = new Map();\r\n\r\n  constructor() ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+          "relativePath": "src\\services\\ExecutionEngine.ts"
+        },
+        {
+          "name": "Map",
+          "type": "type",
+          "line": 337,
+          "context": "MService {\r\n  private adapters: Map<LLMProvider, ProviderAda",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\LLMService.ts",
+          "relativePath": "src\\services\\LLMService.ts"
+        },
+        {
+          "name": "Map",
+          "type": "type",
+          "line": 339,
+          "context": " = [];\r\n  private runningTasks: Map<string, LLMTask> = new M",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\LLMService.ts",
+          "relativePath": "src\\services\\LLMService.ts"
+        },
+        {
+          "name": "Map",
+          "type": "type",
+          "line": 340,
+          "context": " new Map();\r\n  private metrics: Map<LLMProvider, LLMMetrics>",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\LLMService.ts",
+          "relativePath": "src\\services\\LLMService.ts"
+        },
+        {
+          "name": "Map",
+          "type": "type",
+          "line": 337,
+          "context": "MProvider, ProviderAdapter> = new Map();\r\n  private taskQueu",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\LLMService.ts",
+          "relativePath": "src\\services\\LLMService.ts"
+        },
+        {
+          "name": "Map",
+          "type": "type",
+          "line": 339,
+          "context": "Tasks: Map<string, LLMTask> = new Map();\r\n  private metrics:",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\LLMService.ts",
+          "relativePath": "src\\services\\LLMService.ts"
+        },
+        {
+          "name": "Map",
+          "type": "type",
+          "line": 340,
+          "context": "ap<LLMProvider, LLMMetrics> = new Map();\r\n  private maxConcu",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\LLMService.ts",
+          "relativePath": "src\\services\\LLMService.ts"
+        },
+        {
+          "name": "Map",
+          "type": "type",
+          "line": 4,
+          "context": "d = false;\r\n  private services: Map<string, boolean> = new M",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ServiceInitializer.ts",
+          "relativePath": "src\\services\\ServiceInitializer.ts"
+        },
+        {
+          "name": "Map",
+          "type": "type",
+          "line": 4,
+          "context": "vices: Map<string, boolean> = new Map();\r\n\r\n  private constr",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ServiceInitializer.ts",
+          "relativePath": "src\\services\\ServiceInitializer.ts"
+        },
+        {
+          "name": "Map",
+          "type": "type",
+          "line": 18,
+          "context": "] = [];\r\n  private subscribers: Map<BusEventType, Set<EventH",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\utils\\eventBus.ts",
+          "relativePath": "src\\utils\\eventBus.ts"
+        },
+        {
+          "name": "Map",
+          "type": "type",
+          "line": 18,
+          "context": "entType, Set<EventHandler>> = new Map();\r\n  private validato",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\utils\\eventBus.ts",
+          "relativePath": "src\\utils\\eventBus.ts"
+        },
+        {
+          "name": "Map",
+          "type": "type",
+          "line": 29,
+          "context": "orkerPool {\r\n  private workers: Map<AgentId, Worker> = new M",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\workers\\WorkerPool.ts",
+          "relativePath": "src\\workers\\WorkerPool.ts"
+        },
+        {
+          "name": "Map",
+          "type": "type",
+          "line": 30,
+          "context": "ap();\r\n  private workerMetrics: Map<AgentId, WorkerMetrics> ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\workers\\WorkerPool.ts",
+          "relativePath": "src\\workers\\WorkerPool.ts"
+        },
+        {
+          "name": "Map",
+          "type": "type",
+          "line": 31,
+          "context": "Map();\r\n  private messageQueue: Map<AgentId, WorkerMessage[]",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\workers\\WorkerPool.ts",
+          "relativePath": "src\\workers\\WorkerPool.ts"
+        },
+        {
+          "name": "Map",
+          "type": "type",
+          "line": 29,
+          "context": "rkers: Map<AgentId, Worker> = new Map();\r\n  private workerMe",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\workers\\WorkerPool.ts",
+          "relativePath": "src\\workers\\WorkerPool.ts"
+        },
+        {
+          "name": "Map",
+          "type": "type",
+          "line": 30,
+          "context": "Map<AgentId, WorkerMetrics> = new Map();\r\n  private messageQ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\workers\\WorkerPool.ts",
+          "relativePath": "src\\workers\\WorkerPool.ts"
+        },
+        {
+          "name": "Map",
+          "type": "type",
+          "line": 31,
+          "context": "p<AgentId, WorkerMessage[]> = new Map();\r\n  private config: ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\workers\\WorkerPool.ts",
+          "relativePath": "src\\workers\\WorkerPool.ts"
+        }
+      ]
+    },
+    "Math": {
+      "name": "Math",
+      "type": "interface",
+      "definition": "export interface Math {\n  id: string;\n}",
+      "location": "src/types/agents.ts",
+      "refs": [
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 158,
+          "context": " deduce...`,\r\n      confidence: Math.min(0.9, 0.5 + patterns",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\ReasoningAgent.ts",
+          "relativePath": "src\\agents\\ReasoningAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 171,
+          "context": "I infer...`,\r\n      confidence: Math.min(0.8, 0.3 + similarC",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\ReasoningAgent.ts",
+          "relativePath": "src\\agents\\ReasoningAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 184,
+          "context": "ties is...`,\r\n      confidence: Math.min(0.7, 0.4 + possible",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\ReasoningAgent.ts",
+          "relativePath": "src\\agents\\ReasoningAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 158,
+          "context": "educe...`,\r\n      confidence: Math.min(0.9, 0.5 + patterns.l",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\ReasoningAgent.ts",
+          "relativePath": "src\\agents\\ReasoningAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 171,
+          "context": "infer...`,\r\n      confidence: Math.min(0.8, 0.3 + similarCas",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\ReasoningAgent.ts",
+          "relativePath": "src\\agents\\ReasoningAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 184,
+          "context": "es is...`,\r\n      confidence: Math.min(0.7, 0.4 + possibleEx",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\ReasoningAgent.ts",
+          "relativePath": "src\\agents\\ReasoningAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 221,
+          "context": " * 0.05;\r\n    }\r\n\r\n    return Math.min(1, importance);\r\n  }\r",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\ReasoningAgent.ts",
+          "relativePath": "src\\agents\\ReasoningAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 292,
+          "context": "p;\r\n    const recencyFactor = Math.max(0, 1 - age / (1000 * ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\ReasoningAgent.ts",
+          "relativePath": "src\\agents\\ReasoningAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 295,
+          "context": "cyFactor * 0.5;\r\n\r\n    return Math.min(1, relevance);\r\n  }\r\n",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\ReasoningAgent.ts",
+          "relativePath": "src\\agents\\ReasoningAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 353,
+          "context": "mory[]): number {\r\n    return Math.min(1, memories.length * ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\ReasoningAgent.ts",
+          "relativePath": "src\\agents\\ReasoningAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 406,
+          "context": "e(\r\n      reasonings.slice(0, Math.floor(reasonings.length /",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\ReasoningAgent.ts",
+          "relativePath": "src\\agents\\ReasoningAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 409,
+          "context": "ence(\r\n      reasonings.slice(Math.floor(reasonings.length /",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\ReasoningAgent.ts",
+          "relativePath": "src\\agents\\ReasoningAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 41,
+          "context": "nitialPosition || {\r\n        x: Math.random() * 100,\r\n      ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 42,
+          "context": "ath.random() * 100,\r\n        y: Math.random() * 100,\r\n      ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 41,
+          "context": "tialPosition || {\r\n        x: Math.random() * 100,\r\n        ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 42,
+          "context": "h.random() * 100,\r\n        y: Math.random() * 100,\r\n      },",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 44,
+          "context": "    },\r\n      velocity: { x: (Math.random() - 0.5) * 2, y: (",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 44,
+          "context": "Math.random() - 0.5) * 2, y: (Math.random() - 0.5) * 2 },\r\n ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 228,
+          "context": " this.particle.velocity.x += (Math.random() - 0.5) * 0.5;\r\n ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 229,
+          "context": " this.particle.velocity.y += (Math.random() - 0.5) * 0.5;\r\n\r",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 232,
+          "context": "   this.particle.velocity.x = Math.max(\r\n      -2,\r\n      Ma",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 234,
+          "context": "= Math.max(\r\n      -2,\r\n      Math.min(2, this.particle.velo",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 236,
+          "context": "   this.particle.velocity.y = Math.max(\r\n      -2,\r\n      Ma",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 238,
+          "context": "= Math.max(\r\n      -2,\r\n      Math.min(2, this.particle.velo",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 246,
+          "context": "   this.particle.position.x = Math.max(\r\n      0,\r\n      Mat",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 248,
+          "context": " = Math.max(\r\n      0,\r\n      Math.min(100, this.particle.po",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 250,
+          "context": "   this.particle.position.y = Math.max(\r\n      0,\r\n      Mat",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 252,
+          "context": " = Math.max(\r\n      0,\r\n      Math.min(100, this.particle.po",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 262,
+          "context": "l parameter\r\n\r\n    const r1 = Math.random();\r\n    const r2 =",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 263,
+          "context": "ath.random();\r\n    const r2 = Math.random();\r\n\r\n    // Updat",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 281,
+          "context": "   this.particle.position.x = Math.max(\r\n      0,\r\n      Mat",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 283,
+          "context": " = Math.max(\r\n      0,\r\n      Math.min(100, this.particle.po",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 285,
+          "context": "   this.particle.position.y = Math.max(\r\n      0,\r\n      Mat",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 287,
+          "context": " = Math.max(\r\n      0,\r\n      Math.min(100, this.particle.po",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 298,
+          "context": "e.position.x) * 0.1 +\r\n      (Math.random() - 0.5) * 0.2;\r\n ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 301,
+          "context": "e.position.y) * 0.1 +\r\n      (Math.random() - 0.5) * 0.2;\r\n ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 306,
+          "context": " this.particle.velocity.x += (Math.random() - 0.5) * 2;\r\n   ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 307,
+          "context": " this.particle.velocity.y += (Math.random() - 0.5) * 2;\r\n\r\n ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 313,
+          "context": "   this.particle.position.x = Math.max(\r\n      0,\r\n      Mat",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 315,
+          "context": " = Math.max(\r\n      0,\r\n      Math.min(100, this.particle.po",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 317,
+          "context": "   this.particle.position.y = Math.max(\r\n      0,\r\n      Mat",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 319,
+          "context": " = Math.max(\r\n      0,\r\n      Math.min(100, this.particle.po",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 327,
+          "context": "Y = 50;\r\n    const distance = Math.sqrt(\r\n      Math.pow(pos",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 328,
+          "context": " distance = Math.sqrt(\r\n      Math.pow(position.x - centerX,",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 328,
+          "context": "ow(position.x - centerX, 2) + Math.pow(position.y - centerY,",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 333,
+          "context": "00 -\r\n      distance +\r\n      Math.sin(position.x / 10) * 5 ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 334,
+          "context": "position.x / 10) * 5 +\r\n      Math.cos(position.y / 10) * 5\r",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 379,
+          "context": "ase 'consensus':\r\n        if (Math.random() < 0.05) {\r\n     ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 385,
+          "context": "se 'dispersing':\r\n        if (Math.random() < 0.1) {\r\n      ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 415,
+          "context": " other swarm members\r\n    if (Math.random() < 0.7) {\r\n      ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 474,
+          "context": "   if (proposal.votes.size >= Math.ceil(this.swarmMembers.si",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 489,
+          "context": "ore sophisticated\r\n    return Math.random() > 0.3; // 70% ch",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 156,
+          "context": "      position: {\r\n          x: Math.random() * 400 + 200,\r\n",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+          "relativePath": "src\\App.tsx"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 157,
+          "context": "om() * 400 + 200,\r\n          y: Math.random() * 400 + 200,\r\n",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+          "relativePath": "src\\App.tsx"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 400,
+          "context": "tration\r\n          performance: Math.round(Math.random() * 1",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+          "relativePath": "src\\App.tsx"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 401,
+          "context": " 100),\r\n          messageCount: Math.round(Math.random() * 5",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+          "relativePath": "src\\App.tsx"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 472,
+          "context": "dom() * 10,\r\n        cpu_usage: Math.round(Math.random() * 1",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+          "relativePath": "src\\App.tsx"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 473,
+          "context": " * 100),\r\n        memory_usage: Math.round(Math.random() * 1",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+          "relativePath": "src\\App.tsx"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 474,
+          "context": "100),\r\n        network_latency: Math.round(Math.random() * 2",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+          "relativePath": "src\\App.tsx"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 475,
+          "context": "() * 200),\r\n        throughput: Math.round(Math.random() * 1",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+          "relativePath": "src\\App.tsx"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 156,
+          "context": "    position: {\r\n          x: Math.random() * 400 + 200,\r\n  ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+          "relativePath": "src\\App.tsx"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 157,
+          "context": "() * 400 + 200,\r\n          y: Math.random() * 400 + 200,\r\n  ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+          "relativePath": "src\\App.tsx"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 251,
+          "context": "% 3) * 150,\r\n        y: 300 + Math.floor(index / 3) * 120,\r\n",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+          "relativePath": "src\\App.tsx"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 400,
+          "context": "ation\r\n          performance: Math.round(Math.random() * 100",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+          "relativePath": "src\\App.tsx"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 400,
+          "context": "      performance: Math.round(Math.random() * 100),\r\n       ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+          "relativePath": "src\\App.tsx"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 401,
+          "context": "00),\r\n          messageCount: Math.round(Math.random() * 50)",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+          "relativePath": "src\\App.tsx"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 401,
+          "context": "     messageCount: Math.round(Math.random() * 50),\r\n        ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+          "relativePath": "src\\App.tsx"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 403,
+          "context": ", 'processing'][\r\n            Math.floor(Math.random() * 3)\r",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+          "relativePath": "src\\App.tsx"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 403,
+          "context": "ng'][\r\n            Math.floor(Math.random() * 3)\r\n          ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+          "relativePath": "src\\App.tsx"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 427,
+          "context": "pes\r\n        const edgeType = Math.random() > 0.5 ? 'dataEdg",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+          "relativePath": "src\\App.tsx"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 471,
+          "context": "\r\n        temperature: 23.5 + Math.random() * 10,\r\n        c",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+          "relativePath": "src\\App.tsx"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 472,
+          "context": "m() * 10,\r\n        cpu_usage: Math.round(Math.random() * 100",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+          "relativePath": "src\\App.tsx"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 472,
+          "context": "        cpu_usage: Math.round(Math.random() * 100),\r\n       ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+          "relativePath": "src\\App.tsx"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 473,
+          "context": " 100),\r\n        memory_usage: Math.round(Math.random() * 100",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+          "relativePath": "src\\App.tsx"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 473,
+          "context": "     memory_usage: Math.round(Math.random() * 100),\r\n       ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+          "relativePath": "src\\App.tsx"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 474,
+          "context": "0),\r\n        network_latency: Math.round(Math.random() * 200",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+          "relativePath": "src\\App.tsx"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 474,
+          "context": "  network_latency: Math.round(Math.random() * 200),\r\n       ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+          "relativePath": "src\\App.tsx"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 475,
+          "context": " * 200),\r\n        throughput: Math.round(Math.random() * 100",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+          "relativePath": "src\\App.tsx"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 475,
+          "context": "       throughput: Math.round(Math.random() * 1000),\r\n      ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+          "relativePath": "src\\App.tsx"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 129,
+          "context": "\r\n                  width: `${Math.min(100, networkMetrics.t",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\components\\AnalyticsDashboard.tsx",
+          "relativePath": "src\\components\\AnalyticsDashboard.tsx"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 169,
+          "context": "                    width: `${Math.min(100, swarmMetrics.con",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\components\\AnalyticsDashboard.tsx",
+          "relativePath": "src\\components\\AnalyticsDashboard.tsx"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 184,
+          "context": "                    width: `${Math.min(100, swarmMetrics.div",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\components\\AnalyticsDashboard.tsx",
+          "relativePath": "src\\components\\AnalyticsDashboard.tsx"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 212,
+          "context": "mestamp;\r\n    const minutes = Math.floor(diff / 60000);\r\n   ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\components\\ApiKeySettings.tsx",
+          "relativePath": "src\\components\\ApiKeySettings.tsx"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 213,
+          "context": " / 60000);\r\n    const hours = Math.floor(diff / 3600000);\r\n ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\components\\ApiKeySettings.tsx",
+          "relativePath": "src\\components\\ApiKeySettings.tsx"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 214,
+          "context": "/ 3600000);\r\n    const days = Math.floor(diff / 86400000);\r\n",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\components\\ApiKeySettings.tsx",
+          "relativePath": "src\\components\\ApiKeySettings.tsx"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 256,
+          "context": "   const position = {\r\n      x: Math.random() * 400 + 100,\r\n",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\components\\NodePalette.tsx",
+          "relativePath": "src\\components\\NodePalette.tsx"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 257,
+          "context": "random() * 400 + 100,\r\n      y: Math.random() * 300 + 100,\r\n",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\components\\NodePalette.tsx",
+          "relativePath": "src\\components\\NodePalette.tsx"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 256,
+          "context": " const position = {\r\n      x: Math.random() * 400 + 100,\r\n  ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\components\\NodePalette.tsx",
+          "relativePath": "src\\components\\NodePalette.tsx"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 257,
+          "context": "ndom() * 400 + 100,\r\n      y: Math.random() * 300 + 100,\r\n  ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\components\\NodePalette.tsx",
+          "relativePath": "src\\components\\NodePalette.tsx"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 63,
+          "context": "d ?? `${type}-${Date.now()}-${Math.random().toString(36).sub",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\managers\\AgentManager.ts",
+          "relativePath": "src\\managers\\AgentManager.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 131,
+          "context": "ensity: activeAgents.length / Math.max(1, this.agents.size),",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\managers\\AgentManager.ts",
+          "relativePath": "src\\managers\\AgentManager.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 35,
+          "context": "\r\n          setPulseIntensity(Math.random() * 0.5 + 0.5);\r\n\r",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\nodes\\AdvancedAgentNode.tsx",
+          "relativePath": "src\\nodes\\AdvancedAgentNode.tsx"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 108,
+          "context": "AgentType);\r\n  const uptime = Math.floor((Date.now() - metri",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\nodes\\AdvancedAgentNode.tsx",
+          "relativePath": "src\\nodes\\AdvancedAgentNode.tsx"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 125,
+          "context": "{\r\n        animationDelay: `${Math.random() * 2}s`,\r\n       ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\nodes\\AdvancedAgentNode.tsx",
+          "relativePath": "src\\nodes\\AdvancedAgentNode.tsx"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 246,
+          "context": "{{\r\n                width: `${Math.min(100, (metrics.message",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\nodes\\AdvancedAgentNode.tsx",
+          "relativePath": "src\\nodes\\AdvancedAgentNode.tsx"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 41,
+          "context": " startTime,\r\n      memoryUsage: Math.floor(Math.random() * 1",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+          "relativePath": "src\\services\\ExecutionEngine.ts"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 41,
+          "context": "tartTime,\r\n      memoryUsage: Math.floor(Math.random() * 100",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+          "relativePath": "src\\services\\ExecutionEngine.ts"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 41,
+          "context": "      memoryUsage: Math.floor(Math.random() * 100) + 50,\r\n  ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+          "relativePath": "src\\services\\ExecutionEngine.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 591,
+          "context": "    id: `exec-${Date.now()}-${Math.random().toString(36).sub",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+          "relativePath": "src\\services\\ExecutionEngine.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 523,
+          "context": "    id: `task-${Date.now()}-${Math.random().toString(36).sub",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\LLMService.ts",
+          "relativePath": "src\\services\\LLMService.ts"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 306,
+          "context": "ndom()),\r\n            priority: Math.random() > 0.5 ? 'high'",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\utils\\demoScenarios.ts",
+          "relativePath": "src\\utils\\demoScenarios.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 228,
+          "context": "artPoints[\r\n                  Math.floor(\r\n                 ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\utils\\demoScenarios.ts",
+          "relativePath": "src\\utils\\demoScenarios.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 229,
+          "context": "h.floor(\r\n                    Math.random() * problem.parame",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\utils\\demoScenarios.ts",
+          "relativePath": "src\\utils\\demoScenarios.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 291,
+          "context": "    const sourceId = agentIds[Math.floor(Math.random() * age",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\utils\\demoScenarios.ts",
+          "relativePath": "src\\utils\\demoScenarios.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 291,
+          "context": "ourceId = agentIds[Math.floor(Math.random() * agentIds.lengt",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\utils\\demoScenarios.ts",
+          "relativePath": "src\\utils\\demoScenarios.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 292,
+          "context": "    const targetId = agentIds[Math.floor(Math.random() * age",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\utils\\demoScenarios.ts",
+          "relativePath": "src\\utils\\demoScenarios.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 292,
+          "context": "argetId = agentIds[Math.floor(Math.random() * agentIds.lengt",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\utils\\demoScenarios.ts",
+          "relativePath": "src\\utils\\demoScenarios.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 296,
+          "context": "tress-message-${Date.now()}-${Math.random()}`,\r\n          ty",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\utils\\demoScenarios.ts",
+          "relativePath": "src\\utils\\demoScenarios.ts"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 305,
+          "context": "(0)\r\n              .map(() => Math.random()),\r\n            p",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\utils\\demoScenarios.ts",
+          "relativePath": "src\\utils\\demoScenarios.ts"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 306,
+          "context": "om()),\r\n            priority: Math.random() > 0.5 ? 'high' :",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\utils\\demoScenarios.ts",
+          "relativePath": "src\\utils\\demoScenarios.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 334,
+          "context": " => {\r\n      const timeSlot = Math.floor(event.timestamp / i",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\utils\\eventBus.ts",
+          "relativePath": "src\\utils\\eventBus.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 380,
+          "context": "   id: `event-${Date.now()}-${Math.random().toString(36).sub",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\utils\\eventBus.ts",
+          "relativePath": "src\\utils\\eventBus.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 23,
+          "context": "eueId: `queue-${Date.now()}-${Math.random()}`,\r\n    ...updat",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\workers\\agentWorker.ts",
+          "relativePath": "src\\workers\\agentWorker.ts"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 21,
+          "context": "ialPosition = {\r\n            x: Math.random() * 100,\r\n      ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\workers\\swarmWorker.ts",
+          "relativePath": "src\\workers\\swarmWorker.ts"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 22,
+          "context": "random() * 100,\r\n            y: Math.random() * 100,\r\n      ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\workers\\swarmWorker.ts",
+          "relativePath": "src\\workers\\swarmWorker.ts"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 21,
+          "context": "lPosition = {\r\n            x: Math.random() * 100,\r\n        ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\workers\\swarmWorker.ts",
+          "relativePath": "src\\workers\\swarmWorker.ts"
+        },
+        {
+          "name": "Math",
+          "type": "type",
+          "line": 22,
+          "context": "ndom() * 100,\r\n            y: Math.random() * 100,\r\n        ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\workers\\swarmWorker.ts",
+          "relativePath": "src\\workers\\swarmWorker.ts"
+        },
+        {
+          "name": "Math",
+          "type": "interface",
+          "line": 150,
+          "context": "sg-${agentId}-${Date.now()}-${Math.random()}`,\r\n    };\r\n\r\n  ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\workers\\WorkerPool.ts",
+          "relativePath": "src\\workers\\WorkerPool.ts"
+        }
+      ]
+    },
+    "Object": {
+      "name": "Object",
+      "type": "interface",
+      "definition": "export interface Object {\n  id: string;\n}",
+      "location": "src/types/index.ts",
+      "refs": [
+        {
+          "name": "Object",
+          "type": "interface",
+          "line": 218,
+          "context": "ject') {\r\n      importance += Object.keys(event.payload).len",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\ReasoningAgent.ts",
+          "relativePath": "src\\agents\\ReasoningAgent.ts"
+        },
+        {
+          "name": "Object",
+          "type": "interface",
+          "line": 241,
+          "context": "e='space-y-6'>\r\n            {(Object.keys(providers) as LLMP",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\components\\ApiKeySettings.tsx",
+          "relativePath": "src\\components\\ApiKeySettings.tsx"
+        },
+        {
+          "name": "Object",
+          "type": "interface",
+          "line": 89,
+          "context": "000,\r\n      },\r\n    };\r\n\r\n    Object.values(defaultLimits).f",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ApiKeyManager.ts",
+          "relativePath": "src\\services\\ApiKeyManager.ts"
+        },
+        {
+          "name": "Object",
+          "type": "interface",
+          "line": 99,
+          "context": " JSON.parse(stored);\r\n        Object.entries(parsed).forEach",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ApiKeyManager.ts",
+          "relativePath": "src\\services\\ApiKeyManager.ts"
+        },
+        {
+          "name": "Object",
+          "type": "interface",
+          "line": 110,
+          "context": "y {\r\n      const keysObject = Object.fromEntries(this.keys);",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ApiKeyManager.ts",
+          "relativePath": "src\\services\\ApiKeyManager.ts"
+        },
+        {
+          "name": "Object",
+          "type": "interface",
+          "line": 167,
+          "context": "variables from context\r\n      Object.entries(context.variabl",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+          "relativePath": "src\\services\\ExecutionEngine.ts"
+        },
+        {
+          "name": "Object",
+          "type": "interface",
+          "line": 288,
+          "context": "= new Function(\r\n          ...Object.keys(env),\r\n          `",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+          "relativePath": "src\\services\\ExecutionEngine.ts"
+        },
+        {
+          "name": "Object",
+          "type": "interface",
+          "line": 295,
+          "context": "       const result = func(...Object.values(env));\r\n        ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+          "relativePath": "src\\services\\ExecutionEngine.ts"
+        },
+        {
+          "name": "Object",
+          "type": "interface",
+          "line": 387,
+          "context": "\r\n        });\r\n        return Object.entries(groups).map(([k",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+          "relativePath": "src\\services\\ExecutionEngine.ts"
+        },
+        {
+          "name": "Object",
+          "type": "interface",
+          "line": 466,
+          "context": "<string, string> = {};\r\n      Object.entries(scraperConfig.s",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+          "relativePath": "src\\services\\ExecutionEngine.ts"
+        },
+        {
+          "name": "Object",
+          "type": "interface",
+          "line": 69,
+          "context": "tring, boolean> {\r\n    return Object.fromEntries(this.servic",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ServiceInitializer.ts",
+          "relativePath": "src\\services\\ServiceInitializer.ts"
+        }
+      ]
+    },
+    "Set": {
+      "name": "Set",
+      "type": "type",
+      "definition": "export type Set = unknown;",
+      "location": "src/types/agents.ts",
+      "refs": [
+        {
+          "name": "Set",
+          "type": "type",
+          "line": 22,
+          "context": "Base {\r\n  private swarmMembers: Set<AgentId> = new Set();\r\n ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Set",
+          "type": "type",
+          "line": 22,
+          "context": " swarmMembers: Set<AgentId> = new Set();\r\n  private particle",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\agents\\SwarmAgent.ts",
+          "relativePath": "src\\agents\\SwarmAgent.ts"
+        },
+        {
+          "name": "Set",
+          "type": "class",
+          "line": 241,
+          "context": "    'All',\r\n    ...Array.from(new Set(nodeTemplates.map(t =>",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\components\\NodePalette.tsx",
+          "relativePath": "src\\components\\NodePalette.tsx"
+        },
+        {
+          "name": "Set",
+          "type": "class",
+          "line": 100,
+          "context": "      this.subscribers.set(t, new Set());\r\n      }\r\n      th",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\utils\\eventBus.ts",
+          "relativePath": "src\\utils\\eventBus.ts"
+        }
+      ]
+    },
+    "Services": {
+      "name": "Services",
+      "type": "type",
+      "definition": "export type Services = unknown;",
+      "location": "src/types/index.ts",
+      "refs": [
+        {
+          "name": "Services",
+          "type": "type",
+          "line": 57,
+          "context": "e();\r\n        console.log('App: Services initialized success",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+          "relativePath": "src\\App.tsx"
+        }
+      ]
+    },
+    "Failed": {
+      "name": "Failed",
+      "type": "type",
+      "definition": "export type Failed = unknown;",
+      "location": "src/types/index.ts",
+      "refs": [
+        {
+          "name": "Failed",
+          "type": "type",
+          "line": 59,
+          "context": " {\r\n        console.error('App: Failed to initialize service",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\App.tsx",
+          "relativePath": "src\\App.tsx"
+        },
+        {
+          "name": "Failed",
+          "type": "type",
+          "line": 57,
+          "context": "(\r\n        'ServiceInitializer: Failed to initialize service",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ServiceInitializer.ts",
+          "relativePath": "src\\services\\ServiceInitializer.ts"
+        }
+      ]
+    },
+    "String": {
+      "name": "String",
+      "type": "interface",
+      "definition": "export interface String {\n  id: string;\n}",
+      "location": "src/types/index.ts",
+      "refs": [
+        {
+          "name": "String",
+          "type": "type",
+          "line": 38,
+          "context": "ata.formatValue(value)\r\n      : String(value ?? '');\r\n    co",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\edges\\DataEdge.tsx",
+          "relativePath": "src\\edges\\DataEdge.tsx"
+        },
+        {
+          "name": "String",
+          "type": "interface",
+          "line": 123,
+          "context": " .map((char, i) =>\r\n          String.fromCharCode(\r\n        ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ApiKeyManager.ts",
+          "relativePath": "src\\services\\ApiKeyManager.ts"
+        },
+        {
+          "name": "String",
+          "type": "interface",
+          "line": 138,
+          "context": " .map((char, i) =>\r\n          String.fromCharCode(\r\n        ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ApiKeyManager.ts",
+          "relativePath": "src\\services\\ApiKeyManager.ts"
+        }
+      ]
+    },
+    "Uint8Array": {
+      "name": "Uint8Array",
+      "type": "class",
+      "definition": "export class Uint8Array {\n  constructor() {\n    // TODO: Implement constructor\n  }\n\n  // TODO: Add methods and properties\n}",
+      "location": "src/types/index.ts",
+      "refs": [
+        {
+          "name": "Uint8Array",
+          "type": "class",
           "line": 46,
-          "context": "ent constructor\n  }\n\n  // TODO: Add methods and properties\n}",
-          "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\utils.ts",
-          "relativePath": "src\\types\\utils.ts"
+          "context": "n btoa(crypto.getRandomValues(new Uint8Array(32)).toString()",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ApiKeyManager.ts",
+          "relativePath": "src\\services\\ApiKeyManager.ts"
+        }
+      ]
+    },
+    "AbortSignal": {
+      "name": "AbortSignal",
+      "type": "type",
+      "definition": "export type AbortSignal = unknown;",
+      "location": "src/types/index.ts",
+      "refs": [
+        {
+          "name": "AbortSignal",
+          "type": "type",
+          "line": 455,
+          "context": "onfig.headers,\r\n        signal: AbortSignal.timeout(scraperC",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+          "relativePath": "src\\services\\ExecutionEngine.ts"
         },
         {
-          "name": "Add",
+          "name": "AbortSignal",
           "type": "type",
-          "line": 54,
-          "context": "ent constructor\n  }\n\n  // TODO: Add methods and properties\n}",
-          "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\utils.ts",
-          "relativePath": "src\\types\\utils.ts"
+          "line": 525,
+          "context": "      headers,\r\n        signal: AbortSignal.timeout(apiConfi",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+          "relativePath": "src\\services\\ExecutionEngine.ts"
         },
         {
-          "name": "Add",
+          "name": "AbortSignal",
           "type": "type",
-          "line": 14,
-          "context": "ent constructor\n  }\n\n  // TODO: Add methods and properties\n}",
-          "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\workers.ts",
-          "relativePath": "src\\types\\workers.ts"
+          "line": 455,
+          "context": "fig.headers,\r\n        signal: AbortSignal.timeout(scraperCon",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+          "relativePath": "src\\services\\ExecutionEngine.ts"
+        },
+        {
+          "name": "AbortSignal",
+          "type": "type",
+          "line": 525,
+          "context": "    headers,\r\n        signal: AbortSignal.timeout(apiConfig.",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+          "relativePath": "src\\services\\ExecutionEngine.ts"
+        }
+      ]
+    },
+    "RequestInit": {
+      "name": "RequestInit",
+      "type": "type",
+      "definition": "export type RequestInit = unknown;",
+      "location": "src/types/index.ts",
+      "refs": [
+        {
+          "name": "RequestInit",
+          "type": "type",
+          "line": 522,
+          "context": "\r\n\r\n      const requestOptions: RequestInit = {\r\n        met",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+          "relativePath": "src\\services\\ExecutionEngine.ts"
+        }
+      ]
+    },
+    "Partial": {
+      "name": "Partial",
+      "type": "type",
+      "definition": "export type Partial = unknown;",
+      "location": "src/types/index.ts",
+      "refs": [
+        {
+          "name": "Partial",
+          "type": "type",
+          "line": 583,
+          "context": "  input: unknown,\r\n    context: Partial<ExecutionContext> = ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+          "relativePath": "src\\services\\ExecutionEngine.ts"
+        },
+        {
+          "name": "Partial",
+          "type": "type",
+          "line": 515,
+          "context": "uest: LLMRequest,\r\n    context: Partial<LLMExecutionContext>",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\LLMService.ts",
+          "relativePath": "src\\services\\LLMService.ts"
+        },
+        {
+          "name": "Partial",
+          "type": "type",
+          "line": 569,
+          "context": "uest: LLMRequest,\r\n    context: Partial<LLMExecutionContext>",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\LLMService.ts",
+          "relativePath": "src\\services\\LLMService.ts"
+        },
+        {
+          "name": "Partial",
+          "type": "type",
+          "line": 260,
+          "context": "pe: NodeType;\r\n  defaultConfig: Partial<NodeConfig>;\r\n  capa",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\nodes.ts",
+          "relativePath": "src\\types\\nodes.ts"
+        },
+        {
+          "name": "Partial",
+          "type": "type",
+          "line": 265,
+          "context": "scription: string;\r\n    config: Partial<NodeConfig>;\r\n    sa",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\types\\nodes.ts",
+          "relativePath": "src\\types\\nodes.ts"
+        },
+        {
+          "name": "Partial",
+          "type": "type",
+          "line": 20,
+          "context": "\n\r\nfunction sendMessage(update: Partial<AgentWorkerMessage>)",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\workers\\agentWorker.ts",
+          "relativePath": "src\\workers\\agentWorker.ts"
+        }
+      ]
+    },
+    "RegExp": {
+      "name": "RegExp",
+      "type": "class",
+      "definition": "export class RegExp {\n  constructor() {\n    // TODO: Implement constructor\n  }\n\n  // TODO: Add methods and properties\n}",
+      "location": "src/types/index.ts",
+      "refs": [
+        {
+          "name": "RegExp",
+          "type": "class",
+          "line": 169,
+          "context": " = prompt.replace(\r\n          new RegExp(`\\\\{\\\\{${key}\\\\}\\\\}",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+          "relativePath": "src\\services\\ExecutionEngine.ts"
+        }
+      ]
+    },
+    "Function": {
+      "name": "Function",
+      "type": "class",
+      "definition": "export class Function {\n  constructor() {\n    // TODO: Implement constructor\n  }\n\n  // TODO: Add methods and properties\n}",
+      "location": "src/types/index.ts",
+      "refs": [
+        {
+          "name": "Function",
+          "type": "class",
+          "line": 287,
+          "context": "context\r\n        const func = new Function(\r\n          ...Ob",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ExecutionEngine.ts",
+          "relativePath": "src\\services\\ExecutionEngine.ts"
+        }
+      ]
+    },
+    "AsyncGenerator": {
+      "name": "AsyncGenerator",
+      "type": "type",
+      "definition": "export type AsyncGenerator = unknown;",
+      "location": "src/types/index.ts",
+      "refs": [
+        {
+          "name": "AsyncGenerator",
+          "type": "type",
+          "line": 19,
+          "context": "\r\n    request: LLMRequest\r\n  ): AsyncGenerator<LLMStreamChun",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\LLMService.ts",
+          "relativePath": "src\\services\\LLMService.ts"
+        },
+        {
+          "name": "AsyncGenerator",
+          "type": "type",
+          "line": 62,
+          "context": "\r\n    request: LLMRequest\r\n  ): AsyncGenerator<LLMStreamChun",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\LLMService.ts",
+          "relativePath": "src\\services\\LLMService.ts"
+        },
+        {
+          "name": "AsyncGenerator",
+          "type": "type",
+          "line": 187,
+          "context": "\n    _request: LLMRequest\r\n  ): AsyncGenerator<LLMStreamChun",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\LLMService.ts",
+          "relativePath": "src\\services\\LLMService.ts"
+        },
+        {
+          "name": "AsyncGenerator",
+          "type": "type",
+          "line": 268,
+          "context": "\r\n    request: LLMRequest\r\n  ): AsyncGenerator<LLMStreamChun",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\LLMService.ts",
+          "relativePath": "src\\services\\LLMService.ts"
+        },
+        {
+          "name": "AsyncGenerator",
+          "type": "type",
+          "line": 318,
+          "context": "\r\n    request: LLMRequest\r\n  ): AsyncGenerator<LLMStreamChun",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\LLMService.ts",
+          "relativePath": "src\\services\\LLMService.ts"
+        },
+        {
+          "name": "AsyncGenerator",
+          "type": "type",
+          "line": 570,
+          "context": "LLMExecutionContext> = {}\r\n  ): AsyncGenerator<LLMStreamChun",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\LLMService.ts",
+          "relativePath": "src\\services\\LLMService.ts"
+        }
+      ]
+    },
+    "Available": {
+      "name": "Available",
+      "type": "type",
+      "definition": "export type Available = unknown;",
+      "location": "src/types/index.ts",
+      "refs": [
+        {
+          "name": "Available",
+          "type": "type",
+          "line": 519,
+          "context": "onsole.log(\r\n      'LLMService: Available providers:',\r\n    ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\LLMService.ts",
+          "relativePath": "src\\services\\LLMService.ts"
+        }
+      ]
+    },
+    "TextDecoder": {
+      "name": "TextDecoder",
+      "type": "class",
+      "definition": "export class TextDecoder {\n  constructor() {\n    // TODO: Implement constructor\n  }\n\n  // TODO: Add methods and properties\n}",
+      "location": "src/types/index.ts",
+      "refs": [
+        {
+          "name": "TextDecoder",
+          "type": "class",
+          "line": 84,
+          "context": "ody');\r\n\r\n    const decoder = new TextDecoder();\r\n    let bu",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\LLMService.ts",
+          "relativePath": "src\\services\\LLMService.ts"
+        }
+      ]
+    },
+    "Already": {
+      "name": "Already",
+      "type": "type",
+      "definition": "export type Already = unknown;",
+      "location": "src/types/index.ts",
+      "refs": [
+        {
+          "name": "Already",
+          "type": "type",
+          "line": 17,
+          "context": "onsole.log('ServiceInitializer: Already initialized');\r\n    ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ServiceInitializer.ts",
+          "relativePath": "src\\services\\ServiceInitializer.ts"
+        }
+      ]
+    },
+    "Starting": {
+      "name": "Starting",
+      "type": "type",
+      "definition": "export type Starting = unknown;",
+      "location": "src/types/index.ts",
+      "refs": [
+        {
+          "name": "Starting",
+          "type": "type",
+          "line": 21,
+          "context": "onsole.log('ServiceInitializer: Starting initialization...')",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ServiceInitializer.ts",
+          "relativePath": "src\\services\\ServiceInitializer.ts"
+        }
+      ]
+    },
+    "Checking": {
+      "name": "Checking",
+      "type": "type",
+      "definition": "export type Checking = unknown;",
+      "location": "src/types/index.ts",
+      "refs": [
+        {
+          "name": "Checking",
+          "type": "type",
+          "line": 30,
+          "context": "onsole.log('ServiceInitializer: Checking ApiKeyManager...');",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ServiceInitializer.ts",
+          "relativePath": "src\\services\\ServiceInitializer.ts"
+        },
+        {
+          "name": "Checking",
+          "type": "type",
+          "line": 36,
+          "context": "onsole.log('ServiceInitializer: Checking ExecutionEngine...'",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ServiceInitializer.ts",
+          "relativePath": "src\\services\\ServiceInitializer.ts"
+        },
+        {
+          "name": "Checking",
+          "type": "type",
+          "line": 45,
+          "context": "onsole.log('ServiceInitializer: Checking LLMService...');\r\n ",
+          "file": "C:\\Users\\mobileunit2\\Openai\\src\\services\\ServiceInitializer.ts",
+          "relativePath": "src\\services\\ServiceInitializer.ts"
         }
       ]
     }
