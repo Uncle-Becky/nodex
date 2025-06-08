@@ -10,12 +10,17 @@ import {
   type ReactFlowInstance,
 } from '@xyflow/react';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { ServiceInitializer } from './services/ServiceInitializer';
 import { AnalyticsDashboard } from './components/AnalyticsDashboard';
+import { ApiKeySettings } from './components/ApiKeySettings';
+import { NodePalette } from './components/NodePalette';
 import { DataEdge } from './edges/DataEdge';
 import { edgeAware } from './edges/edgeAware';
 import { AgentManager, type AgentType } from './managers/AgentManager';
 import { AdvancedAgentNode } from './nodes/AdvancedAgentNode';
 import { AgentNode } from './nodes/agentNode';
+import { CodeExecutorNode } from './nodes/CodeExecutorNode';
+import { LLMChatNode } from './nodes/LLMChatNode';
 import { useGraphStore } from './store/useGraphStore';
 import type { EdgeData } from './types/agents';
 import { createEvent, eventBus } from './utils/eventBus';
@@ -24,6 +29,8 @@ import { saveFlow } from './utils/persist';
 const nodeTypes = {
   agent: AgentNode,
   advanced: AdvancedAgentNode,
+  llm_chat: LLMChatNode,
+  code_executor: CodeExecutorNode,
 };
 const edgeTypes = {
   aware: edgeAware,
@@ -38,8 +45,23 @@ export default function App() {
   const [isCreatingAgent, setIsCreatingAgent] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [showAnalytics, setShowAnalytics] = useState(false);
+  const [showApiSettings, setShowApiSettings] = useState(false);
+  const [showNodePalette, setShowNodePalette] = useState(false);
 
   useEffect(() => {
+    // Initialize services
+    const initServices = async () => {
+      try {
+        const serviceInitializer = ServiceInitializer.getInstance();
+        await serviceInitializer.initialize();
+        console.log('App: Services initialized successfully');
+      } catch (error) {
+        console.error('App: Failed to initialize services:', error);
+      }
+    };
+
+    initServices();
+
     // Initialize with canvas agent
     agentManager.createAgent('canvas', 'canvas');
 
@@ -704,6 +726,34 @@ export default function App() {
           </div>
         </div>
 
+        {/* AI Tools */}
+        <div className='mb-8'>
+          <h2 className='text-lg font-semibold text-white mb-4 flex items-center gap-2'>
+            <span className='w-2 h-2 bg-green-400 rounded-full animate-pulse'></span>
+            AI Tools
+          </h2>
+
+          <div className='space-y-3'>
+            <button
+              onClick={() => setShowNodePalette(true)}
+              className='w-full neural-button bg-gradient-to-r from-emerald-500 to-green-600 hover:from-green-600 hover:to-emerald-500 transition-all duration-300'
+            >
+              <span className='flex items-center justify-center gap-2'>
+                🧩 <span>Add AI Node</span>
+              </span>
+            </button>
+
+            <button
+              onClick={() => setShowApiSettings(true)}
+              className='w-full neural-button bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-indigo-600 hover:to-blue-500 transition-all duration-300'
+            >
+              <span className='flex items-center justify-center gap-2'>
+                🔑 <span>API Keys</span>
+              </span>
+            </button>
+          </div>
+        </div>
+
         {/* System Controls */}
         <div className='mb-8'>
           <h2 className='text-lg font-semibold text-white mb-4 flex items-center gap-2'>
@@ -791,6 +841,30 @@ export default function App() {
           <AnalyticsDashboard />
         </div>
       )}
+
+      {/* API Key Settings Modal */}
+      <ApiKeySettings
+        isOpen={showApiSettings}
+        onClose={() => setShowApiSettings(false)}
+      />
+
+      {/* Node Palette Modal */}
+      <NodePalette
+        isOpen={showNodePalette}
+        onClose={() => setShowNodePalette(false)}
+        onAddNode={(template: any, position: { x: number; y: number }) => {
+          const newNode: Node = {
+            id: `${template.type}-${Date.now()}`,
+            type: template.type,
+            position,
+            data: {
+              label: template.label,
+              ...template.defaultData,
+            },
+          };
+          updateNodes([...nodes, newNode]);
+        }}
+      />
 
       {/* Hidden file input */}
       <input

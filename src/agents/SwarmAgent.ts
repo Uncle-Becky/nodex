@@ -37,7 +37,7 @@ export class SwarmAgent extends AgentBase {
     super(id);
     this.particle = {
       id: this.id,
-      position: initialPosition || {
+      position: initialPosition ?? {
         x: Math.random() * 100,
         y: Math.random() * 100,
       },
@@ -50,7 +50,7 @@ export class SwarmAgent extends AgentBase {
 
   private initialize(): void {
     // Subscribe to swarm-specific events
-    eventBus.subscribe(['AGENT_INIT', 'AGENT_MESSAGE'], (event) => {
+    eventBus.subscribe(['AGENT_INIT', 'AGENT_MESSAGE'], event => {
       if (event.source !== this.id) {
         this.discoverSwarmMember(event.source);
       }
@@ -75,7 +75,13 @@ export class SwarmAgent extends AgentBase {
   }
 
   private processSwarmMessage(event: BusEvent): void {
-    const payload = event.payload as any;
+    const payload = event.payload as {
+      swarmAction: string;
+      particle: SwarmParticle;
+      proposal: ConsensusProposal;
+      proposalId: string;
+      vote: boolean;
+    };
 
     switch (payload.swarmAction) {
       case 'position_update':
@@ -92,7 +98,7 @@ export class SwarmAgent extends AgentBase {
         );
         break;
       case 'behavior_change':
-        this.coordinateBehaviorChange(payload.newBehavior);
+        this.coordinateBehaviorChange(payload.swarmAction as typeof this.behaviorState);
         break;
       case 'join_swarm':
         this.welcomeNewMember(event.source);
@@ -473,7 +479,7 @@ export class SwarmAgent extends AgentBase {
       // Check if consensus is reached
       if (proposal.votes.size >= Math.ceil(this.swarmMembers.size * 0.6)) {
         const yesVotes = Array.from(proposal.votes.values()).filter(
-          (v) => v
+          v => v
         ).length;
         const consensus = yesVotes / proposal.votes.size > 0.5;
 
@@ -484,7 +490,7 @@ export class SwarmAgent extends AgentBase {
     }
   }
 
-  private evaluateProposal(proposal: ConsensusProposal): boolean {
+  private evaluateProposal(_proposal: ConsensusProposal): boolean {
     // Simple evaluation logic - in reality, this would be more sophisticated
     return Math.random() > 0.3; // 70% chance to vote yes
   }
