@@ -217,7 +217,21 @@ class LLMCompletionExecutor extends NodeExecutor {
   }
 }
 
+/**
+ * Node executor for running arbitrary JavaScript code.
+ * WARNING: Executing arbitrary code is inherently risky. This node attempts to mitigate
+ * risks by running code in a dedicated Web Worker, but vulnerabilities may still exist.
+ * Use with extreme caution and only with trusted code or configurations that limit capabilities.
+ */
 class CodeExecutorNode extends NodeExecutor {
+  /**
+   * Executes the configured code.
+   * @param config The node's configuration, containing the code and settings.
+   * @param input The input data for the code execution.
+   * @param context The execution context, providing variables and memory.
+   * @returns A promise that resolves with the execution result.
+   * WARNING: See class documentation for security warnings.
+   */
   async execute(
     config: NodeConfig,
     input: unknown,
@@ -277,28 +291,43 @@ class CodeExecutorNode extends NodeExecutor {
     env: Record<string, unknown>,
     timeout: number
   ): Promise<unknown> {
+    /**
+     * Executes arbitrary JavaScript code within a Web Worker.
+     * WARNING: Executing arbitrary code is inherently risky and can lead to security vulnerabilities
+     * even with sandboxing attempts. Use with extreme caution and only with trusted code.
+     * The code is executed within a dedicated Web Worker to provide some isolation.
+     * @param code The JavaScript code to execute.
+     * @param env An environment object providing variables accessible to the code.
+     * @param timeout Execution timeout in milliseconds.
+     * @returns A promise that resolves with the result of the code execution.
+     */
     return new Promise((resolve, reject) => {
+      // Ensure the worker path is correct relative to this file's location in `src/services/`
+      // Vite specific: new URL(path, import.meta.url) is the standard way.
+      const worker = new Worker(new URL('../workers/codeExecutionWorker.ts', import.meta.url), { type: 'module' });
+
       const timeoutId = setTimeout(() => {
-        reject(new Error('Code execution timeout'));
+        worker.terminate();
+        reject(new Error(`Execution timed out after ${timeout}ms (main thread timeout)`));
       }, timeout);
 
-      try {
-        // Create a safe execution context
-        const func = new Function(
-          ...Object.keys(env),
-          `
-          "use strict";
-          ${code}
-        `
-        );
+      worker.onmessage = (event) => {
+        clearTimeout(timeoutId);
+        if (event.data.status === 'success') {
+          resolve(event.data.result);
+        } else {
+          reject(new Error(event.data.error || 'Worker execution failed'));
+        }
+        worker.terminate();
+      };
 
-        const result = func(...Object.values(env));
+      worker.onerror = (error) => {
         clearTimeout(timeoutId);
-        resolve(result);
-      } catch (error) {
-        clearTimeout(timeoutId);
-        reject(error);
-      }
+        reject(new Error(`Worker error: ${error.message}`));
+        worker.terminate();
+      };
+
+      worker.postMessage({ code, env, timeout });
     });
   }
 
