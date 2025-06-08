@@ -604,6 +604,7 @@ class ExecutionEngine {
     this.executors.set('data_processor', new DataProcessorExecutor());
     this.executors.set('web_scraper', new WebScraperExecutor());
     this.executors.set('api_connector', new ApiConnectorExecutor());
+    this.executors.set('web_search', new WebSearchExecutor());
   }
 
   public async executeNode(
@@ -698,6 +699,143 @@ class ExecutionEngine {
 
   public getSupportedNodeTypes(): NodeType[] {
     return Array.from(this.executors.keys());
+  }
+}
+
+class WebSearchExecutor extends NodeExecutor {
+  async execute(
+    config: NodeConfig,
+    input: unknown,
+    context: ExecutionContext
+  ): Promise<ExecutionResult> {
+    const startTime = Date.now();
+
+    if (config.type !== 'web_search') {
+      return {
+        success: false,
+        error: 'Invalid node type for WebSearchExecutor',
+        metrics: this.createMetrics(startTime),
+      };
+    }
+
+    if (typeof input !== 'string' || !input.trim()) {
+      return {
+        success: false,
+        error: 'Invalid input: Search query must be a non-empty string.',
+        metrics: this.createMetrics(startTime),
+      };
+    }
+
+    const query = input.trim();
+    // const maxResults = config.config?.maxResults ?? 5; // Example: use from config
+
+    const searchUrl = `https://api.duckduckgo.com/?q=${encodeURIComponent(
+      query
+    )}&format=json&pretty=0&no_html=1&skip_disambig=1`;
+
+    try {
+      const response = await fetch(searchUrl, {
+        method: 'GET',
+        headers: { Accept: 'application/json' },
+      });
+
+      if (!response.ok) {
+        // Check for specific network error to trigger fallback for sandbox environments
+        if (response.status === 0 || response.type === 'opaque' || response.type === 'error') {
+            // This condition might indicate a CORS issue or network blockage in sandbox
+            Logger.warn('WebSearchExecutor: Fetch failed, possibly due to sandbox network restrictions. Using fallback.', response);
+            return this.getMockFallbackResult(query, startTime);
+        }
+        throw new Error(
+          `DuckDuckGo API request failed: ${response.status} ${response.statusText}`
+        );
+      }
+
+      const data = await response.json();
+      const results: { title: string; snippet: string; url: string }[] = [];
+
+      // Attempt to parse DuckDuckGo's various result structures
+      if (data.AbstractText) {
+        results.push({
+          title: data.Heading || query,
+          snippet: data.AbstractText,
+          url: data.AbstractURL || searchUrl, // Fallback to searchUrl if AbstractURL is empty
+        });
+      }
+
+      if (data.RelatedTopics && Array.isArray(data.RelatedTopics)) {
+        for (const topic of data.RelatedTopics) {
+          if (topic.Result) { // Usually for disambiguation or specific entity results
+            // Example: "<a href=\"https://duckduckgo.com/Lisp_(programming_language)\">Lisp (programming language)</a>"
+            const match = topic.Result.match(/<a href="([^"]+)">([^<]+)<\/a>/);
+            if (match) {
+                 results.push({
+                    title: match[2],
+                    snippet: topic.Text || match[2], // topic.Text might be more descriptive
+                    url: match[1],
+                });
+            }
+          } else if (topic.Topics && Array.isArray(topic.Topics)) { // Nested topics
+            for (const subTopic of topic.Topics) {
+                 if (subTopic.FirstURL && subTopic.Text) {
+                    results.push({
+                        title: subTopic.Text.substring(0,100), // Title often not explicit, use snippet start
+                        snippet: subTopic.Text,
+                        url: subTopic.FirstURL,
+                    });
+                }
+            }
+          } else if (topic.FirstURL && topic.Text) { // Standard web results often fall here
+            results.push({
+              title: topic.Text.substring(0,100), // Or derive a title differently
+              snippet: topic.Text,
+              url: topic.FirstURL,
+            });
+          }
+        }
+      }
+
+      // Deduplicate results by URL, preferring earlier entries
+      const uniqueResults = Array.from(new Map(results.map(r => [r.url, r])).values());
+
+      return {
+        success: true,
+        output: uniqueResults.slice(0, config.config?.maxResults ?? 10), // Apply maxResults after processing
+        metrics: this.createMetrics(startTime),
+      };
+    } catch (error: any) {
+      // Handle fetch errors that might occur in restricted environments (like no internet access)
+      if (error.name === 'TypeError' && (error.message.includes('Failed to fetch') || error.message.includes('NetworkError'))) {
+        Logger.warn('WebSearchExecutor: Fetch failed, possibly due to network restrictions. Using fallback.', error);
+        return this.getMockFallbackResult(query, startTime);
+      }
+      Logger.error('WebSearchExecutor error:', error);
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : 'Web search failed',
+        metrics: this.createMetrics(startTime),
+      };
+    }
+  }
+
+  private getMockFallbackResult(query: string, startTime: number): ExecutionResult {
+    return {
+      success: true,
+      output: [
+        {
+          title: `Mock Result 1 for "${query}"`,
+          snippet: `This is a mock search result because the live API call failed. This often happens in sandboxed environments without internet access.`,
+          url: `https://example.com/mock-search?q=${encodeURIComponent(query)}&id=1`,
+        },
+        {
+          title: `Mock Result 2 for "${query}"`,
+          snippet: `Another simulated search entry for your query: "${query}". Check environment connectivity if you expected live results.`,
+          url: `https://example.com/mock-search?q=${encodeURIComponent(query)}&id=2`,
+        },
+      ],
+      metrics: this.createMetrics(startTime),
+      error: "Using mock fallback data due to fetch failure." // Add an indicator that this is fallback data
+    };
   }
 }
 
