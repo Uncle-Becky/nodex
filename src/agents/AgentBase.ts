@@ -72,21 +72,23 @@ export abstract class AgentBase {
     const requestId = `req-edge-${this.id}-${edgeId}-${Date.now()}`;
     return new Promise((resolve, reject) => {
       const timeoutDuration = 5000; // 5 seconds
-      let timeoutId: number | undefined;
 
-      const subscriptionId = eventBus.subscribe('EDGE_DATA_RESPONSE', (event: BusEvent) => {
-        if (event.target === this.id && event.payload?.edgeId === edgeId) {
-          if (timeoutId !== undefined) {
-            clearTimeout(timeoutId);
+      const unsubscribe = eventBus.subscribe(
+        'EDGE_DATA_RESPONSE',
+        (event: BusEvent<{ edgeId: string; data: any }>) => {
+          if (event.target === this.id && event.payload?.edgeId === edgeId) {
+            clearTimeout(timeoutHandle);
+            unsubscribe();
+            resolve(event.payload.data);
           }
-          eventBus.unsubscribe('EDGE_DATA_RESPONSE', subscriptionId);
-          resolve(event.payload.data);
         }
-      });
+      );
 
-      timeoutId = setTimeout(() => {
-        eventBus.unsubscribe('EDGE_DATA_RESPONSE', subscriptionId);
-        reject(new Error(`Timeout waiting for EDGE_DATA_RESPONSE for edge ${edgeId}`));
+      const timeoutHandle = setTimeout(() => {
+        unsubscribe();
+        reject(
+          new Error(`Timeout waiting for EDGE_DATA_RESPONSE for edge ${edgeId}`)
+        );
       }, timeoutDuration);
 
       eventBus.publish({

@@ -40,7 +40,7 @@ class ApiKeyManager {
     // Note: This means the key might not be immediately available.
     // A better pattern would be a static async factory method or ensuring init is called and awaited.
     this.initEncryptionKey().catch(error => {
-      console.error("Failed to initialize encryption key:", error);
+      console.error('Failed to initialize encryption key:', error);
       // Handle initialization failure, e.g., by disabling encryption/decryption features
       // or by setting a flag indicating the manager is not ready.
     });
@@ -61,7 +61,10 @@ class ApiKeyManager {
           ['encrypt', 'decrypt']
         );
       } catch (error) {
-        console.error('Failed to import stored AES key, generating a new one:', error);
+        console.error(
+          'Failed to import stored AES key, generating a new one:',
+          error
+        );
         // Fallback to generating a new key if import fails
         await this.generateAndStoreEncryptionKey();
       }

@@ -194,23 +194,6 @@ export interface ApiConnectorNodeConfig extends BaseNodeConfig {
   };
 }
 
-export type NodeConfig =
-  | LLMChatNodeConfig
-  | LLMCompletionNodeConfig
-  | CodeExecutorNodeConfig
-  | DataProcessorNodeConfig
-  | WebScraperNodeConfig
-  | FileProcessorNodeConfig
-  | ImageAnalyzerNodeConfig
-  | TextAnalyzerNodeConfig
-  | WorkflowControllerNodeConfig
-  | MemoryBankNodeConfig
-  | ApiConnectorNodeConfig;
-// Add WebSearchNodeConfig to this union if specific config fields are needed.
-// For now, assuming web_search uses BaseNodeConfig or a generic config if no specific fields like maxResults are strictly typed yet.
-// If WebSearchExecutor expects specific config fields (e.g., maxResults), a WebSearchNodeConfig interface should be defined
-// and added to the NodeConfig union type. For this PoC, config.config?.maxResults was used, implying a loose structure.
-
 export interface WebSearchNodeConfig extends BaseNodeConfig {
   type: 'web_search';
   config: {
@@ -218,7 +201,6 @@ export interface WebSearchNodeConfig extends BaseNodeConfig {
     // Any other web_search specific configurations can be added here
   };
 }
-
 
 export type NodeConfig =
   | LLMChatNodeConfig

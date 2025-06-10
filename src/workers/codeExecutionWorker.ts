@@ -1,4 +1,10 @@
-self.onmessage = async (event: MessageEvent<{ code: string, env: Record<string, unknown>, timeout: number }>) => {
+self.onmessage = async (
+  event: MessageEvent<{
+    code: string;
+    env: Record<string, unknown>;
+    timeout: number;
+  }>
+) => {
   const { code, env, timeout } = event.data;
 
   // Ensure env is a clean object

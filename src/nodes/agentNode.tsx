@@ -34,9 +34,7 @@ export const AgentNode: React.FC<NodeProps> = ({ id, data }) => {
       workerRef.current.onmessage = (e: MessageEvent<AgentWorkerMessage>) => {
         const { type, payload } = e.data;
 
-        switch (
-          type // Fix: Add missing ':' here
-        ) {
+        switch (type) {
           case 'STATE_UPDATE': {
             const stateUpdatePayload =
               payload as AgentWorkerMessage['payload'] & {
@@ -111,7 +109,7 @@ export const AgentNode: React.FC<NodeProps> = ({ id, data }) => {
   return (
     <div className='p-2 rounded-lg bg-white shadow-xl w-48'>
       <div className='flex justify-between items-center mb-2'>
-        <strong>{data['label'] as string}</strong>
+        <strong>{String(data?.['label'] ?? 'Agent Node')}</strong>
         <div className='flex gap-1'>
           <button
             onClick={handleQuery}

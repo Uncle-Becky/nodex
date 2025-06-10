@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import type { Node } from '@xyflow/react';
+import React, { useCallback, useState } from 'react';
+import { useGraphStore } from '../store/useGraphStore';
 import type { NodeType } from '../types/nodes';
 
 interface NodeTemplate {
@@ -14,10 +16,6 @@ interface NodeTemplate {
 interface NodePaletteProps {
   isOpen: boolean;
   onClose: () => void;
-  onAddNode: (
-    template: NodeTemplate,
-    position: { x: number; y: number }
-  ) => void;
 }
 
 const nodeTemplates: NodeTemplate[] = [
@@ -231,10 +229,10 @@ const nodeTemplates: NodeTemplate[] = [
 export const NodePalette: React.FC<NodePaletteProps> = ({
   isOpen,
   onClose,
-  onAddNode,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [searchTerm, setSearchTerm] = useState('');
+  const { addNode, viewport } = useGraphStore();
 
   const categories = [
     'All',
@@ -250,15 +248,29 @@ export const NodePalette: React.FC<NodePaletteProps> = ({
     return matchesCategory && matchesSearch;
   });
 
-  const handleAddNode = (template: NodeTemplate) => {
-    // Add node at a random position for now
-    const position = {
-      x: Math.random() * 400 + 100,
-      y: Math.random() * 300 + 100,
-    };
-    onAddNode(template, position);
-    onClose();
-  };
+  const handleAddNode = useCallback(
+    (template: NodeTemplate) => {
+      // Calculate position based on current viewport and add some randomization
+      const position = {
+        x: Math.random() * 400 + 100 - viewport.x,
+        y: Math.random() * 300 + 100 - viewport.y,
+      };
+
+      const newNode: Node = {
+        id: `${template.type}-${Date.now()}`,
+        type: template.type,
+        position,
+        data: {
+          label: template.label,
+          ...template.defaultData,
+        },
+      };
+
+      addNode(newNode);
+      onClose();
+    },
+    [addNode, onClose, viewport]
+  );
 
   if (!isOpen) return null;
 

@@ -304,14 +304,21 @@ class CodeExecutorNode extends NodeExecutor {
     return new Promise((resolve, reject) => {
       // Ensure the worker path is correct relative to this file's location in `src/services/`
       // Vite specific: new URL(path, import.meta.url) is the standard way.
-      const worker = new Worker(new URL('../workers/codeExecutionWorker.ts', import.meta.url), { type: 'module' });
+      const worker = new Worker(
+        new URL('../workers/codeExecutionWorker.ts', import.meta.url),
+        { type: 'module' }
+      );
 
       const timeoutId = setTimeout(() => {
         worker.terminate();
-        reject(new Error(`Execution timed out after ${timeout}ms (main thread timeout)`));
+        reject(
+          new Error(
+            `Execution timed out after ${timeout}ms (main thread timeout)`
+          )
+        );
       }, timeout);
 
-      worker.onmessage = (event) => {
+      worker.onmessage = event => {
         clearTimeout(timeoutId);
         if (event.data.status === 'success') {
           resolve(event.data.result);
@@ -321,7 +328,7 @@ class CodeExecutorNode extends NodeExecutor {
         worker.terminate();
       };
 
-      worker.onerror = (error) => {
+      worker.onerror = error => {
         clearTimeout(timeoutId);
         reject(new Error(`Worker error: ${error.message}`));
         worker.terminate();
@@ -741,10 +748,17 @@ class WebSearchExecutor extends NodeExecutor {
 
       if (!response.ok) {
         // Check for specific network error to trigger fallback for sandbox environments
-        if (response.status === 0 || response.type === 'opaque' || response.type === 'error') {
-            // This condition might indicate a CORS issue or network blockage in sandbox
-            Logger.warn('WebSearchExecutor: Fetch failed, possibly due to sandbox network restrictions. Using fallback.', response);
-            return this.getMockFallbackResult(query, startTime);
+        if (
+          response.status === 0 ||
+          response.type === 'opaque' ||
+          response.type === 'error'
+        ) {
+          // This condition might indicate a CORS issue or network blockage in sandbox
+          Logger.warn(
+            'WebSearchExecutor: Fetch failed, possibly due to sandbox network restrictions. Using fallback.',
+            response
+          );
+          return this.getMockFallbackResult(query, startTime);
         }
         throw new Error(
           `DuckDuckGo API request failed: ${response.status} ${response.statusText}`
@@ -765,29 +779,32 @@ class WebSearchExecutor extends NodeExecutor {
 
       if (data.RelatedTopics && Array.isArray(data.RelatedTopics)) {
         for (const topic of data.RelatedTopics) {
-          if (topic.Result) { // Usually for disambiguation or specific entity results
+          if (topic.Result) {
+            // Usually for disambiguation or specific entity results
             // Example: "<a href=\"https://duckduckgo.com/Lisp_(programming_language)\">Lisp (programming language)</a>"
             const match = topic.Result.match(/<a href="([^"]+)">([^<]+)<\/a>/);
             if (match) {
-                 results.push({
-                    title: match[2],
-                    snippet: topic.Text || match[2], // topic.Text might be more descriptive
-                    url: match[1],
-                });
+              results.push({
+                title: match[2],
+                snippet: topic.Text || match[2], // topic.Text might be more descriptive
+                url: match[1],
+              });
             }
-          } else if (topic.Topics && Array.isArray(topic.Topics)) { // Nested topics
+          } else if (topic.Topics && Array.isArray(topic.Topics)) {
+            // Nested topics
             for (const subTopic of topic.Topics) {
-                 if (subTopic.FirstURL && subTopic.Text) {
-                    results.push({
-                        title: subTopic.Text.substring(0,100), // Title often not explicit, use snippet start
-                        snippet: subTopic.Text,
-                        url: subTopic.FirstURL,
-                    });
-                }
+              if (subTopic.FirstURL && subTopic.Text) {
+                results.push({
+                  title: subTopic.Text.substring(0, 100), // Title often not explicit, use snippet start
+                  snippet: subTopic.Text,
+                  url: subTopic.FirstURL,
+                });
+              }
             }
-          } else if (topic.FirstURL && topic.Text) { // Standard web results often fall here
+          } else if (topic.FirstURL && topic.Text) {
+            // Standard web results often fall here
             results.push({
-              title: topic.Text.substring(0,100), // Or derive a title differently
+              title: topic.Text.substring(0, 100), // Or derive a title differently
               snippet: topic.Text,
               url: topic.FirstURL,
             });
@@ -796,7 +813,9 @@ class WebSearchExecutor extends NodeExecutor {
       }
 
       // Deduplicate results by URL, preferring earlier entries
-      const uniqueResults = Array.from(new Map(results.map(r => [r.url, r])).values());
+      const uniqueResults = Array.from(
+        new Map(results.map(r => [r.url, r])).values()
+      );
 
       return {
         success: true,
@@ -805,8 +824,15 @@ class WebSearchExecutor extends NodeExecutor {
       };
     } catch (error: any) {
       // Handle fetch errors that might occur in restricted environments (like no internet access)
-      if (error.name === 'TypeError' && (error.message.includes('Failed to fetch') || error.message.includes('NetworkError'))) {
-        Logger.warn('WebSearchExecutor: Fetch failed, possibly due to network restrictions. Using fallback.', error);
+      if (
+        error.name === 'TypeError' &&
+        (error.message.includes('Failed to fetch') ||
+          error.message.includes('NetworkError'))
+      ) {
+        Logger.warn(
+          'WebSearchExecutor: Fetch failed, possibly due to network restrictions. Using fallback.',
+          error
+        );
         return this.getMockFallbackResult(query, startTime);
       }
       Logger.error('WebSearchExecutor error:', error);
@@ -818,7 +844,10 @@ class WebSearchExecutor extends NodeExecutor {
     }
   }
 
-  private getMockFallbackResult(query: string, startTime: number): ExecutionResult {
+  private getMockFallbackResult(
+    query: string,
+    startTime: number
+  ): ExecutionResult {
     return {
       success: true,
       output: [
@@ -834,7 +863,7 @@ class WebSearchExecutor extends NodeExecutor {
         },
       ],
       metrics: this.createMetrics(startTime),
-      error: "Using mock fallback data due to fetch failure." // Add an indicator that this is fallback data
+      error: 'Using mock fallback data due to fetch failure.', // Add an indicator that this is fallback data
     };
   }
 }

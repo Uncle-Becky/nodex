@@ -113,6 +113,25 @@ class IntelligentEventBus implements EventBus {
     };
   }
 
+  unsubscribe<T = unknown>(
+    types: BusEventType[],
+    handler: EventHandler<T> | ((event: BusEvent<T>) => void | Promise<void>)
+  ): void {
+    const normalizedHandler: EventHandler<T> =
+      typeof handler === 'function'
+        ? { handler: handler as (event: BusEvent<T>) => void | Promise<void> }
+        : handler;
+
+    types.forEach(type => {
+      const handlers = this.subscribers.get(type);
+      if (handlers) {
+        handlers.delete(normalizedHandler as EventHandler);
+      }
+    });
+
+    this.updateSubscriberCount();
+  }
+
   query(filter: EventFilter): EventLogEntry[] {
     return this.filterEvents(this.log, filter);
   }
@@ -347,8 +366,13 @@ class IntelligentEventBus implements EventBus {
     this.metrics.uptime = Date.now() - this.startTime;
 
     // Update memory usage if available
-    if (typeof (performance as unknown as { memory: { usedJSHeapSize: number } }).memory !== 'undefined') {
-      this.metrics.memoryUsage = (performance as unknown as { memory: { usedJSHeapSize: number } }).memory.usedJSHeapSize;
+    if (
+      typeof (performance as unknown as { memory: { usedJSHeapSize: number } })
+        .memory !== 'undefined'
+    ) {
+      this.metrics.memoryUsage = (
+        performance as unknown as { memory: { usedJSHeapSize: number } }
+      ).memory.usedJSHeapSize;
     }
   }
 

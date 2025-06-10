@@ -1,7 +1,8 @@
 import { Handle, type NodeProps, Position } from '@xyflow/react';
-import React, { useEffect, useState } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 import type { AgentType } from '../managers/AgentManager';
-import { eventBus } from '../utils/eventBus';
+import type { BusEvent } from '../types/bus';
+import { createEvent, eventBus } from '../utils/eventBus';
 
 interface SimpleMetrics {
   messagesProcessed: number;
@@ -11,277 +12,259 @@ interface SimpleMetrics {
   lastActivity: number;
 }
 
-export const AdvancedAgentNode: React.FC<NodeProps> = ({
+// Memoized component for better performance
+export const AdvancedAgentNode = memo<NodeProps>(function AdvancedAgentNode({
   id,
   data,
   selected,
-}) => {
+}) {
   const [metrics, setMetrics] = useState<SimpleMetrics>({
     messagesProcessed: 0,
     averageResponseTime: 0,
     errorCount: 0,
-    uptime: Date.now(),
+    uptime: 0,
     lastActivity: Date.now(),
   });
-  const [isActive, setIsActive] = useState(false);
-  const [pulseIntensity, setPulseIntensity] = useState(0.5);
+  const [showDetails, setShowDetails] = useState(false);
+
+  // Memoized event handler to prevent unnecessary re-renders
+  const handleMetricsUpdate = useCallback(
+    (event: BusEvent) => {
+      if (event.type === 'AGENT_STATE_UPDATE' && event.target === id) {
+        // Type-safe payload handling
+        if (
+          event.payload &&
+          typeof event.payload === 'object' &&
+          'metrics' in event.payload
+        ) {
+          const metricsPayload = event.payload
+            .metrics as Partial<SimpleMetrics>;
+          setMetrics(prev => ({
+            ...prev,
+            ...metricsPayload,
+          }));
+        }
+      }
+    },
+    [id]
+  );
 
   useEffect(() => {
     const unsubscribe = eventBus.subscribe(
-      ['AGENT_MESSAGE', 'AGENT_STATE_UPDATE', 'AGENT_ERROR'],
-      event => {
-        if (event.source === id || event.target === id) {
-          setIsActive(true);
-          setPulseIntensity(Math.random() * 0.5 + 0.5);
-
-          // Update metrics based on event type
-          setMetrics(prev => ({
-            ...prev,
-            messagesProcessed: prev.messagesProcessed + 1,
-            lastActivity: Date.now(),
-            errorCount:
-              event.type === 'AGENT_ERROR'
-                ? prev.errorCount + 1
-                : prev.errorCount,
-          }));
-
-          // Reset active state after animation
-          setTimeout(() => setIsActive(false), 1000);
-        }
-      }
+      ['AGENT_STATE_UPDATE', 'AGENT_MESSAGE'],
+      handleMetricsUpdate
     );
 
     return unsubscribe;
-  }, [id]);
+  }, [handleMetricsUpdate]);
 
   const getAgentTypeConfig = (type: AgentType) => {
-    switch (type) {
-      case 'reasoning':
-        return {
-          icon: '🧠',
-          gradient: 'from-purple-500 via-violet-600 to-purple-700',
-          glow: 'shadow-purple-500/50',
-          border: 'border-purple-400/30',
-          accent: 'text-purple-300',
-          bg: 'bg-purple-900/20',
-        };
-      case 'swarm':
-        return {
-          icon: '🐝',
-          gradient: 'from-amber-500 via-orange-600 to-yellow-700',
-          glow: 'shadow-amber-500/50',
-          border: 'border-amber-400/30',
-          accent: 'text-amber-300',
-          bg: 'bg-amber-900/20',
-        };
-      case 'canvas':
-        return {
-          icon: '🎯',
-          gradient: 'from-emerald-500 via-green-600 to-teal-700',
-          glow: 'shadow-emerald-500/50',
-          border: 'border-emerald-400/30',
-          accent: 'text-emerald-300',
-          bg: 'bg-emerald-900/20',
-        };
-      case 'worker':
-        return {
-          icon: '⚡',
-          gradient: 'from-red-500 via-rose-600 to-pink-700',
-          glow: 'shadow-red-500/50',
-          border: 'border-red-400/30',
-          accent: 'text-red-300',
-          bg: 'bg-red-900/20',
-        };
-      default:
-        return {
-          icon: '🤖',
-          gradient: 'from-blue-500 via-indigo-600 to-purple-700',
-          glow: 'shadow-blue-500/50',
-          border: 'border-blue-400/30',
-          accent: 'text-blue-300',
-          bg: 'bg-blue-900/20',
-        };
-    }
+    const configs = {
+      reasoning: {
+        color: 'bg-purple-500',
+        borderColor: 'border-purple-300',
+        icon: '🧠',
+        description: 'Cognitive Processing',
+      },
+      swarm: {
+        color: 'bg-amber-500',
+        borderColor: 'border-amber-300',
+        icon: '🐝',
+        description: 'Collective Intelligence',
+      },
+      canvas: {
+        color: 'bg-emerald-500',
+        borderColor: 'border-emerald-300',
+        icon: '🎯',
+        description: 'System Orchestrator',
+      },
+      worker: {
+        color: 'bg-red-500',
+        borderColor: 'border-red-300',
+        icon: '⚡',
+        description: 'Task Execution',
+      },
+    };
+    return configs[type] || configs.reasoning;
   };
 
-  const config = getAgentTypeConfig(data['agentType'] as AgentType);
-  const uptime = Math.floor((Date.now() - metrics.uptime) / 1000);
+  const config = getAgentTypeConfig(
+    (data?.['agentType'] as AgentType) || 'reasoning'
+  );
+
+  // Handle click to select node
+  const handleClick = useCallback(() => {
+    eventBus.publish(
+      createEvent('NODE_SELECT', 'advanced-agent-node', {
+        nodeId: id,
+        data,
+      })
+    );
+  }, [id, data]);
+
+  // Get active status from metrics
+  const isActive = metrics.lastActivity > Date.now() - 30000; // Active if updated in last 30 seconds
 
   return (
     <div
       className={`
-        relative group
-        w-72 min-h-48
-        card-glass
-        ${config.border}
-        ${config.glow}
-        ${selected ? 'ring-2 ring-white/50 ring-offset-2 ring-offset-transparent' : ''}
-        ${isActive ? 'animate-neural-pulse' : 'animate-float'}
-        transition-all duration-500 ease-neural
-        hover:scale-105 hover:shadow-2xl
-        cursor-pointer
+        relative min-w-[280px] bg-white rounded-lg shadow-lg border-2 transition-all duration-200
+        ${selected ? 'ring-2 ring-blue-400 ring-offset-2' : ''}
+        ${config.borderColor}
+        hover:shadow-xl
       `}
-      style={{
-        animationDelay: `${Math.random() * 2}s`,
-        filter: isActive
-          ? `brightness(${1 + pulseIntensity * 0.3})`
-          : 'brightness(1)',
+      onClick={handleClick}
+      onDoubleClick={() => setShowDetails(!showDetails)}
+      data-testid={`agent-node-${id}`}
+      aria-label={`${(data?.['agentType'] as string) || 'Agent'} node: ${(data?.['label'] as string) || id}`}
+      role='button'
+      tabIndex={0}
+      onKeyDown={e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          handleClick();
+        }
       }}
     >
-      {/* Animated Background Gradient */}
-      <div
-        className={`
-          absolute inset-0 rounded-xl opacity-20
-          bg-gradient-to-br ${config.gradient}
-          animate-gradient-shift
-        `}
+      {/* Input Handles - Multiple connection points */}
+      <Handle
+        type='target'
+        position={Position.Left}
+        id='input-main'
+        style={{
+          top: '30%',
+          background: '#6366f1',
+          width: 12,
+          height: 12,
+          border: '2px solid white',
+        }}
+        aria-label='Main input connection'
+      />
+      <Handle
+        type='target'
+        position={Position.Top}
+        id='input-control'
+        style={{
+          left: '30%',
+          background: '#8b5cf6',
+          width: 12,
+          height: 12,
+          border: '2px solid white',
+        }}
+        aria-label='Control input connection'
       />
 
-      {/* Shimmer Effect */}
-      <div className='absolute inset-0 rounded-xl overflow-hidden'>
+      {/* Header */}
+      <div
+        className={`${config.color} text-white p-3 rounded-t-lg flex items-center justify-between`}
+      >
+        <div className='flex items-center space-x-2'>
+          <span
+            className='text-xl'
+            role='img'
+            aria-label={`${(data?.['agentType'] as string) || 'Agent'} agent`}
+          >
+            {config.icon}
+          </span>
+          <div>
+            <h3 className='font-semibold text-sm truncate max-w-[150px]'>
+              {String(data?.['label'] ?? 'Agent Node')}
+            </h3>
+            <p className='text-xs opacity-90'>{config.description}</p>
+          </div>
+        </div>
         <div
-          className={`
-            absolute inset-0 -translate-x-full
-            bg-gradient-to-r from-transparent via-white/20 to-transparent
-            ${isActive ? 'animate-shimmer' : ''}
-          `}
+          className={`w-3 h-3 rounded-full ${isActive ? 'bg-green-300' : 'bg-gray-300'} animate-pulse`}
+          aria-label={`Agent status: ${isActive ? 'active' : 'inactive'}`}
         />
       </div>
 
-      {/* Content */}
-      <div className='relative z-10 p-6'>
-        {/* Header */}
-        <div className='flex items-center justify-between mb-4'>
-          <div className='flex items-center gap-3'>
-            <div
-              className={`
-                text-2xl
-                ${isActive ? 'animate-bounce' : 'animate-pulse-slow'}
-              `}
-            >
-              {config.icon}
-            </div>
-            <div>
-              <h3 className='font-bold text-white text-sm leading-tight'>
-                {data['label'] as string}
-              </h3>
-              <p className={`text-xs ${config.accent} font-mono`}>
-                {(data['agentType'] as string).toUpperCase()}
-              </p>
-            </div>
-          </div>
-
-          {/* Status Indicator */}
-          <div className='flex items-center gap-2'>
-            <div
-              className={`
-                w-3 h-3 rounded-full
-                ${isActive ? 'bg-green-400 animate-ping' : 'bg-green-500'}
-                shadow-lg shadow-green-500/50
-              `}
-            />
-            <span className='text-xs text-white/70 font-mono'>
-              {isActive ? 'ACTIVE' : 'IDLE'}
-            </span>
-          </div>
-        </div>
-
-        {/* Metrics Grid */}
-        <div className='grid grid-cols-2 gap-3 mb-4'>
-          <div
-            className={`${config.bg} rounded-lg p-3 border ${config.border}`}
-          >
-            <div className='text-xs text-white/60 mb-1'>Messages</div>
-            <div className={`text-lg font-bold ${config.accent} font-mono`}>
+      {/* Metrics Section */}
+      <div className='p-3 space-y-2'>
+        <div className='grid grid-cols-2 gap-2 text-xs'>
+          <div className='bg-gray-50 p-2 rounded'>
+            <div className='text-gray-600'>Messages</div>
+            <div className='font-semibold text-blue-600'>
               {metrics.messagesProcessed}
             </div>
           </div>
-
-          <div
-            className={`${config.bg} rounded-lg p-3 border ${config.border}`}
-          >
-            <div className='text-xs text-white/60 mb-1'>Uptime</div>
-            <div className={`text-lg font-bold ${config.accent} font-mono`}>
-              {uptime}s
-            </div>
-          </div>
-
-          <div
-            className={`${config.bg} rounded-lg p-3 border ${config.border}`}
-          >
-            <div className='text-xs text-white/60 mb-1'>Errors</div>
+          <div className='bg-gray-50 p-2 rounded'>
+            <div className='text-gray-600'>Errors</div>
             <div
-              className={`text-lg font-bold ${metrics.errorCount > 0 ? 'text-red-400' : config.accent} font-mono`}
+              className={`font-semibold ${metrics.errorCount > 0 ? 'text-red-600' : 'text-green-600'}`}
             >
               {metrics.errorCount}
             </div>
           </div>
-
-          <div
-            className={`${config.bg} rounded-lg p-3 border ${config.border}`}
-          >
-            <div className='text-xs text-white/60 mb-1'>Response</div>
-            <div className={`text-lg font-bold ${config.accent} font-mono`}>
-              {metrics.averageResponseTime}ms
-            </div>
-          </div>
         </div>
 
-        {/* Activity Bar */}
-        <div className='mb-4'>
-          <div className='flex justify-between items-center mb-2'>
-            <span className='text-xs text-white/60'>Activity</span>
-            <span className='text-xs text-white/60 font-mono'>
-              {new Date(metrics.lastActivity).toLocaleTimeString()}
-            </span>
+        {/* Performance Indicator */}
+        <div className='mt-2'>
+          <div className='flex justify-between text-xs text-gray-600 mb-1'>
+            <span>Performance</span>
+            <span>{Math.round(metrics.averageResponseTime)}ms</span>
           </div>
-          <div className='w-full bg-white/10 rounded-full h-2 overflow-hidden'>
+          <div className='w-full bg-gray-200 rounded-full h-2'>
             <div
-              className={`
-                h-full bg-gradient-to-r ${config.gradient}
-                transition-all duration-1000 ease-out
-                ${isActive ? 'animate-pulse' : ''}
-              `}
+              className={`h-2 rounded-full transition-all duration-300 ${
+                metrics.averageResponseTime < 100
+                  ? 'bg-green-500'
+                  : metrics.averageResponseTime < 500
+                    ? 'bg-yellow-500'
+                    : 'bg-red-500'
+              }`}
               style={{
-                width: `${Math.min(100, (metrics.messagesProcessed / 10) * 100)}%`,
+                width: `${Math.min(100, (1000 - metrics.averageResponseTime) / 10)}%`,
               }}
             />
           </div>
         </div>
 
-        {/* Agent ID */}
-        <div className='text-xs text-white/40 font-mono truncate'>
-          ID: {data['agentId'] as string}
+        {/* Agent ID for debugging */}
+        <div className='text-xs text-gray-400 font-mono truncate' title={id}>
+          ID: {id.substring(0, 8)}...
         </div>
       </div>
 
-      {/* Connection Handles */}
+      {/* Output Handles - Multiple connection points */}
       <Handle
-        type='target'
-        position={Position.Left}
-        className={`
-          w-4 h-4 border-2 border-white/50 bg-gradient-to-r ${config.gradient}
-          hover:scale-125 transition-transform duration-200
-        `}
+        type='source'
+        position={Position.Right}
+        id='output-main'
+        style={{
+          top: '30%',
+          background: '#10b981',
+          width: 12,
+          height: 12,
+          border: '2px solid white',
+        }}
+        aria-label='Main output connection'
+      />
+      <Handle
+        type='source'
+        position={Position.Bottom}
+        id='output-data'
+        style={{
+          left: '70%',
+          background: '#f59e0b',
+          width: 12,
+          height: 12,
+          border: '2px solid white',
+        }}
+        aria-label='Data output connection'
       />
       <Handle
         type='source'
         position={Position.Right}
-        className={`
-          w-4 h-4 border-2 border-white/50 bg-gradient-to-r ${config.gradient}
-          hover:scale-125 transition-transform duration-200
-        `}
-      />
-
-      {/* Hover Glow Effect */}
-      <div
-        className={`
-          absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100
-          bg-gradient-to-br ${config.gradient}
-          blur-xl -z-10
-          transition-opacity duration-500
-        `}
+        id='output-events'
+        style={{
+          top: '70%',
+          background: '#ef4444',
+          width: 12,
+          height: 12,
+          border: '2px solid white',
+        }}
+        aria-label='Events output connection'
       />
     </div>
   );
-};
+});

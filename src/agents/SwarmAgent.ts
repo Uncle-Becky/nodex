@@ -98,7 +98,9 @@ export class SwarmAgent extends AgentBase {
         );
         break;
       case 'behavior_change':
-        this.coordinateBehaviorChange(payload.swarmAction as typeof this.behaviorState);
+        this.coordinateBehaviorChange(
+          payload.swarmAction as typeof this.behaviorState
+        );
         break;
       case 'join_swarm':
         this.welcomeNewMember(event.source);

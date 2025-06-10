@@ -68,6 +68,32 @@ export type {
   WorkflowControllerNodeConfig,
 } from './nodes';
 
+// Component types
+export type {
+  AgentExecutionUIState,
+  // Component Router Types
+  ComponentRoute,
+  // App State Types for Component Integration
+  ComponentsState,
+  // Component State Manager Types
+  ComponentState,
+  ExecutionAnalytics,
+  // Agent Execution UI Types
+  ExecutionEvent,
+  // Execution History Types
+  ExecutionFilter,
+  ExecutionHistoryState,
+  ExecutionReport,
+  FlowValidationState,
+  // Node Configuration UI Types
+  NodeConfigUIState,
+  NodeTypeConfig,
+  ValidationIssue,
+  ValidationResult,
+  // Flow Validation Types
+  ValidationSeverity,
+} from './components';
+
 // Utility types - these are built-in TypeScript utility types
 export type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];

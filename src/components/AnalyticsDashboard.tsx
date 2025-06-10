@@ -30,8 +30,8 @@ export const AnalyticsDashboard: React.FC = () => {
 
       if (payload.id === 'analytics_update') {
         setNetworkMetrics(
-          (payload.meta as { data: { networkMetrics: NetworkMetrics } })
-            .data.networkMetrics
+          (payload.meta as { data: { networkMetrics: NetworkMetrics } }).data
+            .networkMetrics
         );
         setSwarmMetrics(
           (payload.meta as { data: { swarmMetrics: SwarmMetrics } }).data

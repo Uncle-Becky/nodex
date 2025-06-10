@@ -269,24 +269,27 @@ class GeminiAdapter implements ProviderAdapter {
     config: LLMConfig,
     request: LLMRequest
   ): AsyncGenerator<LLMStreamChunk> {
-    const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:streamGenerateContent', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${config.apiKey}`,
-      },
-      body: JSON.stringify({
-        contents: request.messages.map(msg => ({
-          role: msg.role === 'assistant' ? 'model' : 'user',
-          parts: [{ text: msg.content }],
-        })),
-        generationConfig: {
-          maxOutputTokens: request.maxTokens ?? config.maxTokens,
-          temperature: request.temperature ?? config.temperature ?? 0.7,
-          topP: request.topP ?? config.topP,
+    const response = await fetch(
+      'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:streamGenerateContent',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${config.apiKey}`,
         },
-      }),
-    });
+        body: JSON.stringify({
+          contents: request.messages.map(msg => ({
+            role: msg.role === 'assistant' ? 'model' : 'user',
+            parts: [{ text: msg.content }],
+          })),
+          generationConfig: {
+            maxOutputTokens: request.maxTokens ?? config.maxTokens,
+            temperature: request.temperature ?? config.temperature ?? 0.7,
+            topP: request.topP ?? config.topP,
+          },
+        }),
+      }
+    );
 
     if (!response.ok) {
       const error: LLMError = await response.json();
@@ -315,12 +318,14 @@ class GeminiAdapter implements ProviderAdapter {
                 object: 'chat.completion.chunk',
                 created: Date.now() / 1000,
                 model: config.model ?? this.getDefaultModel(),
-                choices: [{
-                  index: 0,
-                  delta: {
-                    content: data.candidates[0].content.parts[0].text
-                  }
-                }]
+                choices: [
+                  {
+                    index: 0,
+                    delta: {
+                      content: data.candidates[0].content.parts[0].text,
+                    },
+                  },
+                ],
               };
             }
           }
@@ -343,13 +348,28 @@ class GeminiAdapter implements ProviderAdapter {
     const hourAgo = now - 60 * 60 * 1000;
     const dayAgo = now - 24 * 60 * 60 * 1000;
 
-    const minuteRequests = usage.requests.filter((r: { timestamp: number }) => r.timestamp > minuteAgo);
-    const hourRequests = usage.requests.filter((r: { timestamp: number }) => r.timestamp > hourAgo);
-    const dayRequests = usage.requests.filter((r: { timestamp: number }) => r.timestamp > dayAgo);
+    const minuteRequests = usage.requests.filter(
+      (r: { timestamp: number }) => r.timestamp > minuteAgo
+    );
+    const hourRequests = usage.requests.filter(
+      (r: { timestamp: number }) => r.timestamp > hourAgo
+    );
+    const dayRequests = usage.requests.filter(
+      (r: { timestamp: number }) => r.timestamp > dayAgo
+    );
 
-    const minuteTokens = minuteRequests.reduce((sum: number, r: { tokens: number }) => sum + r.tokens, 0);
-    const hourTokens = hourRequests.reduce((sum: number, r: { tokens: number }) => sum + r.tokens, 0);
-    const dayTokens = dayRequests.reduce((sum: number, r: { tokens: number }) => sum + r.tokens, 0);
+    const minuteTokens = minuteRequests.reduce(
+      (sum: number, r: { tokens: number }) => sum + r.tokens,
+      0
+    );
+    const hourTokens = hourRequests.reduce(
+      (sum: number, r: { tokens: number }) => sum + r.tokens,
+      0
+    );
+    const dayTokens = dayRequests.reduce(
+      (sum: number, r: { tokens: number }) => sum + r.tokens,
+      0
+    );
 
     const canRequest =
       minuteRequests.length < limits.requestsPerMinute &&
@@ -466,8 +486,11 @@ class LLMService {
   private runningTasks: Map<string, LLMTask> = new Map();
   private metrics: Map<LLMProvider, LLMMetrics> = new Map();
   private maxConcurrentTasks = 5;
-  private getRateLimits: (provider: LLMProvider) => RateLimitConfig | undefined = () => undefined;
-  private getUsage: (provider: LLMProvider) => UsageTracker | undefined = () => undefined;
+  private getRateLimits: (
+    provider: LLMProvider
+  ) => RateLimitConfig | undefined = () => undefined;
+  private getUsage: (provider: LLMProvider) => UsageTracker | undefined = () =>
+    undefined;
 
   constructor() {
     this.adapters.set('openai', new OpenAIAdapter());

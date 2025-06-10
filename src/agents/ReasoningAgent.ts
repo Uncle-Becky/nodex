@@ -1,10 +1,13 @@
+import {
+  mcpApiService,
+  type Memory as McpMemory,
+} from '../services/McpApiService'; // Fixed import
 import type { AgentId, BusEvent } from '../types/bus';
 import { eventBus } from '../utils/eventBus';
 import { AgentBase } from './AgentBase';
-// Removed IndexedDBService import
-import { mcpApiService, Memory as McpMemory } from '../services/McpApiService'; // Added import
 
-export interface Memory { // This interface is used internally by ReasoningAgent
+export interface Memory {
+  // This interface is used internally by ReasoningAgent
   id: string;
   content: unknown;
   timestamp: number;
@@ -28,65 +31,102 @@ export class ReasoningAgent extends AgentBase {
   private mcpContextId: string | null = null;
   private readonly mcpContextType = 'reasoning_agent_memories';
 
-
   constructor(id: AgentId) {
     super(id);
     // this.idbService = new IndexedDBService(); // Removed
     // Call async initialize. The promise is not awaited here.
     this.initialize().catch(error => {
-        console.error(`[${this.id}] Error during async initialization:`, error);
-        this.updateState({ initializationError: true, mcpError: error.message });
+      (window as Window & { console: Console }).console.error(
+        `[${this.id}] Error during async initialization:`,
+        error
+      );
+      this.updateState({ initializationError: true, mcpError: error.message });
     });
   }
 
   private async initialize(): Promise<void> {
-    this.mcpContextId = `agent_${this.id}_${this.mcpContextType}`; // Example context ID scheme
-    try {
-      let context = await mcpApiService.getContext(this.mcpContextId);
-      if (!context) {
-        console.log(`[${this.id}] No existing MCP context found for ${this.mcpContextId}, creating new one.`);
-        // Pass an empty memories array as part of initialData
-        context = await mcpApiService.createContext(this.id, this.mcpContextType, { memories: [] });
-        // The server now assigns the ID, so if mcpContextId was a pre-calculated one,
-        // it's better to use the one from the response if they could differ.
-        // However, our server currently uses the provided ID if available or generates one.
-        // For this PoC, we assume the generated mcpContextId is what we'll use or what server returns.
-        this.mcpContextId = context.id;
-      }
-
-      if (context && context.data && Array.isArray(context.data.memories)) {
-        this.memories = context.data.memories.map((mem: any) => ({
-            ...mem, // Spread properties from McpMemory (which should be compatible)
-            timestamp: new Date(mem.timestamp).getTime() // Convert ISO string from server to number
-        }));
-        this.remember('memory_count', this.memories.length);
-        console.log(`[${this.id}] Loaded ${this.memories.length} memories from MCP server for context ${this.mcpContextId}.`);
-      } else {
-        this.memories = []; // Ensure it's an array
-        console.log(`[${this.id}] MCP context ${this.mcpContextId} has no 'memories' array or context is empty/malformed.`);
-      }
-    } catch (error: any) {
-      console.error(`[${this.id}] Error initializing context from MCP server for ${this.mcpContextId}:`, error);
-      this.memories = []; // Start with empty memories if server init fails
-      this.updateState({ mcpInitializationError: error.message });
-      // Decide if mcpContextId should be nullified or if agent should retry later
-      // For now, we keep mcpContextId as is, and retries would happen on next interaction.
-    }
-
-    // Initialize with basic reasoning capabilities
+    // Initialize with basic reasoning capabilities first (offline mode)
     this.knowledgeBase.set('reasoning_methods', [
       'deductive',
       'inductive',
       'abductive',
     ]);
     this.knowledgeBase.set('confidence_threshold', 0.7);
+    this.memories = []; // Start with empty memories
 
     // Part 3: Example Goal Usage
-    this.addGoal("analyze_initial_input");
-    console.log(`[${this.id}] Initial goal added: analyze_initial_input. Current goals:`, this.getCurrentGoals());
+    this.addGoal('analyze_initial_input');
+    (window as Window & { console: Console }).console.log(
+      `[${this.id}] Initial goal added: analyze_initial_input. Current goals:`,
+      this.getCurrentGoals()
+    );
+
+    // Try to initialize MCP context with timeout and fallback
+    this.mcpContextId = `agent_${this.id}_${this.mcpContextType}`;
+
+    try {
+      // Add timeout to prevent hanging
+      const timeoutPromise = new Promise<never>((_, reject) => {
+        setTimeout(() => reject(new Error('MCP initialization timeout')), 5000);
+      });
+
+      const initPromise = this.initializeMcpContext();
+
+      await Promise.race([initPromise, timeoutPromise]);
+
+      (window as Window & { console: Console }).console.log(
+        `[${this.id}] MCP context initialized successfully`
+      );
+    } catch (error: unknown) {
+      (window as Window & { console: Console }).console.warn(
+        `[${this.id}] MCP context initialization failed, continuing in offline mode:`,
+        error
+      );
+      this.mcpContextId = null; // Disable MCP functionality
+      this.updateState({
+        mcpInitializationError:
+          error instanceof Error ? error.message : String(error),
+        mcpOfflineMode: true,
+      });
+    }
   }
 
-  protected override async onMessage(event: BusEvent): Promise<void> { // Made async
+  private async initializeMcpContext(): Promise<void> {
+    if (!this.mcpContextId) return;
+
+    let context = await mcpApiService.getContext(this.mcpContextId);
+    if (!context) {
+      (window as Window & { console: Console }).console.log(
+        `[${this.id}] No existing MCP context found for ${this.mcpContextId}, creating new one.`
+      );
+      // Pass an empty memories array as part of initialData
+      context = await mcpApiService.createContext(
+        this.id,
+        this.mcpContextType,
+        { memories: [] }
+      );
+      this.mcpContextId = context.id;
+    }
+
+    if (context?.data && Array.isArray(context.data.memories)) {
+      this.memories = context.data.memories.map((mem: McpMemory) => ({
+        ...mem, // Spread properties from McpMemory (which should be compatible)
+        timestamp: new Date(mem.timestamp).getTime(), // Convert ISO string from server to number
+      }));
+      this.remember('memory_count', this.memories.length);
+      (window as Window & { console: Console }).console.log(
+        `[${this.id}] Loaded ${this.memories.length} memories from MCP server for context ${this.mcpContextId}.`
+      );
+    } else {
+      this.memories = []; // Ensure it's an array
+      (window as Window & { console: Console }).console.log(
+        `[${this.id}] MCP context ${this.mcpContextId} has no 'memories' array or context is empty/malformed.`
+      );
+    }
+  }
+
+  protected override async onMessage(event: BusEvent): Promise<void> {
+    // Made async
     const startTime = Date.now();
 
     try {
@@ -121,34 +161,54 @@ export class ReasoningAgent extends AgentBase {
     }
   }
 
-  private async processAgentMessage(event: BusEvent): Promise<void> { // Made async
+  private async processAgentMessage(event: BusEvent): Promise<void> {
+    // Made async
     const message = event.payload as { message: string; data?: unknown };
 
     // Part 1 & 3: Example Usage of requestEdgeData and Goals
-    if (this.hasGoal("analyze_initial_input")) {
-      console.log(`[${this.id}] Goal "analyze_initial_input" is active.`);
+    if (this.hasGoal('analyze_initial_input')) {
+      (window as Window & { console: Console }).console.log(
+        `[${this.id}] Goal "analyze_initial_input" is active.`
+      );
       try {
-        console.log(`[${this.id}] Requesting data for edge_input_1 as part of analyze_initial_input goal.`);
-        const edgeData = await this.requestEdgeData("edge_input_1");
+        (window as Window & { console: Console }).console.log(
+          `[${this.id}] Requesting data for edge_input_1 as part of analyze_initial_input goal.`
+        );
+        const edgeData = await this.requestEdgeData('edge_input_1');
         if (edgeData) {
-          console.log(`[${this.id}] Received edge data for edge_input_1:`, edgeData);
-          this.remember("last_edge_data_edge_input_1", edgeData);
+          (window as Window & { console: Console }).console.log(
+            `[${this.id}] Received edge data for edge_input_1:`,
+            edgeData
+          );
+          this.remember('last_edge_data_edge_input_1', edgeData);
           // Incorporate edgeData into reasoning or message processing if needed
           // For example, add it to the message data:
           // message.data = { ...message.data, edge_input_1_data: edgeData };
         }
       } catch (error) {
-        console.warn(`[${this.id}] Failed to get edge data for edge_input_1:`, error);
+        (window as Window & { console: Console }).console.warn(
+          `[${this.id}] Failed to get edge data for edge_input_1:`,
+          error
+        );
       }
       // ... existing logic for processing the message ...
 
       // Achieve and remove the goal
-      this.achieveGoal("analyze_initial_input", true);
-      console.log(`[${this.id}] Achieved goal: analyze_initial_input. State:`, this.state[`goal_analyze_initial_input_achieved`]);
-      this.removeGoal("analyze_initial_input");
-      console.log(`[${this.id}] Removed goal: analyze_initial_input. Current goals:`, this.getCurrentGoals());
+      this.achieveGoal('analyze_initial_input', true);
+      (window as Window & { console: Console }).console.log(
+        `[${this.id}] Achieved goal: analyze_initial_input. State:`,
+        this.state[`goal_analyze_initial_input_achieved`]
+      );
+      this.removeGoal('analyze_initial_input');
+      (window as Window & { console: Console }).console.log(
+        `[${this.id}] Removed goal: analyze_initial_input. Current goals:`,
+        this.getCurrentGoals()
+      );
     } else {
-      console.log(`[${this.id}] Goal "analyze_initial_input" is not active or already achieved. Current goals:`, this.getCurrentGoals());
+      (window as Window & { console: Console }).console.log(
+        `[${this.id}] Goal "analyze_initial_input" is not active or already achieved. Current goals:`,
+        this.getCurrentGoals()
+      );
     }
 
     // Perform reasoning based on message content
@@ -263,7 +323,8 @@ export class ReasoningAgent extends AgentBase {
     };
   }
 
-  private async storeMemory(memory: Memory): Promise<void> { // Made async
+  private async storeMemory(memory: Memory): Promise<void> {
+    // Made async
     this.memories.push(memory);
 
     // Limit memory size and remove least important memories (in-memory only)
@@ -279,17 +340,33 @@ export class ReasoningAgent extends AgentBase {
     if (this.mcpContextId) {
       try {
         // Convert timestamp to ISO string for MCP server
-        const memoryToStore: McpMemory = { ...memory, timestamp: new Date(memory.timestamp).toISOString() as any };
-        await mcpApiService.appendToListInContext(this.mcpContextId, 'memories', memoryToStore);
-        console.log(`[${this.id}] Appended memory ${memory.id} to MCP server context ${this.mcpContextId}.`);
+        const memoryToStore: McpMemory = {
+          ...memory,
+          timestamp: new Date(memory.timestamp).toISOString() as any,
+        };
+        await mcpApiService.appendToListInContext(
+          this.mcpContextId,
+          'memories',
+          memoryToStore
+        );
+        (window as Window & { console: Console }).console.log(
+          `[${this.id}] Appended memory ${memory.id} to MCP server context ${this.mcpContextId}.`
+        );
       } catch (error) {
-        console.error(`[${this.id}] Error storing memory ${memory.id} to MCP server:`, error);
+        (window as Window & { console: Console }).console.error(
+          `[${this.id}] Error storing memory ${memory.id} to MCP server:`,
+          error
+        );
         // Handle error: e.g., retry logic, or mark agent as degraded
-        this.updateState({ mcpStoreError: error.message });
+        this.updateState({
+          mcpStoreError: error instanceof Error ? error.message : String(error),
+        });
       }
     } else {
-        console.warn(`[${this.id}] mcpContextId is null, cannot store memory ${memory.id} to MCP server.`);
-        this.updateState({ mcpStoreWarning: 'mcpContextId is null' });
+      (window as Window & { console: Console }).console.warn(
+        `[${this.id}] mcpContextId is null, cannot store memory ${memory.id} to MCP server.`
+      );
+      this.updateState({ mcpStoreWarning: 'mcpContextId is null' });
     }
   }
 
@@ -507,7 +584,8 @@ export class ReasoningAgent extends AgentBase {
     return secondHalf - firstHalf;
   }
 
-  private async clearMemory(): Promise<void> { // Made async
+  private async clearMemory(): Promise<void> {
+    // Made async
     this.memories = [];
     this.reasoningHistory = []; // Keep reasoning history separate, or clear it based on different logic
     this.updateState({
@@ -518,14 +596,23 @@ export class ReasoningAgent extends AgentBase {
       try {
         // To clear memories, we update the context with an empty 'memories' list
         await mcpApiService.updateContext(this.mcpContextId, { memories: [] });
-        console.log(`[${this.id}] Cleared memories on MCP server for context ${this.mcpContextId}.`);
-      } catch (error: any) {
-        console.error(`[${this.id}] Error clearing memories on MCP server for ${this.mcpContextId}:`, error);
-        this.updateState({ mcpClearError: error.message });
+        (window as Window & { console: Console }).console.log(
+          `[${this.id}] Cleared memories on MCP server for context ${this.mcpContextId}.`
+        );
+      } catch (error: unknown) {
+        (window as Window & { console: Console }).console.error(
+          `[${this.id}] Error clearing memories on MCP server for ${this.mcpContextId}:`,
+          error
+        );
+        this.updateState({
+          mcpClearError: error instanceof Error ? error.message : String(error),
+        });
       }
     } else {
-        console.warn(`[${this.id}] mcpContextId is null, cannot clear memories on MCP server.`);
-        this.updateState({ mcpClearWarning: 'mcpContextId is null' });
+      (window as Window & { console: Console }).console.warn(
+        `[${this.id}] mcpContextId is null, cannot clear memories on MCP server.`
+      );
+      this.updateState({ mcpClearWarning: 'mcpContextId is null' });
     }
   }
 
@@ -544,7 +631,9 @@ export class ReasoningAgent extends AgentBase {
   private handleError(error: unknown): void {
     const errorMessage =
       error instanceof Error ? error.message : 'Unknown error';
-    console.error(`[ReasoningAgent] Error: ${errorMessage}`);
+    (window as Window & { console: Console }).console.error(
+      `[ReasoningAgent] Error: ${errorMessage}`
+    );
 
     eventBus.publish({
       id: `${this.id}-error-${Date.now()}`,

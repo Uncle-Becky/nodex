@@ -12,7 +12,38 @@ export type BusEventType =
   | 'NODE_CREATE'
   | 'SYSTEM_ALERT'
   | 'AGENT_QUERY'
-  | 'SYSTEM_METRICS';
+  | 'SYSTEM_METRICS'
+  // Node Configuration Events
+  | 'NODE_SELECT'
+  | 'NODE_CONFIG_UPDATE'
+  // Agent Execution Events
+  | 'AGENT_SELECT'
+  | 'AGENT_EXECUTE'
+  | 'AGENT_PAUSE'
+  | 'AGENT_STOP'
+  // Component Visibility Events
+  | 'COMPONENT_VISIBILITY'
+  // Component State Events
+  | 'COMPONENT_STATE_UPDATE'
+  | 'COMPONENT_STATE_RESET'
+  | 'COMPONENT_STATE_CHANGED'
+  // Flow Validation Events
+  | 'FLOW_VALIDATE'
+  | 'FLOW_VALIDATION_RESULT'
+  // Flow Execution Events
+  | 'FLOW_EXECUTE'
+  | 'FLOW_PAUSE'
+  | 'FLOW_STOP'
+  // Execution History Events
+  | 'EXECUTION_HISTORY_CLEARED'
+  | 'EXECUTION_REPLAY_START'
+  | 'EXECUTION_REPLAY_END'
+  // Edge Data Events
+  | 'REQUEST_EDGE_DATA'
+  | 'EDGE_DATA_RESPONSE'
+  // Agent Goal Events
+  | 'AGENT_GOAL_ACHIEVED'
+  | 'AGENT_GOALS_UPDATE';
 
 export type EventPriority = 'low' | 'normal' | 'high';
 
@@ -95,6 +126,10 @@ export interface EventBus {
     type: BusEventType | BusEventType[],
     handler: EventHandler<T> | ((event: BusEvent<T>) => void | Promise<void>)
   ): () => void;
+  unsubscribe<T = unknown>(
+    type: BusEventType[],
+    handler: EventHandler<T> | ((event: BusEvent<T>) => void | Promise<void>)
+  ): void;
   query(filter: EventFilter): EventLogEntry[];
   getLog(filter?: EventFilter): EventLogEntry[];
   replay(log: EventLogEntry[]): Promise<void>;

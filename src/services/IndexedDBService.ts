@@ -19,20 +19,25 @@ export class IndexedDBService {
     return new Promise((resolve, reject) => {
       const request = indexedDB.open(DB_NAME, 1); // Version 1
 
-      request.onupgradeneeded = (event) => {
+      request.onupgradeneeded = event => {
         const db = (event.target as IDBOpenDBRequest).result;
         if (!db.objectStoreNames.contains(MEMORIES_STORE_NAME)) {
-          const store = db.createObjectStore(MEMORIES_STORE_NAME, { keyPath: 'id' });
+          const store = db.createObjectStore(MEMORIES_STORE_NAME, {
+            keyPath: 'id',
+          });
           store.createIndex('agentIdIdx', 'agentId', { unique: false });
         }
       };
 
-      request.onsuccess = (event) => {
+      request.onsuccess = event => {
         resolve((event.target as IDBOpenDBRequest).result);
       };
 
-      request.onerror = (event) => {
-        console.error('IndexedDB error:', (event.target as IDBOpenDBRequest).error);
+      request.onerror = event => {
+        console.error(
+          'IndexedDB error:',
+          (event.target as IDBOpenDBRequest).error
+        );
         reject(new Error('Failed to open IndexedDB.'));
       };
     });
@@ -51,7 +56,8 @@ export class IndexedDBService {
         request.onsuccess = () => resolve();
         request.onerror = () => reject(request.error);
       });
-      await new Promise<void>((resolve, reject) => { // Wait for transaction to complete
+      await new Promise<void>((resolve, reject) => {
+        // Wait for transaction to complete
         tx.oncomplete = () => resolve();
         tx.onerror = () => reject(tx.error);
       });
@@ -70,15 +76,21 @@ export class IndexedDBService {
 
       return await new Promise<StoredMemory[]>((resolve, reject) => {
         const request = index.getAll(agentId);
-        request.onsuccess = () => resolve(request.result.map(m => {
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          const { agentId: _, ...memory } = m; // Strip agentId before returning
-          return memory as Memory;
-        }));
+        request.onsuccess = () =>
+          resolve(
+            request.result.map(m => {
+              // eslint-disable-next-line @typescript-eslint/no-unused-vars
+              const { agentId: _, ...memory } = m; // Strip agentId before returning
+              return memory as Memory;
+            })
+          );
         request.onerror = () => reject(request.error);
       });
     } catch (error) {
-      console.error(`Failed to get memories for agent ${agentId} from IndexedDB:`, error);
+      console.error(
+        `Failed to get memories for agent ${agentId} from IndexedDB:`,
+        error
+      );
       return []; // Return empty array on error to prevent app crash
     }
   }
@@ -94,12 +106,16 @@ export class IndexedDBService {
         request.onsuccess = () => resolve();
         request.onerror = () => reject(request.error);
       });
-       await new Promise<void>((resolve, reject) => { // Wait for transaction to complete
+      await new Promise<void>((resolve, reject) => {
+        // Wait for transaction to complete
         tx.oncomplete = () => resolve();
         tx.onerror = () => reject(tx.error);
       });
     } catch (error) {
-      console.error(`Failed to delete memory ${memoryId} from IndexedDB:`, error);
+      console.error(
+        `Failed to delete memory ${memoryId} from IndexedDB:`,
+        error
+      );
       throw error;
     }
   }
@@ -113,7 +129,7 @@ export class IndexedDBService {
 
       const cursorRequest = index.openCursor(IDBKeyRange.only(agentId));
 
-      cursorRequest.onsuccess = (event) => {
+      cursorRequest.onsuccess = event => {
         const cursor = (event.target as IDBRequest<IDBCursorWithValue>).result;
         if (cursor) {
           store.delete(cursor.primaryKey);
@@ -123,13 +139,19 @@ export class IndexedDBService {
 
       return await new Promise<void>((resolve, reject) => {
         tx.oncomplete = () => resolve();
-        tx.onerror = (event) => {
-            console.error(`Error clearing memories for agent ${agentId}:`, (event.target as IDBTransaction).error);
-            reject(tx.error);
-        }
+        tx.onerror = event => {
+          console.error(
+            `Error clearing memories for agent ${agentId}:`,
+            (event.target as IDBTransaction).error
+          );
+          reject(tx.error);
+        };
       });
     } catch (error) {
-      console.error(`Failed to clear memories for agent ${agentId} from IndexedDB:`, error);
+      console.error(
+        `Failed to clear memories for agent ${agentId} from IndexedDB:`,
+        error
+      );
       throw error;
     }
   }

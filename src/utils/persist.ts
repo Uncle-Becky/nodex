@@ -15,7 +15,7 @@ export function loadFlow(): Promise<{ nodes: Node[]; edges: Edge[] }> {
     input.type = 'file';
     input.accept = 'application/json';
 
-    input.onchange = (e) => {
+    input.onchange = e => {
       const file = (e.target as HTMLInputElement).files?.[0];
       if (!file) {
         reject(new Error('No file selected'));
@@ -23,7 +23,7 @@ export function loadFlow(): Promise<{ nodes: Node[]; edges: Edge[] }> {
       }
 
       const reader = new FileReader();
-      reader.onload = (event) => {
+      reader.onload = event => {
         try {
           const flow = JSON.parse(event.target?.result as string);
           resolve(flow);
