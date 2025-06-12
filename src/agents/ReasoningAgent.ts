@@ -36,6 +36,7 @@ export class ReasoningAgent extends AgentBase {
       'abductive',
     ]);
     this.knowledgeBase.set('confidence_threshold', 0.7);
+    this.updateState({ status: 'active', label: 'Idle' });
   }
 
   protected override onMessage(event: BusEvent): void {
@@ -74,6 +75,7 @@ export class ReasoningAgent extends AgentBase {
 
   private processAgentMessage(event: BusEvent): void {
     const message = event.payload as { message: string; data?: unknown };
+    this.updateState({ status: 'reasoning', label: `Reasoning...` });
 
     // Perform reasoning based on message content
     const reasoning = this.reason(message.message);
@@ -97,6 +99,8 @@ export class ReasoningAgent extends AgentBase {
       });
     }
 
+    // Intermediate state update after reasoning is done, before final state update for data
+    this.updateState({ status: 'active', label: 'Idle' });
     this.reasoningHistory.push(reasoning);
     this.updateState({
       lastReasoning: reasoning,
@@ -106,6 +110,10 @@ export class ReasoningAgent extends AgentBase {
 
   private processCanvasCommand(event: BusEvent): void {
     const command = event.payload as { command: string; args?: unknown[] };
+    this.updateState({
+      status: 'processing_command',
+      label: `Cmd: ${command.command}`,
+    });
 
     switch (command.command) {
       case 'analyze_pattern':
@@ -118,6 +126,7 @@ export class ReasoningAgent extends AgentBase {
         this.clearMemory();
         break;
     }
+    this.updateState({ status: 'active', label: 'Idle' });
   }
 
   private reason(input: string): Reasoning {
@@ -434,6 +443,7 @@ export class ReasoningAgent extends AgentBase {
   private handleError(error: unknown): void {
     const errorMessage =
       error instanceof Error ? error.message : 'Unknown error';
+    this.updateState({ status: 'error', label: 'Error!' });
     console.error(`[ReasoningAgent] Error: ${errorMessage}`);
 
     eventBus.publish({

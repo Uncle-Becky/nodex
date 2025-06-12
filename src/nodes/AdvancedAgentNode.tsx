@@ -107,6 +107,48 @@ export const AdvancedAgentNode: React.FC<NodeProps> = ({
   const config = getAgentTypeConfig(data['agentType'] as AgentType);
   const uptime = Math.floor((Date.now() - metrics.uptime) / 1000);
 
+  const agentStatusFromData = data?.status as string | undefined;
+
+  // Determine status display based on agentStatusFromData and isActive
+  let statusText: string;
+  let statusColorClass: string;
+  let statusTextColorClass: string;
+  let shadowColorClass: string;
+
+  if (agentStatusFromData) {
+    statusText = agentStatusFromData.toUpperCase();
+    switch (agentStatusFromData) {
+      case 'error':
+        statusColorClass = 'bg-red-500 animate-ping';
+        statusTextColorClass = 'text-red-400';
+        shadowColorClass = 'shadow-red-500/50';
+        break;
+      case 'reasoning':
+      case 'processing_command':
+        statusColorClass = 'bg-yellow-400 animate-ping';
+        statusTextColorClass = 'text-yellow-300';
+        shadowColorClass = 'shadow-yellow-500/50';
+        break;
+      case 'active': // Explicit 'active' status from agent
+      case 'idle': // Explicit 'idle' status from agent
+        statusColorClass = isActive ? 'bg-green-400 animate-ping' : 'bg-green-500';
+        statusTextColorClass = 'text-green-300';
+        shadowColorClass = 'shadow-green-500/50';
+        break;
+      default: // Other specific statuses from agent
+        statusColorClass = isActive ? 'bg-blue-400 animate-ping' : 'bg-blue-500'; // Default to blue if unknown status
+        statusTextColorClass = 'text-blue-300';
+        shadowColorClass = 'shadow-blue-500/50';
+        break;
+    }
+  } else {
+    // Fallback to old logic if no specific agentStatusFromData
+    statusText = isActive ? 'ACTIVE' : 'IDLE';
+    statusColorClass = isActive ? 'bg-green-400 animate-ping' : 'bg-green-500';
+    statusTextColorClass = 'text-white/70'; // Default text color for old logic
+    shadowColorClass = 'shadow-green-500/50';
+  }
+
   return (
     <div
       className={`
@@ -176,12 +218,12 @@ export const AdvancedAgentNode: React.FC<NodeProps> = ({
             <div
               className={`
                 w-3 h-3 rounded-full
-                ${isActive ? 'bg-green-400 animate-ping' : 'bg-green-500'}
-                shadow-lg shadow-green-500/50
+                ${statusColorClass}
+                shadow-lg ${shadowColorClass}
               `}
             />
-            <span className='text-xs text-white/70 font-mono'>
-              {isActive ? 'ACTIVE' : 'IDLE'}
+            <span className={`text-xs ${statusTextColorClass} font-mono`}>
+              {statusText}
             </span>
           </div>
         </div>

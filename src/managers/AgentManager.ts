@@ -1,4 +1,7 @@
+import { AgentBase } from '../agents/AgentBase';
 import { CanvasMetaAgent } from '../agents/CanvasMetaAgent';
+import { ReasoningAgent } from '../agents/ReasoningAgent';
+import { SwarmAgent } from '../agents/SwarmAgent';
 import type { AgentId } from '../types/agents';
 import type { BusEvent } from '../types/bus';
 import { eventBus } from '../utils/eventBus';
@@ -35,6 +38,7 @@ export interface SwarmMetrics {
 
 export class AgentManager {
   private agents: Map<AgentId, AgentInfo> = new Map();
+  private agentInstances: Map<AgentId, AgentBase> = new Map();
   private canvasAgent: CanvasMetaAgent;
   private messageHistory: BusEvent[] = [];
 
@@ -73,6 +77,38 @@ export class AgentManager {
     };
 
     this.agents.set(agentId, agentInfo);
+
+    // Instantiate and store the agent based on its type
+    switch (agentInfo.type) {
+      case 'reasoning':
+        {
+          const agent = new ReasoningAgent(agentId);
+          this.agentInstances.set(agentId, agent);
+        }
+        break;
+      case 'swarm':
+        {
+          const agent = new SwarmAgent(agentId);
+          this.agentInstances.set(agentId, agent);
+        }
+        break;
+      case 'canvas':
+        // CanvasMetaAgent is a singleton, typically managed separately
+        console.warn(
+          `AgentManager.createAgent: 'canvas' type is usually a singleton and not created dynamically. Agent ID: ${agentId}`
+        );
+        // Do not add to agentInstances unless multiple canvas agents are intended
+        break;
+      case 'worker':
+      default:
+        console.warn(
+          `AgentManager.createAgent: No specific agent class for type '${agentInfo.type}'. Agent ID: ${agentId}`
+        );
+        // Optionally, instantiate a generic AgentBase or handle as an error
+        // For now, just log and don't add to agentInstances
+        break;
+    }
+
     agentInfo.status = 'active';
 
     // Ensure we always return a string
@@ -97,7 +133,12 @@ export class AgentManager {
 
   public clearAll(): void {
     this.agents.clear();
+    this.agentInstances.clear();
     this.messageHistory = [];
+  }
+
+  public getAgentInstance(id: AgentId): AgentBase | undefined {
+    return this.agentInstances.get(id);
   }
 
   public sendCanvasCommand(

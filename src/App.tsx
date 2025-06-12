@@ -23,6 +23,7 @@ import { CodeExecutorNode } from './nodes/CodeExecutorNode';
 import { LLMChatNode } from './nodes/LLMChatNode';
 import { useGraphStore } from './store/useGraphStore';
 import type { EdgeData } from './types/agents';
+import type { BusEvent } from './types/bus';
 import { createEvent, eventBus } from './utils/eventBus';
 import { saveFlow } from './utils/persist';
 
@@ -81,6 +82,78 @@ export default function App() {
 
     updateNodes(demoNodes);
   }, [agentManager, updateNodes]);
+
+  useEffect(() => {
+    const handler = (event: BusEvent) => {
+      if (event.type === 'AGENT_STATE_UPDATE') {
+        const agentId = event.source;
+        // Ensure payload and state exist and are objects
+        if (
+          event.payload &&
+          typeof event.payload === 'object' &&
+          'state' in event.payload
+        ) {
+          const agentFullState = (
+            event.payload as { state: Record<string, any> }
+          ).state;
+
+          if (typeof agentFullState !== 'object' || agentFullState === null) {
+            console.warn(
+              'AGENT_STATE_UPDATE received with invalid state in payload',
+              event
+            );
+            return;
+          }
+
+          updateNodes(currentNodes =>
+            currentNodes.map(node => {
+              if (node.id === agentId) {
+                const newNode = {
+                  ...node,
+                  data: { ...node.data, agentState: { ...agentFullState } },
+                };
+
+                // Update position if present in agent's state
+                if (
+                  typeof agentFullState.position === 'object' &&
+                  agentFullState.position !== null &&
+                  typeof agentFullState.position.x === 'number' &&
+                  typeof agentFullState.position.y === 'number'
+                ) {
+                  newNode.position = { ...agentFullState.position };
+                }
+
+                // Update label if present in agent's state
+                if (typeof agentFullState.label === 'string') {
+                  newNode.data.label = agentFullState.label;
+                }
+
+                // Update status if present in agent's state
+                if (typeof agentFullState.status === 'string') {
+                  newNode.data.status = agentFullState.status;
+                  // Potentially update a visual cue or style based on status
+                }
+
+                return newNode;
+              }
+              return node;
+            })
+          );
+        } else {
+          console.warn(
+            'AGENT_STATE_UPDATE received with missing or invalid payload.state',
+            event
+          );
+        }
+      }
+    };
+
+    const unsubscribe = eventBus.subscribe('AGENT_STATE_UPDATE', handler);
+
+    return () => {
+      unsubscribe();
+    };
+  }, [updateNodes]);
 
   const onConnect: OnConnect = useCallback(
     (params: Connection | Edge) => {

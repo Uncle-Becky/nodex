@@ -5,6 +5,8 @@ import {
   type NodeChange,
   applyEdgeChanges,
   applyNodeChanges,
+  type NodeUpdater,
+  type EdgeUpdater,
 } from '@xyflow/react';
 import { create } from 'zustand';
 
@@ -13,8 +15,8 @@ interface GraphState {
   edges: Edge[];
   setNodes: (changes: NodeChange[]) => void;
   setEdges: (changes: EdgeChange[]) => void;
-  updateNodes: (nodes: Node[]) => void;
-  updateEdges: (edges: Edge[]) => void;
+  updateNodes: (updater: Node[] | NodeUpdater) => void;
+  updateEdges: (updater: Edge[] | EdgeUpdater) => void;
 }
 
 export const useGraphStore = create<GraphState>(set => ({
@@ -31,6 +33,12 @@ export const useGraphStore = create<GraphState>(set => ({
     set(state => ({ nodes: applyNodeChanges(changes, state.nodes) })),
   setEdges: changes =>
     set(state => ({ edges: applyEdgeChanges(changes, state.edges) })),
-  updateNodes: nodes => set({ nodes }),
-  updateEdges: edges => set({ edges }),
+  updateNodes: updater =>
+    set(state => ({
+      nodes: typeof updater === 'function' ? updater(state.nodes) : updater,
+    })),
+  updateEdges: updater =>
+    set(state => ({
+      edges: typeof updater === 'function' ? updater(state.edges) : updater,
+    })),
 }));
