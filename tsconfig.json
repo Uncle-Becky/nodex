@@ -23,6 +23,6 @@
     "composite": true,
     "incremental": true
   },
-  "include": ["src"],
+  "include": ["src", "mcp-server/src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

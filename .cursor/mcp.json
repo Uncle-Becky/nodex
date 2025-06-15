@@ -1,0 +1,8 @@
+{
+  "logging": {
+    "level": "info"
+  },
+  "featureFlags": {
+    "newFeatureX": false
+  }
+}

@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
-export default {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+module.exports = {
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx,css,scss}'],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
@@ -81,6 +82,7 @@ export default {
           'Helvetica Neue',
           'Arial',
           'sans-serif',
+          'module',
         ],
       },
       boxShadow: {
@@ -90,5 +92,8 @@ export default {
       },
     },
   },
-  plugins: [],
+  daisyui: {
+    themes: ['light', 'dark'],
+  },
+  plugins: [require('daisyui')],
 };

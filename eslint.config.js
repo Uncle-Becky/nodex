@@ -12,6 +12,7 @@ export default [
   {
     // Global ignores
     ignores: [
+      'mcp-server/src/config/**',
       'dist/**',
       'node_modules/**',
       'coverage/**',

@@ -32,8 +32,8 @@ router.post('/context', async (req: Request, res: Response) => {
     const newContext = await contextService.createContext(ownerId, type, initialData, metadata);
     res.status(201).json(newContext);
   } catch (error: any) {
-    console.error('[Route /context POST] Error:', error);
-    res.status(500).json({ error: error.message || 'Failed to create context' });
+    (typeof error === 'string') ? console.error('[Route /context POST] Error:', error) : console.error('[Route /context POST] Error:', error);
+    res.status(500).json({ error: error.message ?? 'Failed to create context' });
   }
 });
 
@@ -45,8 +45,8 @@ router.get('/context/:contextId', async (req: Request, res: Response) => {
     }
     res.status(200).json(context);
   } catch (error: any) {
-    console.error(`[Route /context GET ${req.params.contextId}] Error:`, error);
-    res.status(500).json({ error: error.message || 'Failed to retrieve context' });
+    (typeof error === 'string') ? console.error(`[Route /context GET ${req.params.contextId}] Error:`, error) : console.error(`[Route /context GET ${req.params.contextId}] Error:`, error);
+    res.status(500).json({ error: error.message ?? 'Failed to retrieve context' });
   }
 });
 
@@ -64,7 +64,7 @@ router.put('/context/:contextId', async (req: Request, res: Response) => {
     res.status(200).json(updatedContext);
   } catch (error: any) {
     console.error(`[Route /context PUT ${req.params.contextId}] Error:`, error);
-    res.status(500).json({ error: error.message || 'Failed to update context' });
+    res.status(500).json({ error: error.message ?? 'Failed to update context' });
   }
 });
 

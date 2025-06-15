@@ -84,7 +84,7 @@ currentConfig = loadConfig();
 export function getConfig(): ServerConfig {
   // In case currentConfig was not initialized due to an error during initial load, try loading again.
   if (!currentConfig) {
-    console.warn("[Config] currentConfig is undefined, attempting to load again.");
+    console.warn('[Config] currentConfig is undefined, attempting to load again.');
     loadConfig();
   }
   return currentConfig;
