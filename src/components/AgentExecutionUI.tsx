@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { AgentManager } from '../managers/AgentManager';
 import { ComponentStateManager } from '../managers/ComponentStateManager';
 import { useGraphStore } from '../store/useGraphStore';
+import type { BusEvent } from '../types/bus';
 import type {
   AgentExecutionUIState,
   ExecutionEvent,
@@ -15,7 +16,7 @@ interface AgentExecutionUIProps {
 export const AgentExecutionUI: React.FC<AgentExecutionUIProps> = ({
   agentId,
 }) => {
-  const { nodes, edges } = useGraphStore();
+  const { nodes } = useGraphStore();
   const [selectedAgentId, setSelectedAgentId] = useState<string | undefined>(
     agentId
   );
@@ -26,12 +27,32 @@ export const AgentExecutionUI: React.FC<AgentExecutionUIProps> = ({
     []
   );
   const [isExecuting, setIsExecuting] = useState(false);
-  const [executionMetrics, setExecutionMetrics] = useState<Record<string, any>>(
-    {}
-  );
+  const [executionMetrics, setExecutionMetrics] = useState<
+    Record<string, unknown>
+  >({});
 
   const stateManager = ComponentStateManager.getInstance();
   const agentManager = new AgentManager();
+
+  const loadAgentStatus = useCallback(
+    (agentId: string) => {
+      const agents = agentManager.getAgents();
+      const agent = agents.find(a => a.id === agentId);
+
+      if (agent) {
+        setAgentStatus(agent.status);
+        setIsExecuting(agent.status === 'active');
+
+        // Update component state
+        stateManager.updateComponentState('agentExecutionUI', {
+          selectedAgentId: agentId,
+          agentStatus: agent.status,
+          isExecuting: agent.status === 'active',
+        });
+      }
+    },
+    [agentManager, stateManager]
+  );
 
   useEffect(() => {
     // Load initial agent if provided
@@ -41,7 +62,7 @@ export const AgentExecutionUI: React.FC<AgentExecutionUIProps> = ({
     }
 
     // Subscribe to agent selection events
-    const handleAgentSelection = (event: any) => {
+    const handleAgentSelection = (event: BusEvent<{ agentId: string }>) => {
       if (event.type === 'AGENT_SELECT') {
         setSelectedAgentId(event.payload.agentId);
         loadAgentStatus(event.payload.agentId);
@@ -49,7 +70,7 @@ export const AgentExecutionUI: React.FC<AgentExecutionUIProps> = ({
     };
 
     // Subscribe to agent execution events
-    const handleAgentExecution = (event: any) => {
+    const handleAgentExecution = (event: ExecutionEvent) => {
       if (
         [
           'AGENT_INIT',
@@ -80,7 +101,7 @@ export const AgentExecutionUI: React.FC<AgentExecutionUIProps> = ({
       selectionUnsubscribe();
       executionUnsubscribe();
     };
-  }, [agentId, selectedAgentId]);
+  }, [agentId, selectedAgentId, loadAgentStatus]);
 
   // Subscribe to component state
   useEffect(() => {
@@ -95,24 +116,7 @@ export const AgentExecutionUI: React.FC<AgentExecutionUIProps> = ({
     );
 
     return unsubscribe;
-  }, []);
-
-  const loadAgentStatus = (agentId: string) => {
-    const agents = agentManager.getAgents();
-    const agent = agents.find(a => a.id === agentId);
-
-    if (agent) {
-      setAgentStatus(agent.status);
-      setIsExecuting(agent.status === 'active');
-
-      // Update component state
-      stateManager.updateComponentState('agentExecutionUI', {
-        selectedAgentId: agentId,
-        agentStatus: agent.status,
-        isExecuting: agent.status === 'active',
-      });
-    }
-  };
+  }, [loadAgentStatus, stateManager]);
 
   const executeAgent = () => {
     if (!selectedAgentId) return;

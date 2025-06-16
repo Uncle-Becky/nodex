@@ -1,0 +1,254 @@
+{
+  "timestamp": "2025-06-16T07:12:19.312Z",
+  "overallResults": {
+    "AgentBase": {
+      "passed": 3,
+      "total": 3,
+      "passRate": 100,
+      "totalDuration": 282
+    },
+    "ReasoningAgent": {
+      "passed": 4,
+      "total": 4,
+      "passRate": 100,
+      "totalDuration": 596
+    },
+    "SwarmAgent": {
+      "passed": 4,
+      "total": 4,
+      "passRate": 100,
+      "totalDuration": 635
+    },
+    "CanvasMetaAgent": {
+      "passed": 3,
+      "total": 3,
+      "passRate": 100,
+      "totalDuration": 479
+    },
+    "WorkerPool": {
+      "passed": 4,
+      "total": 4,
+      "passRate": 100,
+      "totalDuration": 746
+    }
+  },
+  "detailedResults": {
+    "AgentBase.initialization": {
+      "success": true,
+      "duration": 167,
+      "result": {
+        "performance": 71,
+        "memoryUsage": 40,
+        "eventsProcessed": 102
+      },
+      "logs": [],
+      "timestamp": "2025-06-16T07:12:16.712Z"
+    },
+    "AgentBase.eventHandling": {
+      "success": true,
+      "duration": 110,
+      "result": {
+        "performance": 96,
+        "memoryUsage": 46,
+        "eventsProcessed": 100
+      },
+      "logs": [],
+      "timestamp": "2025-06-16T07:12:16.823Z"
+    },
+    "AgentBase.memoryOperations": {
+      "success": true,
+      "duration": 5,
+      "result": {
+        "message": "Memory operations (create, get, update) successful.",
+        "contextId": "sim-context-74c31d6a",
+        "finalData": {
+          "info": "updated agent data",
+          "version": 2,
+          "newField": true
+        }
+      },
+      "logs": [
+        "[DETAIL] Simulating memory operations with mockContextStore.",
+        "[DETAIL] Context created: sim-context-74c31d6a with data: {\"info\":\"initial agent data\",\"version\":1}",
+        "[DETAIL] Context retrieved successfully.",
+        "[DETAIL] Context updated with data: {\"info\":\"updated agent data\",\"version\":2,\"newField\":true}",
+        "[DETAIL] Context validated successfully after update."
+      ],
+      "timestamp": "2025-06-16T07:12:16.829Z"
+    },
+    "ReasoningAgent.deductiveReasoning": {
+      "success": true,
+      "duration": 101,
+      "result": {
+        "message": "Reasoning test (deductiveReasoning) successful.",
+        "llm_response": "Yes, Z is Y.",
+        "tokens_used": 34
+      },
+      "logs": [
+        "[DETAIL] MockLLM received prompt for deductiveReasoning: \"Simulated prompt for deductiveReasoning: Premises: All X are Y. Z is X. Question: Is Z Y?...\"",
+        "[DETAIL] MockLLM response: \"Yes, Z is Y.\", Success: true"
+      ],
+      "timestamp": "2025-06-16T07:12:16.932Z"
+    },
+    "ReasoningAgent.inductiveReasoning": {
+      "success": true,
+      "duration": 140,
+      "result": {
+        "message": "Reasoning test (inductiveReasoning) successful.",
+        "llm_response": "The next number is 8.",
+        "tokens_used": 30
+      },
+      "logs": [
+        "[DETAIL] MockLLM received prompt for inductiveReasoning: \"Simulated prompt for inductiveReasoning: Sequence: 2, 4, 6. Question: What is the next number?...\"",
+        "[DETAIL] MockLLM response: \"The next number is 8.\", Success: true"
+      ],
+      "timestamp": "2025-06-16T07:12:17.072Z"
+    },
+    "ReasoningAgent.abductiveReasoning": {
+      "success": true,
+      "duration": 153,
+      "result": {
+        "message": "Reasoning test (abductiveReasoning) successful.",
+        "llm_response": "A plausible explanation is that the sprinkler was on, or it rained.",
+        "tokens_used": 31
+      },
+      "logs": [
+        "[DETAIL] MockLLM received prompt for abductiveReasoning: \"Simulated prompt for abductiveReasoning: Observation: The grass is wet. Possible causes: sprinkler, ...\"",
+        "[DETAIL] MockLLM response: \"A plausible explanation is that the sprinkler was on, or it rained.\", Success: true"
+      ],
+      "timestamp": "2025-06-16T07:12:17.227Z"
+    },
+    "ReasoningAgent.episodicMemory": {
+      "success": true,
+      "duration": 202,
+      "result": {
+        "performance": 70,
+        "memoryUsage": 29,
+        "eventsProcessed": 33
+      },
+      "logs": [],
+      "timestamp": "2025-06-16T07:12:17.430Z"
+    },
+    "SwarmAgent.particleSwarmOptimization": {
+      "success": true,
+      "duration": 186,
+      "result": {
+        "performance": 91,
+        "memoryUsage": 41,
+        "eventsProcessed": 29
+      },
+      "logs": [],
+      "timestamp": "2025-06-16T07:12:17.617Z"
+    },
+    "SwarmAgent.consensusAlgorithm": {
+      "success": true,
+      "duration": 140,
+      "result": {
+        "performance": 80,
+        "memoryUsage": 46,
+        "eventsProcessed": 31
+      },
+      "logs": [],
+      "timestamp": "2025-06-16T07:12:17.758Z"
+    },
+    "SwarmAgent.emergentBehavior": {
+      "success": true,
+      "duration": 168,
+      "result": {
+        "performance": 90,
+        "memoryUsage": 52,
+        "eventsProcessed": 116
+      },
+      "logs": [],
+      "timestamp": "2025-06-16T07:12:17.927Z"
+    },
+    "SwarmAgent.swarmIntelligence": {
+      "success": true,
+      "duration": 141,
+      "result": {
+        "performance": 83,
+        "memoryUsage": 49,
+        "eventsProcessed": 20
+      },
+      "logs": [],
+      "timestamp": "2025-06-16T07:12:18.069Z"
+    },
+    "CanvasMetaAgent.orchestration": {
+      "success": true,
+      "duration": 152,
+      "result": {
+        "performance": 86,
+        "memoryUsage": 53,
+        "eventsProcessed": 29
+      },
+      "logs": [],
+      "timestamp": "2025-06-16T07:12:18.223Z"
+    },
+    "CanvasMetaAgent.monitoring": {
+      "success": true,
+      "duration": 203,
+      "result": {
+        "performance": 99,
+        "memoryUsage": 43,
+        "eventsProcessed": 102
+      },
+      "logs": [],
+      "timestamp": "2025-06-16T07:12:18.428Z"
+    },
+    "CanvasMetaAgent.optimization": {
+      "success": true,
+      "duration": 124,
+      "result": {
+        "performance": 63,
+        "memoryUsage": 59,
+        "eventsProcessed": 107
+      },
+      "logs": [],
+      "timestamp": "2025-06-16T07:12:18.552Z"
+    },
+    "WorkerPool.workerCreation": {
+      "success": true,
+      "duration": 171,
+      "result": {
+        "performance": 71,
+        "memoryUsage": 22,
+        "eventsProcessed": 119
+      },
+      "logs": [],
+      "timestamp": "2025-06-16T07:12:18.725Z"
+    },
+    "WorkerPool.taskDistribution": {
+      "success": true,
+      "duration": 171,
+      "result": {
+        "performance": 92,
+        "memoryUsage": 41,
+        "eventsProcessed": 105
+      },
+      "logs": [],
+      "timestamp": "2025-06-16T07:12:18.897Z"
+    },
+    "WorkerPool.loadBalancing": {
+      "success": true,
+      "duration": 185,
+      "result": {
+        "performance": 81,
+        "memoryUsage": 37,
+        "eventsProcessed": 98
+      },
+      "logs": [],
+      "timestamp": "2025-06-16T07:12:19.083Z"
+    },
+    "WorkerPool.errorHandling": {
+      "success": true,
+      "duration": 219,
+      "result": {
+        "performance": 87,
+        "memoryUsage": 27,
+        "eventsProcessed": 38
+      },
+      "logs": [],
+      "timestamp": "2025-06-16T07:12:19.303Z"
+    }
+  }
+}

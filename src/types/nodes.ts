@@ -277,3 +277,30 @@ export interface NodeTemplate {
     expectedOutput: unknown;
   }>;
 }
+
+export type DataType =
+  | 'text' // For text inputs/outputs (blue)
+  | 'json' // For structured data (green)
+  | 'image' // For image data (purple)
+  | 'number' // For numerical data (orange)
+  | 'boolean' // For boolean values (red)
+  | 'array' // For array data (yellow)
+  | 'stream' // For streaming data (cyan)
+  | 'any'; // For flexible connections (gray)
+
+export interface NodePort {
+  id: string;
+  type: DataType;
+  label: string;
+  description: string;
+  required: boolean;
+  multiple: boolean; // Whether multiple connections are allowed
+}
+
+export interface EdgeValidationState {
+  sourceNode: string;
+  sourcePort: string;
+  sourceType: DataType;
+  validTargets: Set<string>; // Set of valid target node IDs
+  validPorts: Set<string>; // Set of valid target port IDs
+}

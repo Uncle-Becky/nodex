@@ -82,8 +82,12 @@ export interface EdgeData {
   weight?: number;
   confidence?: number;
   lastActivity?: number;
-  metadata?: { [key: string]: unknown };
-  [key: string]: unknown; // Index signature for additional properties
+  metadata?: Record<string, unknown>;
+  label?: string;
+  animated?: boolean;
+  style?: Record<string, unknown>;
+  className?: string;
+  data?: Record<string, unknown>;
 }
 
 export interface AgentBeliefs {
@@ -95,8 +99,4 @@ export interface Position {
   y: number;
 }
 
-export interface Math {
-  id: string;
-}
-
-export type Set = unknown;
+export type Set<T> = T[];

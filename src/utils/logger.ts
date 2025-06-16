@@ -1,31 +1,31 @@
 const isDev = import.meta.env.DEV;
 
 export class Logger {
-  static log(...args: any[]) {
+  static log(...args: unknown[]) {
     if (isDev) {
       console.log(...args);
     }
   }
 
-  static error(e: any) {
+  static error(e: unknown) {
     if (isDev) {
       console.error(e);
     }
   }
 
-  static warn(...args: any[]) {
+  static warn(...args: unknown[]) {
     if (isDev) {
       console.warn(...args);
     }
   }
 
-  static info(...args: any[]) {
+  static info(...args: unknown[]) {
     if (isDev) {
       console.info(...args);
     }
   }
 
-  static debug(...args: any[]) {
+  static debug(...args: unknown[]) {
     if (isDev) {
       console.debug(...args);
     }
@@ -56,36 +56,36 @@ export class Logger {
   }
 
   // Service-specific loggers
-  static service(serviceName: string, ...args: any[]) {
+  static service(serviceName: string, ...args: unknown[]) {
     if (isDev) {
       console.log(`[${serviceName}]`, ...args);
     }
   }
 
-  static execution(nodeType: string, ...args: any[]) {
+  static execution(nodeType: string, ...args: unknown[]) {
     if (isDev) {
       console.log(`[Execution:${nodeType}]`, ...args);
     }
   }
 
-  static llm(provider: string, ...args: any[]) {
+  static llm(provider: string, ...args: unknown[]) {
     if (isDev) {
       console.log(`[LLM:${provider}]`, ...args);
     }
   }
 
-  static apiKey(provider: string, ...args: any[]) {
+  static apiKey(provider: string, ...args: unknown[]) {
     if (isDev) {
       console.log(`[ApiKey:${provider}]`, ...args);
     }
   }
 
   // Force logging even in production (for critical errors)
-  static forceError(e: any) {
+  static forceError(e: unknown) {
     console.error(e);
   }
 
-  static forceLog(...args: any[]) {
+  static forceLog(...args: unknown[]) {
     console.log(...args);
   }
 }

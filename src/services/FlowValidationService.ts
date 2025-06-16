@@ -1,9 +1,12 @@
 import type { Edge, Node } from '@xyflow/react';
 import type { ValidationIssue, ValidationResult } from '../types/components';
 import { eventBus } from '../utils/eventBus';
+import { executionEngine } from './ExecutionEngine';
+import { executionHistoryService } from './ExecutionHistoryService';
 
 export class FlowValidationService {
   private static instance: FlowValidationService;
+  private initialized = false;
 
   private constructor() {}
 
@@ -14,27 +17,56 @@ export class FlowValidationService {
     return FlowValidationService.instance;
   }
 
+  public async initialize(): Promise<void> {
+    if (this.initialized) {
+      console.log('FlowValidationService: Already initialized');
+      return;
+    }
+
+    try {
+      // Verify dependencies are available
+      if (!executionEngine) {
+        throw new Error('ExecutionEngine not available');
+      }
+      if (!executionHistoryService) {
+        throw new Error('ExecutionHistoryService not available');
+      }
+
+      // Initialize service
+      this.initialized = true;
+      console.log('FlowValidationService: Initialized successfully');
+    } catch (error) {
+      console.error('FlowValidationService: Initialization failed:', error);
+      throw error;
+    }
+  }
+
+  public isInitialized(): boolean {
+    return this.initialized;
+  }
+
   /**
    * Validate an entire flow
    */
   public validateFlow(nodes: Node[], edges: Edge[]): ValidationResult {
+    if (!this.initialized) {
+      throw new Error('FlowValidationService not initialized');
+    }
+
     const issues: ValidationIssue[] = [];
 
     // Validate nodes
-    nodes.forEach(node => {
-      const nodeIssues = this.validateNode(node);
-      issues.push(...nodeIssues);
-    });
+    for (const node of nodes) {
+      issues.push(...this.validateNode(node));
+    }
 
     // Validate edges
-    edges.forEach(edge => {
-      const edgeIssues = this.validateEdge(edge, nodes);
-      issues.push(...edgeIssues);
-    });
+    for (const edge of edges) {
+      issues.push(...this.validateEdge(edge, nodes));
+    }
 
     // Validate flow integrity
-    const flowIssues = this.validateFlowIntegrity(nodes, edges);
-    issues.push(...flowIssues);
+    issues.push(...this.validateFlowIntegrity(nodes, edges));
 
     const isValid = !issues.some(issue => issue.severity === 'error');
 
@@ -268,7 +300,7 @@ export class FlowValidationService {
         visited.add(nodeId);
         recursionStack.add(nodeId);
 
-        for (const neighbor of adjacencyList[nodeId] || []) {
+        for (const neighbor of adjacencyList[nodeId] ?? []) {
           if (!visited.has(neighbor) && hasCycle(neighbor)) {
             return true;
           } else if (recursionStack.has(neighbor)) {

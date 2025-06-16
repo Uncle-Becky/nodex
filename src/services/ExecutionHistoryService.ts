@@ -43,16 +43,43 @@ export class ExecutionHistoryService {
   private static instance: ExecutionHistoryService;
   private eventHistory: BusEvent[] = [];
   private readonly MAX_HISTORY_SIZE = 10000;
+  private initialized = false;
 
-  private constructor() {
-    this.initialize();
-  }
+  private constructor() {}
 
   public static getInstance(): ExecutionHistoryService {
     if (!ExecutionHistoryService.instance) {
       ExecutionHistoryService.instance = new ExecutionHistoryService();
     }
     return ExecutionHistoryService.instance;
+  }
+
+  public async initialize(): Promise<void> {
+    if (this.initialized) {
+      console.log('ExecutionHistoryService: Already initialized');
+      return;
+    }
+
+    try {
+      // Verify dependencies are available
+      if (!executionEngine) {
+        throw new Error('ExecutionEngine not available');
+      }
+
+      // Initialize event subscriptions
+      this.initialize();
+
+      // Mark as initialized
+      this.initialized = true;
+      console.log('ExecutionHistoryService: Initialized successfully');
+    } catch (error) {
+      console.error('ExecutionHistoryService: Initialization failed:', error);
+      throw error;
+    }
+  }
+
+  public isInitialized(): boolean {
+    return this.initialized;
   }
 
   private initialize(): void {
@@ -353,3 +380,6 @@ export class ExecutionHistoryService {
     }
   }
 }
+
+// Export the singleton instance
+export const executionHistoryService = ExecutionHistoryService.getInstance();

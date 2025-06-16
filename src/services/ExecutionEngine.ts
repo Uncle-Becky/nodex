@@ -323,7 +323,7 @@ class CodeExecutorNode extends NodeExecutor {
         if (event.data.status === 'success') {
           resolve(event.data.result);
         } else {
-          reject(new Error(event.data.error || 'Worker execution failed'));
+          reject(new Error(event.data.error ?? 'Worker execution failed'));
         }
         worker.terminate();
       };
@@ -597,11 +597,45 @@ class ApiConnectorExecutor extends NodeExecutor {
 }
 
 class ExecutionEngine {
+  private static instance: ExecutionEngine;
   private executors: Map<NodeType, NodeExecutor> = new Map();
   private executions: Map<string, NodeExecution> = new Map();
+  private initialized = false;
 
-  constructor() {
+  private constructor() {
     this.registerExecutors();
+  }
+
+  public static getInstance(): ExecutionEngine {
+    if (!ExecutionEngine.instance) {
+      ExecutionEngine.instance = new ExecutionEngine();
+    }
+    return ExecutionEngine.instance;
+  }
+
+  public async initialize(): Promise<void> {
+    if (this.initialized) {
+      console.log('ExecutionEngine: Already initialized');
+      return;
+    }
+
+    try {
+      // Verify dependencies are available
+      if (!llmService) {
+        throw new Error('LLMService not available');
+      }
+
+      // Initialize service
+      this.initialized = true;
+      console.log('ExecutionEngine: Initialized successfully');
+    } catch (error) {
+      console.error('ExecutionEngine: Initialization failed:', error);
+      throw error;
+    }
+  }
+
+  public isInitialized(): boolean {
+    return this.initialized;
   }
 
   private registerExecutors(): void {
@@ -657,8 +691,8 @@ class ExecutionEngine {
       }
       Logger.service('ExecutionEngine', 'Found executor, executing...');
 
-      const executionContext: ExecutionContext = {
-        nodeId: config.id,
+      const fullContext: ExecutionContext = {
+        nodeId: context.nodeId ?? 'unknown',
         sessionId: context.sessionId ?? 'default',
         userId: context.userId,
         variables: context.variables ?? {},
@@ -666,7 +700,7 @@ class ExecutionEngine {
         metadata: context.metadata ?? {},
       };
 
-      const result = await executor.execute(config, input, executionContext);
+      const result = await executor.execute(config, input, fullContext);
 
       execution.status = result.success ? 'completed' : 'failed';
       execution.output = result.output;
@@ -713,7 +747,7 @@ class WebSearchExecutor extends NodeExecutor {
   async execute(
     config: NodeConfig,
     input: unknown,
-    context: ExecutionContext
+    _context: ExecutionContext
   ): Promise<ExecutionResult> {
     const startTime = Date.now();
 
@@ -771,9 +805,9 @@ class WebSearchExecutor extends NodeExecutor {
       // Attempt to parse DuckDuckGo's various result structures
       if (data.AbstractText) {
         results.push({
-          title: data.Heading || query,
+          title: data.Heading ?? query,
           snippet: data.AbstractText,
-          url: data.AbstractURL || searchUrl, // Fallback to searchUrl if AbstractURL is empty
+          url: data.AbstractURL ?? searchUrl, // Fallback to searchUrl if AbstractURL is empty
         });
       }
 
@@ -786,7 +820,7 @@ class WebSearchExecutor extends NodeExecutor {
             if (match) {
               results.push({
                 title: match[2],
-                snippet: topic.Text || match[2], // topic.Text might be more descriptive
+                snippet: topic.Text ?? match[2], // topic.Text might be more descriptive
                 url: match[1],
               });
             }
@@ -868,4 +902,4 @@ class WebSearchExecutor extends NodeExecutor {
   }
 }
 
-export const executionEngine = new ExecutionEngine();
+export const executionEngine = ExecutionEngine.getInstance();

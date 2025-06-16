@@ -1,12 +1,24 @@
-import type { ComponentState } from '../types/components';
 import { eventBus } from '../utils/eventBus';
+
+export interface ComponentState {
+  id: string;
+  state: Record<string, unknown>;
+  subscribers: Set<(state: Record<string, unknown>) => void>;
+  lastUpdate: number;
+  version: number;
+  isPersistent: boolean;
+}
 
 export class ComponentStateManager {
   private static instance: ComponentStateManager;
   private states: Map<string, ComponentState> = new Map();
+  private readonly PERSISTENCE_KEY = 'component_states';
+  private readonly MAX_STATE_SIZE = 1024 * 1024; // 1MB
+  private readonly STATE_VERSION = 1;
 
   private constructor() {
-    this.initialize();
+    this.loadPersistedStates();
+    this.setupEventHandling();
   }
 
   public static getInstance(): ComponentStateManager {
@@ -16,92 +28,111 @@ export class ComponentStateManager {
     return ComponentStateManager.instance;
   }
 
-  private initialize(): void {
-    const handleEvent = (event: {
-      type: string;
-      payload: {
+  private setupEventHandling(): void {
+    // Subscribe to state reset events
+    eventBus.subscribe(['COMPONENT_STATE_RESET'], event => {
+      const { componentId } = event.payload as { componentId: string };
+      this.resetState(componentId);
+    });
+
+    // Subscribe to state change events
+    eventBus.subscribe(['COMPONENT_STATE_CHANGED'], event => {
+      const { componentId, state } = event.payload as {
         componentId: string;
-        state?: Record<string, unknown>;
-        path?: string[];
+        state: Record<string, unknown>;
       };
-    }): void => {
-      if (event.type === 'COMPONENT_STATE_UPDATE') {
-        const { componentId, state, path } = event.payload;
-        if (state) {
-          this.updateComponentState(componentId, state, path);
-        }
-      } else if (event.type === 'COMPONENT_STATE_RESET') {
-        const { componentId } = event.payload;
-        this.resetComponentState(componentId);
+      this.updateComponentState(componentId, state);
+    });
+  }
+
+  private loadPersistedStates(): void {
+    try {
+      const stored = localStorage.getItem(this.PERSISTENCE_KEY);
+      if (stored) {
+        const persistedStates = JSON.parse(stored) as Record<
+          string,
+          { state: Record<string, unknown>; version: number }
+        >;
+
+        Object.entries(persistedStates).forEach(([id, data]) => {
+          if (data.version === this.STATE_VERSION) {
+            this.states.set(id, {
+              id,
+              state: data.state,
+              subscribers: new Set(),
+              lastUpdate: Date.now(),
+              version: data.version,
+              isPersistent: true,
+            });
+          }
+        });
       }
+    } catch (error) {
+      console.error('Failed to load persisted component states:', error);
+    }
+  }
+
+  private persistStates(): void {
+    try {
+      const statesToPersist: Record<
+        string,
+        { state: Record<string, unknown>; version: number }
+      > = {};
+
+      this.states.forEach((componentState, id) => {
+        if (componentState.isPersistent) {
+          statesToPersist[id] = {
+            state: componentState.state,
+            version: componentState.version,
+          };
+        }
+      });
+
+      const serialized = JSON.stringify(statesToPersist);
+      if (serialized.length > this.MAX_STATE_SIZE) {
+        console.warn('Component state size exceeds maximum allowed size');
+        return;
+      }
+
+      localStorage.setItem(this.PERSISTENCE_KEY, serialized);
+    } catch (error) {
+      console.error('Failed to persist component states:', error);
+    }
+  }
+
+  public getState(componentId: string): Record<string, unknown> {
+    const componentState = this.states.get(componentId);
+    return componentState?.state ?? {};
+  }
+
+  public setState(
+    componentId: string,
+    state: Record<string, unknown>,
+    options: { isPersistent?: boolean } = {}
+  ): void {
+    const existingState = this.states.get(componentId);
+    const newState: ComponentState = {
+      id: componentId,
+      state,
+      subscribers: existingState?.subscribers ?? new Set(),
+      lastUpdate: Date.now(),
+      version: this.STATE_VERSION,
+      isPersistent:
+        options.isPersistent ?? existingState?.isPersistent ?? false,
     };
 
-    eventBus.subscribe(
-      ['COMPONENT_STATE_UPDATE', 'COMPONENT_STATE_RESET'],
-      handleEvent
-    );
-  }
-
-  public getComponentState<T = Record<string, unknown>>(
-    componentId: string
-  ): T {
-    if (!this.states.has(componentId)) {
-      this.states.set(componentId, {
-        id: componentId,
-        state: {},
-        subscribers: new Set(),
-      });
-    }
-
-    return this.states.get(componentId)?.state as T;
-  }
-
-  public updateComponentState(
-    componentId: string,
-    stateUpdate: Record<string, unknown>,
-    path?: string[]
-  ): void {
-    if (!this.states.has(componentId)) {
-      this.states.set(componentId, {
-        id: componentId,
-        state: {},
-        subscribers: new Set(),
-      });
-    }
-
-    const componentState = this.states.get(componentId)!;
-    let newState: Record<string, unknown>;
-
-    if (path && path.length > 0) {
-      // Update nested state
-      newState = { ...componentState.state };
-      let current: Record<string, unknown> = newState;
-
-      for (let i = 0; i < path.length - 1; i++) {
-        const key = path[i];
-        if (key) {
-          current[key] = current[key]
-            ? { ...(current[key] as Record<string, unknown>) }
-            : {};
-          current = current[key] as Record<string, unknown>;
-        }
-      }
-
-      const lastKey = path[path.length - 1];
-      if (lastKey) {
-        current[lastKey] = stateUpdate;
-      }
-    } else {
-      // Update root state
-      newState = { ...componentState.state, ...stateUpdate };
-    }
-
-    // Update state
-    componentState.state = newState;
+    this.states.set(componentId, newState);
 
     // Notify subscribers
-    componentState.subscribers.forEach(subscriber => {
-      subscriber(newState);
+    newState.subscribers.forEach(callback => {
+      try {
+        callback(state);
+      } catch (error) {
+        console.error(
+          `Error in component state subscriber for ${componentId}:`,
+          error
+        );
+      }
     });
 
     // Publish state change event
@@ -110,35 +141,33 @@ export class ComponentStateManager {
       type: 'COMPONENT_STATE_CHANGED',
       timestamp: Date.now(),
       source: 'component-state-manager',
-      target: componentId,
-      payload: {
-        componentId,
-        state: newState,
-      },
+      payload: { componentId, state },
     });
+
+    // Persist if needed
+    if (newState.isPersistent) {
+      this.persistStates();
+    }
   }
 
-  public resetComponentState(componentId: string): void {
-    if (this.states.has(componentId)) {
-      const componentState = this.states.get(componentId)!;
-      componentState.state = {};
+  public updateComponentState(
+    componentId: string,
+    stateUpdate: Record<string, unknown>
+  ): void {
+    const currentState = this.getState(componentId);
+    this.setState(componentId, { ...currentState, ...stateUpdate });
+  }
 
-      // Notify subscribers
-      componentState.subscribers.forEach(subscriber => {
-        subscriber({});
-      });
-
-      // Publish state reset event
-      eventBus.publish({
-        id: `state-reset-${Date.now()}`,
-        type: 'COMPONENT_STATE_RESET',
-        timestamp: Date.now(),
-        source: 'component-state-manager',
-        target: componentId,
-        payload: {
-          componentId,
-        },
-      });
+  public resetState(componentId: string): void {
+    const componentState = this.states.get(componentId);
+    if (componentState) {
+      this.setState(
+        componentId,
+        {},
+        {
+          isPersistent: componentState.isPersistent,
+        }
+      );
     }
   }
 
@@ -146,41 +175,66 @@ export class ComponentStateManager {
     componentId: string,
     callback: (state: Record<string, unknown>) => void
   ): () => void {
-    if (!this.states.has(componentId)) {
+    const componentState = this.states.get(componentId);
+    if (!componentState) {
       this.states.set(componentId, {
         id: componentId,
         state: {},
-        subscribers: new Set(),
+        subscribers: new Set([callback]),
+        lastUpdate: Date.now(),
+        version: this.STATE_VERSION,
+        isPersistent: false,
       });
+    } else {
+      componentState.subscribers.add(callback);
     }
 
-    const componentState = this.states.get(componentId)!;
-    componentState.subscribers.add(callback);
+    // Initial callback with current state
+    callback(this.getState(componentId));
 
     // Return unsubscribe function
     return () => {
-      componentState.subscribers.delete(callback);
+      const state = this.states.get(componentId);
+      if (state) {
+        state.subscribers.delete(callback);
+        if (state.subscribers.size === 0) {
+          this.states.delete(componentId);
+        }
+      }
     };
   }
 
-  public persistState(): Record<string, unknown> {
-    const persistedState: Record<string, unknown> = {};
+  public getComponentStateInfo(componentId: string): {
+    hasState: boolean;
+    lastUpdate: number;
+    subscriberCount: number;
+    isPersistent: boolean;
+    stateSize: number;
+  } {
+    const state = this.states.get(componentId);
+    if (!state) {
+      return {
+        hasState: false,
+        lastUpdate: 0,
+        subscriberCount: 0,
+        isPersistent: false,
+        stateSize: 0,
+      };
+    }
 
-    this.states.forEach((state, componentId) => {
-      persistedState[componentId] = state.state;
-    });
-
-    return persistedState;
+    return {
+      hasState: true,
+      lastUpdate: state.lastUpdate,
+      subscriberCount: state.subscribers.size,
+      isPersistent: state.isPersistent,
+      stateSize: JSON.stringify(state.state).length,
+    };
   }
 
-  public loadPersistedState(persistedState: Record<string, unknown>): void {
-    Object.entries(persistedState).forEach(([componentId, state]) => {
-      if (typeof state === 'object' && state !== null) {
-        this.updateComponentState(
-          componentId,
-          state as Record<string, unknown>
-        );
-      }
-    });
+  public clearAllStates(): void {
+    this.states.clear();
+    localStorage.removeItem(this.PERSISTENCE_KEY);
   }
 }
+
+export const componentStateManager = ComponentStateManager.getInstance();

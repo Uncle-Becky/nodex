@@ -38,17 +38,17 @@ export const DataEdge = memo<EdgeProps>(
     const { getNode } = useReactFlow();
 
     // Memoize calculations to prevent unnecessary recalculations
-    const { sourceNode, edgePath, labelX, labelY, value, displayValue, label } =
+    const { edgePath, labelX, labelY, value, displayValue, label } =
       useMemo(() => {
         // Get source node using proper source ID from edge
-        const sourceNodeId = id.split('-to-')[0] || id.split('->')[0] || '';
-        const sourceNode = getNode(sourceNodeId);
+        const sourceNodeId = id.split('-to-')[0] ?? id.split('->')[0] ?? '';
+        const _sourceNode = getNode(sourceNodeId);
 
         // Type guard for data
         const edgeData = data as DataEdgeData | undefined;
 
         // Get the value from the source node's data using the specified key
-        const value: unknown = sourceNode?.data?.[edgeData?.key ?? ''];
+        const value: unknown = _sourceNode?.data?.[edgeData?.key ?? ''];
         const displayValue = edgeData?.formatValue
           ? edgeData.formatValue(value)
           : String(value ?? 'N/A');
@@ -62,7 +62,6 @@ export const DataEdge = memo<EdgeProps>(
         });
 
         return {
-          sourceNode,
           edgePath,
           labelX,
           labelY,
@@ -87,8 +86,8 @@ export const DataEdge = memo<EdgeProps>(
 
     // Validate connection compatibility
     const isValidConnection = useMemo(() => {
-      const sourceNode = getNode(id.split('-to-')[0] || '');
-      const targetNode = getNode(id.split('-to-')[1] || '');
+      const sourceNode = getNode(id.split('-to-')[0] ?? '');
+      const targetNode = getNode(id.split('-to-')[1] ?? '');
 
       return (
         sourceNode &&

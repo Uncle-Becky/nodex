@@ -8,8 +8,8 @@ export interface McpContextResponse {
   type: string;
   createdAt: string; // Dates will be strings over HTTP
   updatedAt: string;
-  data: any;
-  metadata?: Record<string, any>;
+  data: unknown;
+  metadata?: Record<string, unknown>;
 }
 
 export interface ClientLLMRequest {
@@ -31,23 +31,23 @@ export interface ClientLLMResponse {
     completion_tokens?: number;
     total_tokens: number;
   }; // Ensure total_tokens is expected
-  error?: any;
+  error?: unknown;
 }
 
 const MCP_SERVER_BASE_URL =
-  process.env.REACT_APP_MCP_SERVER_URL || 'http://localhost:3001/api/mcp';
+  process.env.REACT_APP_MCP_SERVER_URL ?? 'http://localhost:3001/api/mcp';
 
 async function handleResponse<T>(response: Response): Promise<T> {
   if (!response.ok) {
-    let errorData;
+    let errorData: { message?: string; error?: { message?: string } };
     try {
       errorData = await response.json();
-    } catch (e) {
+    } catch {
       errorData = { message: response.statusText };
     }
     console.error('MCP API Error:', errorData);
     throw new Error(
-      `HTTP error ${response.status}: ${errorData?.error?.message || errorData?.message || response.statusText}`
+      `HTTP error ${response.status}: ${errorData?.error?.message ?? errorData?.message ?? response.statusText}`
     );
   }
   // For 204 No Content, response.json() will fail. Handle it before.
@@ -61,8 +61,8 @@ export const mcpApiService = {
   createContext: async (
     ownerId: string,
     type: string,
-    initialData?: any,
-    metadata?: Record<string, any>
+    initialData?: unknown,
+    metadata?: Record<string, unknown>
   ): Promise<McpContextResponse> => {
     console.log(
       `[McpApiService] Creating context: ownerId=${ownerId}, type=${type}`
@@ -97,8 +97,8 @@ export const mcpApiService = {
 
   updateContext: async (
     contextId: string,
-    data: any,
-    metadata?: Record<string, any>
+    data: unknown,
+    metadata?: Record<string, unknown>
   ): Promise<McpContextResponse> => {
     console.log(`[McpApiService] Updating context: contextId=${contextId}`);
     const response = await fetch(
@@ -115,7 +115,7 @@ export const mcpApiService = {
   appendToListInContext: async (
     contextId: string,
     listKey: string,
-    item: any
+    item: unknown
   ): Promise<McpContextResponse> => {
     console.log(
       `[McpApiService] Appending to list '${listKey}' in context: ${contextId}`
@@ -145,7 +145,7 @@ export const mcpApiService = {
         .catch(() => ({ message: response.statusText }));
       console.error('[McpApiService] Error deleting context:', errorData);
       throw new Error(
-        `HTTP error ${response.status}: ${errorData.message || response.statusText}`
+        `HTTP error ${response.status}: ${errorData.message ?? response.statusText}`
       );
     }
     // No JSON body expected for 204, handleResponse would fail if not for earlier check

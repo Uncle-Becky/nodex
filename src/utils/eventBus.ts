@@ -12,6 +12,18 @@ import type {
   EventValidator,
 } from '../types/bus';
 
+interface EventSubscription {
+  handler: EventHandler;
+  filter?: (event: BusEvent) => boolean;
+  once: boolean;
+}
+
+interface EventQueueItem {
+  event: BusEvent;
+  retryCount: number;
+  timestamp: number;
+}
+
 // Enhanced intelligent event bus implementation
 class IntelligentEventBus implements EventBus {
   private log: EventLogEntry[] = [];
@@ -21,6 +33,12 @@ class IntelligentEventBus implements EventBus {
   private metrics: BusMetrics;
   private isActive = true;
   private startTime = Date.now();
+  private eventQueue: EventQueueItem[] = [];
+  private processingQueue = false;
+  private readonly MAX_RETRY_ATTEMPTS = 3;
+  private readonly MAX_QUEUE_SIZE = 1000;
+  private readonly PERSISTENCE_KEY = 'event_bus_queue';
+  private readonly MAX_PERSISTED_EVENTS = 100;
 
   constructor() {
     this.metrics = {
@@ -52,6 +70,9 @@ class IntelligentEventBus implements EventBus {
       },
       priority: 1000, // High priority to ensure it runs first
     });
+
+    this.loadPersistedEvents();
+    this.startQueueProcessor();
   }
 
   async publish<T>(event: BusEvent<T>): Promise<void> {
@@ -87,7 +108,11 @@ class IntelligentEventBus implements EventBus {
 
   subscribe<T = unknown>(
     type: BusEventType | BusEventType[],
-    handler: EventHandler<T> | ((event: BusEvent<T>) => void | Promise<void>)
+    handler: EventHandler<T> | ((event: BusEvent<T>) => void | Promise<void>),
+    options: {
+      filter?: (event: BusEvent<T>) => boolean;
+      once?: boolean;
+    } = {}
   ): () => void {
     const types = Array.isArray(type) ? type : [type];
     const normalizedHandler: EventHandler<T> =
@@ -382,6 +407,98 @@ class IntelligentEventBus implements EventBus {
       count += handlers.size;
     });
     this.metrics.activeSubscribers = count;
+  }
+
+  private loadPersistedEvents(): void {
+    try {
+      const stored = localStorage.getItem(this.PERSISTENCE_KEY);
+      if (stored) {
+        const persistedEvents = JSON.parse(stored) as EventQueueItem[];
+        this.eventQueue = persistedEvents.slice(-this.MAX_PERSISTED_EVENTS);
+      }
+    } catch (error) {
+      console.error('Failed to load persisted events:', error);
+    }
+  }
+
+  private persistEvents(): void {
+    try {
+      const eventsToPersist = this.eventQueue.slice(-this.MAX_PERSISTED_EVENTS);
+      localStorage.setItem(
+        this.PERSISTENCE_KEY,
+        JSON.stringify(eventsToPersist)
+      );
+    } catch (error) {
+      console.error('Failed to persist events:', error);
+    }
+  }
+
+  private startQueueProcessor(): void {
+    setInterval(() => {
+      this.processQueue();
+    }, 100);
+  }
+
+  private async processQueue(): Promise<void> {
+    if (this.processingQueue || this.eventQueue.length === 0) return;
+
+    this.processingQueue = true;
+    const now = Date.now();
+
+    try {
+      while (this.eventQueue.length > 0) {
+        const item = this.eventQueue[0];
+
+        // Skip expired events
+        if (item.event.ttl && now - item.timestamp > item.event.ttl) {
+          this.eventQueue.shift();
+          continue;
+        }
+
+        // Process event
+        try {
+          await this.processEvent(item.event);
+          this.eventQueue.shift();
+        } catch (error) {
+          console.error('Error processing event:', error);
+
+          if (item.retryCount < this.MAX_RETRY_ATTEMPTS) {
+            // Move to end of queue for retry
+            item.retryCount++;
+            this.eventQueue.push(this.eventQueue.shift()!);
+          } else {
+            // Remove after max retries
+            this.eventQueue.shift();
+          }
+        }
+
+        // Persist queue state periodically
+        if (this.eventQueue.length % 10 === 0) {
+          this.persistEvents();
+        }
+      }
+    } finally {
+      this.processingQueue = false;
+    }
+  }
+
+  public getQueueStatus(): {
+    queueLength: number;
+    processing: boolean;
+    oldestEvent: number;
+    newestEvent: number;
+  } {
+    return {
+      queueLength: this.eventQueue.length,
+      processing: this.processingQueue,
+      oldestEvent: this.eventQueue[0]?.timestamp ?? 0,
+      newestEvent: this.eventQueue[this.eventQueue.length - 1]?.timestamp ?? 0,
+    };
+  }
+
+  public clearQueue(): void {
+    this.eventQueue = [];
+    this.persistEvents();
   }
 }
 

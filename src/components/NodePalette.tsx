@@ -1,9 +1,19 @@
 import type { Node } from '@xyflow/react';
 import React, { useCallback, useState } from 'react';
 import { useGraphStore } from '../store/useGraphStore';
-import type { NodeType } from '../types/nodes';
+import type { DataType, NodePort, NodeType } from '../types/nodes';
+import type { EdgeValidationState } from './NodeConnectorUtils';
 
-interface NodeTemplate {
+// Export the EdgeValidationState interface for use in other files
+export type { EdgeValidationState };
+
+interface NodePaletteProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+// Simplified templates for the palette - we'll convert these to full NodeTemplate format when needed
+interface SimplifiedNodeTemplate {
   type: NodeType;
   label: string;
   description: string;
@@ -11,14 +21,17 @@ interface NodeTemplate {
   icon: string;
   color: string;
   defaultData: Record<string, unknown>;
+  inputs: NodePort[];
+  outputs: NodePort[];
+  validationRules?: {
+    // Rules for validating connections
+    allowedInputTypes: DataType[];
+    allowedOutputTypes: DataType[];
+    maxConnections?: number;
+  };
 }
 
-interface NodePaletteProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
-
-const nodeTemplates: NodeTemplate[] = [
+const nodeTemplates: SimplifiedNodeTemplate[] = [
   // LLM Nodes
   {
     type: 'llm_chat',
@@ -33,6 +46,31 @@ const nodeTemplates: NodeTemplate[] = [
       temperature: 0.7,
       maxTokens: 2048,
       conversationHistory: true,
+    },
+    inputs: [
+      {
+        id: 'input-text',
+        type: 'text',
+        label: 'Input Text',
+        description: 'Text input for the chat',
+        required: true,
+        multiple: false,
+      },
+    ],
+    outputs: [
+      {
+        id: 'output-text',
+        type: 'text',
+        label: 'Response',
+        description: 'LLM response text',
+        required: true,
+        multiple: false,
+      },
+    ],
+    validationRules: {
+      allowedInputTypes: ['text'],
+      allowedOutputTypes: ['text'],
+      maxConnections: 1,
     },
   },
   {
@@ -49,6 +87,8 @@ const nodeTemplates: NodeTemplate[] = [
       maxTokens: 1024,
       outputFormat: 'text',
     },
+    inputs: [],
+    outputs: [],
   },
 
   // Code Execution
@@ -66,6 +106,8 @@ const nodeTemplates: NodeTemplate[] = [
       allowNetworkAccess: false,
       allowFileAccess: false,
     },
+    inputs: [],
+    outputs: [],
   },
 
   // Data Processing
@@ -85,6 +127,8 @@ const nodeTemplates: NodeTemplate[] = [
       ],
       validation: true,
     },
+    inputs: [],
+    outputs: [],
   },
   {
     type: 'web_scraper',
@@ -100,6 +144,8 @@ const nodeTemplates: NodeTemplate[] = [
       respectRobots: true,
       rateLimit: 1000,
     },
+    inputs: [],
+    outputs: [],
   },
   {
     type: 'file_processor',
@@ -113,6 +159,8 @@ const nodeTemplates: NodeTemplate[] = [
       operations: [{ type: 'read', parameters: {} }],
       maxFileSize: 10485760, // 10MB
     },
+    inputs: [],
+    outputs: [],
   },
 
   // Analysis
@@ -127,6 +175,8 @@ const nodeTemplates: NodeTemplate[] = [
       analysisTypes: ['sentiment', 'entities'],
       confidence: 0.8,
     },
+    inputs: [],
+    outputs: [],
   },
   {
     type: 'image_analyzer',
@@ -141,6 +191,8 @@ const nodeTemplates: NodeTemplate[] = [
       confidence: 0.8,
       outputFormat: 'json',
     },
+    inputs: [],
+    outputs: [],
   },
 
   // Control Flow
@@ -156,6 +208,8 @@ const nodeTemplates: NodeTemplate[] = [
       errorHandling: 'stop',
       maxIterations: 10,
     },
+    inputs: [],
+    outputs: [],
   },
   {
     type: 'condition_checker',
@@ -167,6 +221,8 @@ const nodeTemplates: NodeTemplate[] = [
     defaultData: {
       conditions: [{ field: 'value', operator: 'greater', value: 0 }],
     },
+    inputs: [],
+    outputs: [],
   },
 
   // Utilities
@@ -183,6 +239,8 @@ const nodeTemplates: NodeTemplate[] = [
       encryption: false,
       searchable: true,
     },
+    inputs: [],
+    outputs: [],
   },
   {
     type: 'api_connector',
@@ -198,6 +256,8 @@ const nodeTemplates: NodeTemplate[] = [
       retries: 3,
       rateLimit: 1000,
     },
+    inputs: [],
+    outputs: [],
   },
   {
     type: 'formatter',
@@ -210,6 +270,8 @@ const nodeTemplates: NodeTemplate[] = [
       format: 'json',
       template: '{{input}}',
     },
+    inputs: [],
+    outputs: [],
   },
   {
     type: 'logger',
@@ -223,6 +285,8 @@ const nodeTemplates: NodeTemplate[] = [
       includeTimestamp: true,
       includeMetadata: true,
     },
+    inputs: [],
+    outputs: [],
   },
 ];
 
@@ -249,7 +313,7 @@ export const NodePalette: React.FC<NodePaletteProps> = ({
   });
 
   const handleAddNode = useCallback(
-    (template: NodeTemplate) => {
+    (template: SimplifiedNodeTemplate) => {
       // Calculate position based on current viewport and add some randomization
       const position = {
         x: Math.random() * 400 + 100 - viewport.x,

@@ -104,13 +104,13 @@ export default function App() {
 
   // Managers - single instances
   const [agentManager] = useState(() => new AgentManager());
-  const [componentStateManager] = useState(() =>
+  const [_componentStateManager] = useState(() =>
     ComponentStateManager.getInstance()
   );
-  const [flowValidationService] = useState(() =>
+  const [_flowValidationService] = useState(() =>
     FlowValidationService.getInstance()
   );
-  const [executionHistoryService] = useState(() =>
+  const [_executionHistoryService] = useState(() =>
     ExecutionHistoryService.getInstance()
   );
 
@@ -274,7 +274,7 @@ export default function App() {
   );
 
   const onInit = useCallback((rf: ReactFlowInstance) => {
-    (window as any).rf = rf;
+    (window as unknown as { rf: ReactFlowInstance }).rf = rf;
     console.log('React Flow initialized');
   }, []);
 
@@ -379,7 +379,7 @@ export default function App() {
 
   // Loading state
   if (!isInitialized) {
-    return <LoadingScreen error={initError || undefined} />;
+    return <LoadingScreen error={initError ?? undefined} />;
   }
 
   return (

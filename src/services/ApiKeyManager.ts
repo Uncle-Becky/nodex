@@ -1,4 +1,4 @@
-import type { LLMProvider } from '../types/llm';
+import type { LLMProvider, UsageTracker } from '../types/llm';
 
 interface ApiKeyConfig {
   provider: LLMProvider;
@@ -10,8 +10,7 @@ interface ApiKeyConfig {
   isValid: boolean;
 }
 
-interface RateLimitConfig {
-  provider: LLMProvider;
+interface ApiRateLimitConfig {
   requestsPerMinute: number;
   requestsPerHour: number;
   requestsPerDay: number;
@@ -20,32 +19,43 @@ interface RateLimitConfig {
   tokensPerDay: number;
 }
 
-interface UsageTracker {
-  provider: LLMProvider;
-  requests: Array<{ timestamp: number; tokens: number }>;
-  dailyUsage: number;
-  hourlyUsage: number;
-  minuteUsage: number;
-  lastReset: number;
-}
-
 class ApiKeyManager {
+  private static instance: ApiKeyManager | null = null;
   private keys: Map<LLMProvider, ApiKeyConfig> = new Map();
-  private rateLimits: Map<LLMProvider, RateLimitConfig> = new Map();
+  private rateLimits: Map<LLMProvider, ApiRateLimitConfig> = new Map();
   private usage: Map<LLMProvider, UsageTracker> = new Map();
   private encryptionKey!: CryptoKey; // Definite assignment assertion
+  private isInitialized = false;
 
-  constructor() {
-    // Call the async initialization method.
-    // Note: This means the key might not be immediately available.
-    // A better pattern would be a static async factory method or ensuring init is called and awaited.
-    this.initEncryptionKey().catch(error => {
-      console.error('Failed to initialize encryption key:', error);
-      // Handle initialization failure, e.g., by disabling encryption/decryption features
-      // or by setting a flag indicating the manager is not ready.
-    });
-    this.initializeRateLimits();
-    this.loadKeysFromStorage();
+  private constructor() {
+    // Private constructor to enforce singleton pattern
+  }
+
+  public static getInstance(): ApiKeyManager {
+    ApiKeyManager.instance ??= new ApiKeyManager();
+    return ApiKeyManager.instance;
+  }
+
+  public async initialize(): Promise<void> {
+    if (this.isInitialized) {
+      console.log('ApiKeyManager: Already initialized');
+      return;
+    }
+
+    try {
+      await this.initEncryptionKey();
+      this.initializeRateLimits();
+      await this.loadKeysFromStorage();
+      this.isInitialized = true;
+      console.log('ApiKeyManager: Initialized successfully');
+    } catch (error) {
+      console.error('ApiKeyManager: Initialization failed:', error);
+      throw error;
+    }
+  }
+
+  public getInitializationStatus(): boolean {
+    return this.isInitialized;
   }
 
   private async initEncryptionKey(): Promise<void> {
@@ -85,27 +95,34 @@ class ApiKeyManager {
   }
 
   private initializeRateLimits(): void {
-    const defaultLimits: Record<LLMProvider, RateLimitConfig> = {
+    const defaultLimits: Record<LLMProvider, ApiRateLimitConfig> = {
       openai: {
-        provider: 'openai',
-        requestsPerMinute: 60,
-        requestsPerHour: 3600,
-        requestsPerDay: 10000,
+        // GPT-4 Turbo: 500 RPM, 200K TPM
+        // GPT-3.5 Turbo: 3,500 RPM, 90K TPM
+        // Using conservative limits for mixed usage
+        requestsPerMinute: 500,
+        requestsPerHour: 15000,
+        requestsPerDay: 200000,
         tokensPerMinute: 90000,
-        tokensPerHour: 1000000,
-        tokensPerDay: 10000000,
+        tokensPerHour: 2000000,
+        tokensPerDay: 20000000,
       },
       claude: {
-        provider: 'claude',
-        requestsPerMinute: 50,
-        requestsPerHour: 1000,
-        requestsPerDay: 5000,
-        tokensPerMinute: 40000,
-        tokensPerHour: 400000,
-        tokensPerDay: 1000000,
+        // Claude 3 Opus: 100 RPM, 100K TPM
+        // Claude 3 Sonnet: 200 RPM, 100K TPM
+        // Claude 3 Haiku: 500 RPM, 100K TPM
+        // Using conservative limits for mixed usage
+        requestsPerMinute: 100,
+        requestsPerHour: 5000,
+        requestsPerDay: 100000,
+        tokensPerMinute: 100000,
+        tokensPerHour: 2000000,
+        tokensPerDay: 20000000,
       },
       gemini: {
-        provider: 'gemini',
+        // Gemini Pro: 60 RPM, 32K TPM
+        // Gemini Ultra: 60 RPM, 32K TPM
+        // Using documented limits
         requestsPerMinute: 60,
         requestsPerHour: 1500,
         requestsPerDay: 15000,
@@ -114,7 +131,8 @@ class ApiKeyManager {
         tokensPerDay: 50000000,
       },
       perplexity: {
-        provider: 'perplexity',
+        // Perplexity API: 20 RPM, 10K TPM
+        // Using documented limits
         requestsPerMinute: 20,
         requestsPerHour: 500,
         requestsPerDay: 5000,
@@ -124,8 +142,16 @@ class ApiKeyManager {
       },
     };
 
-    Object.values(defaultLimits).forEach(limit => {
-      this.rateLimits.set(limit.provider, limit);
+    // Add comments explaining the limits
+    console.log(
+      'ApiKeyManager: Initializing rate limits with the following configurations:'
+    );
+    Object.entries(defaultLimits).forEach(([provider, limits]) => {
+      console.log(`${provider.toUpperCase()} Rate Limits:
+        - Requests: ${limits.requestsPerMinute}/min, ${limits.requestsPerHour}/hour, ${limits.requestsPerDay}/day
+        - Tokens: ${limits.tokensPerMinute}/min, ${limits.tokensPerHour}/hour, ${limits.tokensPerDay}/day
+      `);
+      this.rateLimits.set(provider as LLMProvider, limits);
     });
   }
 
@@ -160,7 +186,7 @@ class ApiKeyManager {
     const encodedText = new TextEncoder().encode(text);
 
     const ciphertext = await crypto.subtle.encrypt(
-      { name: 'AES-GCM', iv: iv },
+      { name: 'AES-GCM', iv },
       this.encryptionKey,
       encodedText
     );
@@ -174,7 +200,7 @@ class ApiKeyManager {
     const bytes = combined; // combined is already Uint8Array
     const len = bytes.byteLength;
     for (let i = 0; i < len; i++) {
-      binary += String.fromCharCode(bytes[i]);
+      binary += String.fromCharCode(bytes[i]!);
     }
     return btoa(binary);
   }
@@ -196,7 +222,7 @@ class ApiKeyManager {
 
     try {
       const decryptedBuffer = await crypto.subtle.decrypt(
-        { name: 'AES-GCM', iv: iv },
+        { name: 'AES-GCM', iv },
         this.encryptionKey,
         ciphertext
       );
@@ -225,12 +251,7 @@ class ApiKeyManager {
 
     // Initialize usage tracker
     this.usage.set(provider, {
-      provider,
       requests: [],
-      dailyUsage: 0,
-      hourlyUsage: 0,
-      minuteUsage: 0,
-      lastReset: Date.now(),
     });
   }
 
@@ -345,6 +366,12 @@ class ApiKeyManager {
     return Array.from(this.keys.keys());
   }
 
+  public getRateLimitsForProvider(
+    provider: LLMProvider
+  ): ApiRateLimitConfig | null {
+    return this.rateLimits.get(provider) ?? null;
+  }
+
   public getProviderStatus(provider: LLMProvider): {
     hasKey: boolean;
     isValid: boolean;
@@ -402,4 +429,5 @@ class ApiKeyManager {
   }
 }
 
-export const apiKeyManager = new ApiKeyManager();
+// Export the singleton instance
+export const apiKeyManager = ApiKeyManager.getInstance();

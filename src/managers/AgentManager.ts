@@ -1,20 +1,15 @@
 import { CanvasMetaAgent } from '../agents/CanvasMetaAgent';
-import type { AgentId } from '../types/agents';
+import type { AgentId, AgentState, AgentType } from '../types/agents';
 import type { BusEvent } from '../types/bus';
 import { eventBus } from '../utils/eventBus';
 
-export type AgentType = 'reasoning' | 'swarm' | 'canvas' | 'worker';
-
-export interface AgentInfo {
-  id: AgentId;
-  type: AgentType;
-  status: 'initializing' | 'active' | 'paused' | 'error' | 'terminated';
+export interface AgentInfo extends Pick<AgentState, 'id' | 'type' | 'status'> {
   createdAt: number;
   lastActivity: number;
   messageCount: number;
   errorCount: number;
   position?: { x: number; y: number };
-  state?: Record<string, unknown>;
+  state?: Partial<AgentState>;
 }
 
 export interface NetworkMetrics {
@@ -36,7 +31,7 @@ export interface SwarmMetrics {
 export class AgentManager {
   private agents: Map<AgentId, AgentInfo> = new Map();
   private canvasAgent: CanvasMetaAgent;
-  private messageHistory: BusEvent[] = [];
+  private messageHistory: BusEvent<unknown>[] = [];
 
   constructor() {
     this.canvasAgent = new CanvasMetaAgent();
@@ -44,23 +39,22 @@ export class AgentManager {
   }
 
   private initialize(): void {
-    eventBus.subscribe(
-      [
-        'AGENT_INIT',
-        'AGENT_MESSAGE',
-        'AGENT_STATE_UPDATE',
-        'AGENT_ERROR',
-        'SYSTEM_METRICS',
-      ],
-      event => {
-        this.handleEvent(event);
-      }
-    );
+    const eventTypes = [
+      'AGENT_INIT',
+      'AGENT_MESSAGE',
+      'AGENT_STATE_UPDATE',
+      'AGENT_ERROR',
+      'SYSTEM_METRICS',
+    ] as const;
+
+    eventBus.subscribe(eventTypes, (event: BusEvent<unknown>) => {
+      this.handleEvent(event);
+    });
   }
 
-  public async createAgent(type: AgentType, id?: AgentId): Promise<string> {
-    const agentId: string =
-      id ?? `${type}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+  public async createAgent(type: AgentType, id?: AgentId): Promise<AgentId> {
+    const agentId =
+      id ?? `${type}-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
 
     const agentInfo: AgentInfo = {
       id: agentId,
@@ -73,21 +67,33 @@ export class AgentManager {
     };
 
     this.agents.set(agentId, agentInfo);
-    agentInfo.status = 'active';
 
-    // Ensure we always return a string
-    if (!agentId) {
-      throw new Error('Failed to create agent ID');
-    }
+    // Update status after initialization
+    const updatedInfo = { ...agentInfo, status: 'active' as const };
+    this.agents.set(agentId, updatedInfo);
 
     return agentId;
   }
 
-  private handleEvent(event: BusEvent): void {
+  private handleEvent(event: BusEvent<unknown>): void {
     this.messageHistory.push(event);
 
+    // Keep message history at a reasonable size
     if (this.messageHistory.length > 10000) {
       this.messageHistory = this.messageHistory.slice(-5000);
+    }
+
+    // Update agent state based on event
+    if (event.target && this.agents.has(event.target)) {
+      const agent = this.agents.get(event.target)!;
+      agent.lastActivity = event.timestamp;
+      agent.messageCount++;
+
+      if (event.type === 'AGENT_ERROR') {
+        agent.errorCount++;
+      }
+
+      this.agents.set(event.target, agent);
     }
   }
 
@@ -103,9 +109,9 @@ export class AgentManager {
   public sendCanvasCommand(
     agentId: AgentId,
     command: string,
-    args?: unknown[]
+    args: unknown[] = []
   ): void {
-    eventBus.publish({
+    const event: BusEvent<{ command: string; args: unknown[] }> = {
       id: `canvas-command-${Date.now()}`,
       type: 'CANVAS_COMMAND',
       timestamp: Date.now(),
@@ -115,7 +121,9 @@ export class AgentManager {
         command,
         args,
       },
-    });
+    };
+
+    eventBus.publish(event);
   }
 
   public getNetworkMetrics(): NetworkMetrics {

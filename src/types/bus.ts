@@ -5,47 +5,12 @@ export type BusEventType =
   | 'AGENT_MESSAGE'
   | 'AGENT_STATE_UPDATE'
   | 'AGENT_ERROR'
-  | 'EDGE_UPDATE'
-  | 'SYSTEM_EVENT'
-  | 'CANVAS_COMMAND'
-  | 'EDGE_CREATE'
-  | 'NODE_CREATE'
-  | 'SYSTEM_ALERT'
-  | 'AGENT_QUERY'
   | 'SYSTEM_METRICS'
-  // Node Configuration Events
+  | 'CANVAS_COMMAND'
   | 'NODE_SELECT'
-  | 'NODE_CONFIG_UPDATE'
-  // Agent Execution Events
-  | 'AGENT_SELECT'
-  | 'AGENT_EXECUTE'
-  | 'AGENT_PAUSE'
-  | 'AGENT_STOP'
-  // Component Visibility Events
-  | 'COMPONENT_VISIBILITY'
-  // Component State Events
-  | 'COMPONENT_STATE_UPDATE'
-  | 'COMPONENT_STATE_RESET'
-  | 'COMPONENT_STATE_CHANGED'
-  // Flow Validation Events
-  | 'FLOW_VALIDATE'
-  | 'FLOW_VALIDATION_RESULT'
-  // Flow Execution Events
-  | 'FLOW_EXECUTE'
-  | 'FLOW_PAUSE'
-  | 'FLOW_STOP'
-  // Execution History Events
-  | 'EXECUTION_HISTORY_CLEARED'
-  | 'EXECUTION_REPLAY_START'
-  | 'EXECUTION_REPLAY_END'
-  // Edge Data Events
-  | 'REQUEST_EDGE_DATA'
-  | 'EDGE_DATA_RESPONSE'
-  // Agent Goal Events
-  | 'AGENT_GOAL_ACHIEVED'
-  | 'AGENT_GOALS_UPDATE';
+  | 'FLOW_VALIDATION_RESULT';
 
-export type EventPriority = 'low' | 'normal' | 'high';
+export type EventPriority = 'low' | 'normal' | 'high' | 'critical';
 
 export interface BusEvent<T = unknown> {
   id: string;
@@ -58,6 +23,8 @@ export interface BusEvent<T = unknown> {
   ttl?: number;
   meta?: {
     tags?: string[];
+    correlationId?: string;
+    causationId?: string;
     [key: string]: unknown;
   };
 }
@@ -76,30 +43,31 @@ export interface EventLogEntry extends BusEvent {
 }
 
 export interface EventFilter {
-  type?: BusEventType;
-  source?: string;
-  target?: string;
+  type?: BusEventType | BusEventType[];
+  source?: string | string[];
+  target?: string | string[];
   startTime?: number;
   endTime?: number;
-  hasErrors?: boolean;
   tags?: string[];
+  correlationId?: string;
+  causationId?: string;
+  custom?: (event: BusEvent) => boolean;
 }
 
 export interface EventHandler<T = unknown> {
   handler: (event: BusEvent<T>) => void | Promise<void>;
-  priority?: number;
+  priority?: EventPriority;
   filter?: (event: BusEvent<T>) => boolean;
-  once?: boolean;
 }
 
 export interface EventMiddleware {
-  process: (event: BusEvent, next: () => void) => void;
+  process: (event: BusEvent, next: () => void) => void | Promise<void>;
   priority: number;
 }
 
 export interface EventValidator {
   validate: (event: BusEvent) => boolean | string;
-  eventTypes?: BusEventType[];
+  priority?: EventPriority;
 }
 
 export interface EventAnalysis {
@@ -108,7 +76,11 @@ export interface EventAnalysis {
   eventsBySource: Record<string, number>;
   averageProcessingTime: number;
   errorRate: number;
-  timelineAnalysis: Record<string, number>;
+  timeline: {
+    timestamp: number;
+    count: number;
+    errors: number;
+  }[];
 }
 
 export interface BusMetrics {
@@ -120,14 +92,65 @@ export interface BusMetrics {
   uptime: number;
 }
 
+export interface EventSubscriptionOptions {
+  filter?: (event: BusEvent) => boolean;
+  once?: boolean;
+  priority?: number;
+}
+
+export interface EventQueueStatus {
+  queueLength: number;
+  processing: boolean;
+  oldestEvent: number;
+  newestEvent: number;
+  retryCount: number;
+  errorCount: number;
+}
+
+export interface EventPersistenceConfig {
+  enabled: boolean;
+  maxEvents: number;
+  storageKey: string;
+  autoPersist: boolean;
+  persistInterval: number;
+}
+
+export interface EventBusConfig {
+  maxQueueSize: number;
+  maxRetryAttempts: number;
+  processingInterval: number;
+  persistence: EventPersistenceConfig;
+  defaultTtl?: number;
+  defaultPriority: 'low' | 'normal' | 'high';
+}
+
+export const DEFAULT_EVENT_BUS_CONFIG: EventBusConfig = {
+  maxQueueSize: 1000,
+  maxRetryAttempts: 3,
+  processingInterval: 100,
+  persistence: {
+    enabled: true,
+    maxEvents: 100,
+    storageKey: 'event_bus_queue',
+    autoPersist: true,
+    persistInterval: 10000,
+  },
+  defaultTtl: 3600000, // 1 hour
+  defaultPriority: 'normal',
+};
+
 export interface EventBus {
   publish<T>(event: BusEvent<T>): Promise<void>;
   subscribe<T = unknown>(
     type: BusEventType | BusEventType[],
-    handler: EventHandler<T> | ((event: BusEvent<T>) => void | Promise<void>)
+    handler: EventHandler<T> | ((event: BusEvent<T>) => void | Promise<void>),
+    options?: {
+      filter?: (event: BusEvent<T>) => boolean;
+      once?: boolean;
+    }
   ): () => void;
   unsubscribe<T = unknown>(
-    type: BusEventType[],
+    types: BusEventType[],
     handler: EventHandler<T> | ((event: BusEvent<T>) => void | Promise<void>)
   ): void;
   query(filter: EventFilter): EventLogEntry[];

@@ -1,8 +1,16 @@
 {
-  "logging": {
-    "level": "info"
-  },
-  "featureFlags": {
-    "newFeatureX": false
+  "logging": {"level": "info"},
+  "featureFlags": {"newFeatureX": false},
+  "mcpServer": {
+    "pipedream": {
+      "googleSheets": {
+        "mcpServers": {
+          "Google Sheets": {
+            "url": "https://mcp.pipedream.net/32cd4dc9-4309-4a95-aec1-af0e8c82669f/google_sheets"
+          }
+        }
+      }
+    },
+    "openai": {"url": "https://api.openai.com/v1/chat/completions"}
   }
 }

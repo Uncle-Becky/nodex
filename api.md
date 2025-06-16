@@ -1,81 +1,81 @@
-# Shared
+# API Reference
 
-Types:
+## Shared Types
 
-- <code><a href="./src/resources/shared.ts">ChatModel</a></code>
-- <code><a href="./src/resources/shared.ts">ComparisonFilter</a></code>
-- <code><a href="./src/resources/shared.ts">CompoundFilter</a></code>
-- <code><a href="./src/resources/shared.ts">ErrorObject</a></code>
-- <code><a href="./src/resources/shared.ts">FunctionDefinition</a></code>
-- <code><a href="./src/resources/shared.ts">FunctionParameters</a></code>
-- <code><a href="./src/resources/shared.ts">Metadata</a></code>
-- <code><a href="./src/resources/shared.ts">Reasoning</a></code>
-- <code><a href="./src/resources/shared.ts">ReasoningEffort</a></code>
-- <code><a href="./src/resources/shared.ts">ResponseFormatJSONObject</a></code>
-- <code><a href="./src/resources/shared.ts">ResponseFormatJSONSchema</a></code>
-- <code><a href="./src/resources/shared.ts">ResponseFormatText</a></code>
+- <code><a href="./src/types/llm.ts">ChatModel</a></code>
+- <code><a href="./src/types/index.ts">ComparisonFilter</a></code>
+- <code><a href="./src/types/index.ts">CompoundFilter</a></code>
+- <code><a href="./src/types/index.ts">ErrorObject</a></code>
+- <code><a href="./src/types/llm.ts">FunctionDefinition</a></code>
+- <code><a href="./src/types/llm.ts">FunctionParameters</a></code>
+- <code><a href="./src/types/index.ts">Metadata</a></code>
+- <code><a href="./src/types/index.ts">Reasoning</a></code>
+- <code><a href="./src/types/index.ts">ReasoningEffort</a></code>
+- <code><a href="./src/types/index.ts">ResponseFormatJSONObject</a></code>
+- <code><a href="./src/types/index.ts">ResponseFormatJSONSchema</a></code>
+- <code><a href="./src/types/index.ts">ResponseFormatText</a></code>
 
 # Completions
 
 Types:
 
-- <code><a href="./src/resources/completions.ts">Completion</a></code>
-- <code><a href="./src/resources/completions.ts">CompletionChoice</a></code>
-- <code><a href="./src/resources/completions.ts">CompletionUsage</a></code>
+- <code><a href="./src/types/llm.ts">Completion</a></code>
+- <code><a href="./src/types/llm.ts">CompletionChoice</a></code>
+- <code><a href="./src/types/llm.ts">CompletionUsage</a></code>
 
 Methods:
 
-- <code title="post /completions">client.completions.<a href="./src/resources/completions.ts">create</a>({ ...params }) -> Completion</code>
+- <code title="post /completions">client.completions.<a href="./src/services/LLMService.ts">create</a>({ ...params }) -> Completion</code>
 
 # Chat
 
 Types:
 
-- <code><a href="./src/resources/chat/chat.ts">ChatModel</a></code>
+- <code><a href="./src/types/llm.ts">ChatModel</a></code>
 
 ## Completions
 
 Types:
 
-- <code><a href="./src/resources/chat/completions/completions.ts">ChatCompletion</a></code>
-- <code><a href="./src/resources/chat/completions/completions.ts">ChatCompletionAssistantMessageParam</a></code>
-- <code><a href="./src/resources/chat/completions/completions.ts">ChatCompletionAudio</a></code>
-- <code><a href="./src/resources/chat/completions/completions.ts">ChatCompletionAudioParam</a></code>
-- <code><a href="./src/resources/chat/completions/completions.ts">ChatCompletionChunk</a></code>
-- <code><a href="./src/resources/chat/completions/completions.ts">ChatCompletionContentPart</a></code>
-- <code><a href="./src/resources/chat/completions/completions.ts">ChatCompletionContentPartImage</a></code>
-- <code><a href="./src/resources/chat/completions/completions.ts">ChatCompletionContentPartInputAudio</a></code>
-- <code><a href="./src/resources/chat/completions/completions.ts">ChatCompletionContentPartRefusal</a></code>
-- <code><a href="./src/resources/chat/completions/completions.ts">ChatCompletionContentPartText</a></code>
-- <code><a href="./src/resources/chat/completions/completions.ts">ChatCompletionDeleted</a></code>
-- <code><a href="./src/resources/chat/completions/completions.ts">ChatCompletionDeveloperMessageParam</a></code>
-- <code><a href="./src/resources/chat/completions/completions.ts">ChatCompletionFunctionCallOption</a></code>
-- <code><a href="./src/resources/chat/completions/completions.ts">ChatCompletionFunctionMessageParam</a></code>
-- <code><a href="./src/resources/chat/completions/completions.ts">ChatCompletionMessage</a></code>
-- <code><a href="./src/resources/chat/completions/completions.ts">ChatCompletionMessageParam</a></code>
-- <code><a href="./src/resources/chat/completions/completions.ts">ChatCompletionMessageToolCall</a></code>
-- <code><a href="./src/resources/chat/completions/completions.ts">ChatCompletionModality</a></code>
-- <code><a href="./src/resources/chat/completions/completions.ts">ChatCompletionNamedToolChoice</a></code>
-- <code><a href="./src/resources/chat/completions/completions.ts">ChatCompletionPredictionContent</a></code>
-- <code><a href="./src/resources/chat/completions/completions.ts">ChatCompletionRole</a></code>
-- <code><a href="./src/resources/chat/completions/completions.ts">ChatCompletionStoreMessage</a></code>
-- <code><a href="./src/resources/chat/completions/completions.ts">ChatCompletionStreamOptions</a></code>
-- <code><a href="./src/resources/chat/completions/completions.ts">ChatCompletionSystemMessageParam</a></code>
-- <code><a href="./src/resources/chat/completions/completions.ts">ChatCompletionTokenLogprob</a></code>
-- <code><a href="./src/resources/chat/completions/completions.ts">ChatCompletionTool</a></code>
-- <code><a href="./src/resources/chat/completions/completions.ts">ChatCompletionToolChoiceOption</a></code>
-- <code><a href="./src/resources/chat/completions/completions.ts">ChatCompletionToolMessageParam</a></code>
-- <code><a href="./src/resources/chat/completions/completions.ts">ChatCompletionUserMessageParam</a></code>
-- <code><a href="./src/resources/chat/completions/completions.ts">CreateChatCompletionRequestMessage</a></code>
-- <code><a href="./src/resources/chat/completions/completions.ts">ChatCompletionReasoningEffort</a></code>
+- <code><a href="./src/types/llm.ts">ChatCompletion</a></code>
+- <code><a href="./src/types/llm.ts">ChatCompletionAssistantMessageParam</a></code>
+- <code><a href="./src/types/llm.ts">ChatCompletionAudio</a></code>
+- <code><a href="./src/types/llm.ts">ChatCompletionAudioParam</a></code>
+- <code><a href="./src/types/llm.ts">ChatCompletionChunk</a></code>
+- <code><a href="./src/types/llm.ts">ChatCompletionContentPart</a></code>
+- <code><a href="./src/types/llm.ts">ChatCompletionContentPartImage</a></code>
+- <code><a href="./src/types/llm.ts">ChatCompletionContentPartInputAudio</a></code>
+- <code><a href="./src/types/llm.ts">ChatCompletionContentPartRefusal</a></code>
+- <code><a href="./src/types/llm.ts">ChatCompletionContentPartText</a></code>
+- <code><a href="./src/types/llm.ts">ChatCompletionDeleted</a></code>
+- <code><a href="./src/types/llm.ts">ChatCompletionDeveloperMessageParam</a></code>
+- <code><a href="./src/types/llm.ts">ChatCompletionFunctionCallOption</a></code>
+- <code><a href="./src/types/llm.ts">ChatCompletionFunctionMessageParam</a></code>
+- <code><a href="./src/types/llm.ts">ChatCompletionMessage</a></code>
+- <code><a href="./src/types/llm.ts">ChatCompletionMessageParam</a></code>
+- <code><a href="./src/types/llm.ts">ChatCompletionMessageToolCall</a></code>
+- <code><a href="./src/types/llm.ts">ChatCompletionModality</a></code>
+- <code><a href="./src/types/llm.ts">ChatCompletionNamedToolChoice</a></code>
+- <code><a href="./src/types/llm.ts">ChatCompletionPredictionContent</a></code>
+- <code><a href="./src/types/llm.ts">ChatCompletionRole</a></code>
+- <code><a href="./src/types/llm.ts">ChatCompletionStoreMessage</a></code>
+- <code><a href="./src/types/llm.ts">ChatCompletionStreamOptions</a></code>
+- <code><a href="./src/types/llm.ts">ChatCompletionSystemMessageParam</a></code>
+- <code><a href="./src/types/llm.ts">ChatCompletionTokenLogprob</a></code>
+- <code><a href="./src/types/llm.ts">ChatCompletionTool</a></code>
+- <code><a href="./src/types/llm.ts">ChatCompletionToolChoiceOption</a></code>
+- <code><a href="./src/types/llm.ts">ChatCompletionToolMessageParam</a></code>
+- <code><a href="./src/types/llm.ts">ChatCompletionUserMessageParam</a></code>
+- <code><a href="./src/types/llm.ts">CreateChatCompletionRequestMessage</a></code>
+- <code><a href="./src/types/llm.ts">ChatCompletionReasoningEffort</a></code>
 
 Methods:
 
-- <code title="post /chat/completions">client.chat.completions.<a href="./src/resources/chat/completions/completions.ts">create</a>({ ...params }) -> ChatCompletion</code>
-- <code title="get /chat/completions/{completion_id}">client.chat.completions.<a href="./src/resources/chat/completions/completions.ts">retrieve</a>(completionId) -> ChatCompletion</code>
-- <code title="post /chat/completions/{completion_id}">client.chat.completions.<a href="./src/resources/chat/completions/completions.ts">update</a>(completionId, { ...params }) -> ChatCompletion</code>
-- <code title="get /chat/completions">client.chat.completions.<a href="./src/resources/chat/completions/completions.ts">list</a>({ ...params }) -> ChatCompletionsPage</code>
-- <code title="delete /chat/completions/{completion_id}">client.chat.completions.<a href="./src/resources/chat/completions/completions.ts">del</a>(completionId) -> ChatCompletionDeleted</code>
+- <code title="post /chat/completions">client.chat.completions.<a href="./src/services/LLMService.ts">create</a>({ ...params }) -> ChatCompletion</code>
+- <code title="get /chat/completions/{completion_id}">client.chat.completions.<a href="./src/services/LLMService.ts">retrieve</a>(completionId) -> ChatCompletion</code>
+- <code title="post /chat/completions/{completion_id}">client.chat.completions.<a href="./src/services/LLMService.ts">update</a>(completionId, { ...params }) -> ChatCompletion</code>
+- <code title="get /chat/completions">client.chat.completions.<a href="./src/services/LLMService.ts">list</a>({ ...params }) -> ChatCompletionsPage</code>
+- <code title="delete /chat/completions/{completion_id}">client.chat.completions.<a href="./src/services/LLMService.ts">del</a>(completionId) -> ChatCompletionDeleted</code>
 
 ### Messages
 

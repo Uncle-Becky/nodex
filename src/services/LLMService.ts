@@ -337,56 +337,7 @@ class GeminiAdapter implements ProviderAdapter {
   }
 
   private checkRateLimits(provider: LLMProvider, tokens: number): boolean {
-    const limits = this.getRateLimits(provider);
-    if (!limits) return true;
-
-    const usage = this.getUsage(provider);
-    if (!usage) return true;
-
-    const now = Date.now();
-    const minuteAgo = now - 60 * 1000;
-    const hourAgo = now - 60 * 60 * 1000;
-    const dayAgo = now - 24 * 60 * 60 * 1000;
-
-    const minuteRequests = usage.requests.filter(
-      (r: { timestamp: number }) => r.timestamp > minuteAgo
-    );
-    const hourRequests = usage.requests.filter(
-      (r: { timestamp: number }) => r.timestamp > hourAgo
-    );
-    const dayRequests = usage.requests.filter(
-      (r: { timestamp: number }) => r.timestamp > dayAgo
-    );
-
-    const minuteTokens = minuteRequests.reduce(
-      (sum: number, r: { tokens: number }) => sum + r.tokens,
-      0
-    );
-    const hourTokens = hourRequests.reduce(
-      (sum: number, r: { tokens: number }) => sum + r.tokens,
-      0
-    );
-    const dayTokens = dayRequests.reduce(
-      (sum: number, r: { tokens: number }) => sum + r.tokens,
-      0
-    );
-
-    const canRequest =
-      minuteRequests.length < limits.requestsPerMinute &&
-      hourRequests.length < limits.requestsPerHour &&
-      dayRequests.length < limits.tokensPerDay.length &&
-      minuteTokens + tokens < limits.tokensPerMinute.length &&
-      hourTokens + tokens < limits.tokensPerHour.length &&
-      dayTokens + tokens < limits.tokensPerDay.length;
-
-    if (!canRequest) {
-      const metrics = llmService.getMetrics(provider) as LLMMetrics;
-      if (metrics) {
-        metrics.rateLimitHits++;
-      }
-    }
-
-    return canRequest;
+    return apiKeyManager.checkRateLimit(provider, tokens);
   }
 
   public recordUsage(provider: LLMProvider, tokens: number): void {
@@ -397,23 +348,36 @@ class GeminiAdapter implements ProviderAdapter {
   }
 
   public getRateLimits(provider: LLMProvider): RateLimitConfig | undefined {
-    const limits = this.getRateLimits(provider);
+    const limits = apiKeyManager.getRateLimitsForProvider(provider);
     if (limits) {
       this.recordUsage(provider, 0); // Record the request even if no tokens used
+      // Convert ApiRateLimitConfig to RateLimitConfig for compatibility
+      return {
+        requestsPerMinute: limits.requestsPerMinute,
+        requestsPerHour: limits.requestsPerHour,
+        tokensPerDay: [],
+        tokensPerHour: [],
+        tokensPerMinute: [],
+        rateLimitHits: [],
+        rateLimitHits24h: [],
+        rateLimitHits7d: [],
+        rateLimitHits30d: [],
+        rateLimitHits90d: [],
+      };
     }
-    return limits;
+    return undefined;
   }
 
   public getUsage(provider: LLMProvider): UsageTracker | undefined {
-    const usage = this.getUsage(provider);
+    const usage = apiKeyManager.getUsageStats(provider);
     if (usage) {
       this.recordUsage(provider, 0); // Record the request even if no tokens used
     }
-    return usage;
+    return usage ?? undefined;
   }
 
   public getAllProviders(): LLMProvider[] {
-    return llmService.getAvailableProviders() as LLMProvider[];
+    return ['openai', 'claude', 'gemini', 'perplexity'];
   }
 
   validateConfig(config: LLMConfig): boolean {
@@ -481,25 +445,58 @@ class PerplexityAdapter implements ProviderAdapter {
 }
 
 class LLMService {
+  private static instance: LLMService;
   private adapters: Map<LLMProvider, ProviderAdapter> = new Map();
   private taskQueue: LLMTask[] = [];
   private runningTasks: Map<string, LLMTask> = new Map();
   private metrics: Map<LLMProvider, LLMMetrics> = new Map();
   private maxConcurrentTasks = 5;
-  private getRateLimits: (
-    provider: LLMProvider
-  ) => RateLimitConfig | undefined = () => undefined;
-  private getUsage: (provider: LLMProvider) => UsageTracker | undefined = () =>
-    undefined;
+  private initialized = false;
 
-  constructor() {
+  private constructor() {
     this.adapters.set('openai', new OpenAIAdapter());
     this.adapters.set('claude', new ClaudeAdapter());
     this.adapters.set('gemini', new GeminiAdapter());
     this.adapters.set('perplexity', new PerplexityAdapter());
+  }
 
-    this.initializeMetrics();
-    this.startTaskProcessor();
+  public static getInstance(): LLMService {
+    if (!LLMService.instance) {
+      LLMService.instance = new LLMService();
+    }
+    return LLMService.instance;
+  }
+
+  public async initialize(): Promise<void> {
+    if (this.initialized) {
+      console.log('LLMService: Already initialized');
+      return;
+    }
+
+    try {
+      console.log('LLMService: Starting initialization...');
+
+      // Verify API key manager is initialized
+      if (!apiKeyManager.getInitializationStatus()) {
+        throw new Error('ApiKeyManager not initialized');
+      }
+
+      // Initialize metrics
+      this.initializeMetrics();
+
+      // Start task processor
+      this.startTaskProcessor();
+
+      this.initialized = true;
+      console.log('LLMService: Initialized successfully');
+    } catch (error) {
+      console.error('LLMService: Initialization failed:', error);
+      throw error;
+    }
+  }
+
+  public isInitialized(): boolean {
+    return this.initialized;
   }
 
   private initializeMetrics(): void {
@@ -563,7 +560,7 @@ class LLMService {
       throw new Error(`No adapter found for provider: ${provider}`);
     }
 
-    const apiKey = apiKeyManager.getApiKey(provider);
+    const apiKey = await apiKeyManager.getApiKey(provider);
     if (!apiKey) {
       throw new Error(`No API key found for provider: ${provider}`);
     }
@@ -605,7 +602,7 @@ class LLMService {
     // Simple provider selection logic - can be enhanced
     const providersWithKeys = apiKeyManager
       .getAllProviders()
-      .filter(provider => apiKeyManager.hasValidKey(provider));
+      .filter((provider: LLMProvider) => apiKeyManager.hasValidKey(provider));
 
     if (providersWithKeys.length === 0) {
       throw new Error(
@@ -613,8 +610,8 @@ class LLMService {
       );
     }
 
-    const availableProviders = providersWithKeys.filter(provider =>
-      apiKeyManager.checkRateLimit(provider)
+    const availableProviders = providersWithKeys.filter(
+      (provider: LLMProvider) => apiKeyManager.checkRateLimit(provider)
     );
 
     if (availableProviders.length === 0) {
@@ -725,7 +722,7 @@ class LLMService {
       throw new Error(`No adapter found for provider: ${provider}`);
     }
 
-    const apiKey = apiKeyManager.getApiKey(provider);
+    const apiKey = await apiKeyManager.getApiKey(provider);
     if (!apiKey) {
       throw new Error(`No API key found for provider: ${provider}`);
     }
@@ -785,4 +782,4 @@ class LLMService {
   }
 }
 
-export const llmService = new LLMService();
+export const llmService = LLMService.getInstance();
